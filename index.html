@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Sticker to GIF Converter — Free, No Signup | StickerToGIF</title>
+	<script>
+	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/insights/script.js"></script>
+  <meta name="description" content="Convert TikTok stickers to GIF for free in seconds. Drag a sticker out of TikTok DMs, paste the URL, and download your GIF instantly. No signup, no watermark, no limits.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="canonical" href="https://www.stickertogif.me/" />
+  <meta name="google-adsense-account" content="ca-pub-7492388540350253">
+  <meta name="keywords" content="tiktok sticker to gif, convert tiktok sticker, save tiktok sticker, tiktok sticker download, awebp to gif, tiktok sticker gif converter">
+  <meta name="author" content="AntonAnon">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.stickertogif.me/">
+  <meta property="og:title" content="TikTok Sticker to GIF Converter — Free, No Signup">
+  <meta property="og:description" content="Convert TikTok stickers to GIF for free in seconds. No signup, no watermark, no limits.">
+  <meta property="og:image" content="https://www.stickertogif.me/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TikTok Sticker to GIF Converter — Free">
+  <meta name="twitter:description" content="Drag a TikTok sticker URL, paste it in, get a GIF. Free, no signup.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "StickerToGIF",
+    "url": "https://www.stickertogif.me",
+    "description": "Free tool to convert TikTok stickers from animated WebP to GIF format.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.stickertogif.me/",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "StickerToGIF",
+    "url": "https://www.stickertogif.me",
+    "logo": "https://www.stickertogif.me/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "contact@stickertogif.me"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "StickerToGIF",
+    "url": "https://www.stickertogif.me",
+    "description": "Free tool to convert TikTok stickers from animated WebP to GIF format.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "AntonAnon" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert a TikTok sticker to GIF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Drag the sticker out of TikTok DMs in a desktop browser to get its .awebp URL. Paste that URL into StickerToGIF and click Convert. Your GIF downloads automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is StickerToGIF free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. No account, no watermark, no conversion limit. Completely free." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the TikTok sticker URL stop working?",
+        "acceptedAnswer": { "@type": "Answer", "text": "TikTok signs their CDN URLs with an expiry timestamp. Once it expires you need to drag the sticker out again from TikTok to get a fresh URL." }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7492388540350253" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0e0e0f;
+      --surface: #181819;
+      --surface2: #222224;
+      --border: #2a2a2d;
+      --accent: #00d4ff;
+      --accent2: #ff2d78;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Contact modal */
+    #contact-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+    #contact-modal.show { display: flex; }
+    .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; max-width: 440px; width: 100%; position: relative; }
+    .contact-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 16px 16px 0 0; }
+    .contact-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .contact-box p { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 20px; line-height: 1.6; }
+    .contact-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; transition: color 0.15s; }
+    .contact-close:hover { color: var(--text); }
+    .contact-form { display: flex; flex-direction: column; gap: 12px; }
+    .contact-form input, .contact-form textarea, .contact-form select { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; border-radius: 8px; transition: border-color 0.15s; }
+    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #444; }
+    .contact-form textarea { resize: vertical; min-height: 100px; }
+    .contact-form select { appearance: none; cursor: pointer; }
+    .contact-form option { background: var(--surface2); }
+    .contact-submit { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; }
+    .contact-submit:hover { opacity: 0.88; }
+    .contact-success { display: none; text-align: center; padding: 20px 0; }
+    .contact-success p { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; line-height: 1.8; }
+    .contact-success .tick { font-size: 36px; margin-bottom: 12px; }
+
+    /* Cookie consent banner */
+    #cookie-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 999;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    #cookie-banner.show { display: flex; }
+    #cookie-banner p { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); line-height: 1.6; max-width: 600px; }
+    #cookie-banner a { color: var(--accent); }
+    .cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-accept { padding: 8px 20px; background: var(--accent); color: #000; font-family: 'DM Mono', monospace; font-size: 11px; border: none; cursor: pointer; border-radius: 4px; font-weight: 500; transition: opacity 0.15s; }
+    .cookie-accept:hover { opacity: 0.85; }
+    .cookie-decline { padding: 8px 16px; background: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; border: 1px solid var(--border); cursor: pointer; border-radius: 4px; transition: color 0.15s, border-color 0.15s; }
+    .cookie-decline:hover { color: var(--text); border-color: var(--accent); }
+
+    /* Ad blocker banner */
+    #adblock-banner {
+      display: none;
+      width: 100%;
+      background: rgba(255,45,120,0.08);
+      border-bottom: 1px solid rgba(255,45,120,0.2);
+      padding: 10px 24px;
+      text-align: center;
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: #ff6699;
+      position: relative;
+      z-index: 10;
+    }
+    #adblock-banner.show { display: block; }
+    #adblock-banner a { color: var(--accent); text-decoration: underline; cursor: pointer; }
+    #banner-close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff6699; cursor: pointer; font-size: 14px; }
+
+    header {
+      width: 100%;
+      max-width: 680px;
+      padding: 28px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-text { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+    .logo-text span { color: var(--accent); }
+
+    nav a { color: var(--muted); text-decoration: none; font-size: 13px; font-family: 'DM Mono', monospace; margin-left: 20px; transition: color 0.2s; }
+    nav a:hover { color: var(--text); }
+
+    main { width: 100%; max-width: 680px; padding: 60px 24px 40px; position: relative; z-index: 1; }
+
+    .hero { text-align: center; margin-bottom: 48px; animation: fadeUp 0.6s 0.1s ease both; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 99px; padding: 4px 12px; font-size: 11px;
+      font-family: 'DM Mono', monospace; color: var(--accent); margin-bottom: 20px; letter-spacing: 0.05em;
+    }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); animation: pulse 2s infinite; }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 16px; }
+    h1 .line2 { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 420px; margin: 0 auto; }
+    .counter-wrap { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 10px 22px; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15); border-radius: 99px; }
+    .counter-num { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--accent); letter-spacing: -0.5px; }
+    .counter-label { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; animation: fadeUp 0.6s 0.2s ease both; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+    .input-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; display: block; }
+
+    .steps { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; animation: fadeUp 0.6s 0.3s ease both; }
+    .step-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .step-num { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; }
+    .step-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .step-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    .note { margin-top: 16px; padding: 12px 16px; background: rgba(255,45,120,0.06); border: 1px solid rgba(255,45,120,0.15); border-radius: 8px; font-size: 12px; font-family: 'DM Mono', monospace; color: #ff6699; animation: fadeUp 0.6s 0.4s ease both; }
+
+    .section { margin-top: 80px; scroll-margin-top: 40px; }
+    .section-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
+    .section h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 24px; }
+    .section p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
+
+    /* History side panel */
+    .page-with-history { width: 100%; max-width: 100%; display: flex; align-items: flex-start; align-self: stretch; }
+    .converter-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
+    .history-panel { width: 220px; flex-shrink: 0; border-left: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; align-self: flex-start; }
+    .history-panel-header { padding: 14px 16px 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .history-panel-title { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
+    .history-panel-body { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .history-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; gap: 8px; padding: 8px; align-items: center; transition: border-color 0.15s; }
+    .history-card:hover { border-color: var(--accent); }
+    .history-thumb { width: 44px; height: 44px; object-fit: contain; background: var(--bg); display: block; flex-shrink: 0; border-radius: 4px; }
+    .history-info { flex: 1; min-width: 0; }
+    .history-name { font-size: 10px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; font-family: 'DM Mono', monospace; }
+    .history-date { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--muted); }
+    .history-actions { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+    .history-dl-btn { padding: 4px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: var(--accent); color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
+    .history-del-btn { padding: 4px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: none; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; }
+    .history-del-btn:hover { color: var(--accent2); border-color: var(--accent2); }
+    .history-empty { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; text-align: center; padding: 16px 8px; line-height: 1.6; }
+    .clear-history-btn { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); background: none; border: none; cursor: pointer; transition: color 0.15s; }
+    .clear-history-btn:hover { color: var(--accent2); }
+
+    /* Blog section */
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    .blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.15s; cursor: pointer; text-decoration: none; display: block; }
+    .blog-card:hover { border-color: var(--accent); }
+    .blog-card-body { padding: 20px; }
+    .blog-tag { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+    .blog-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; letter-spacing: -0.2px; }
+    .blog-card p { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+    .blog-meta { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .blog-meta::before { content: ''; display: block; width: 16px; height: 1px; background: var(--border); }
+
+    /* Blog post full */
+    .blog-post { display: none; }
+    .blog-post.active { display: block; }
+    .blog-post-header { margin-bottom: 24px; }
+    .blog-post-title { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; line-height: 1.2; }
+    .blog-post-meta { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
+    .blog-post-body { font-size: 14px; color: var(--muted); line-height: 1.9; }
+    .blog-post-body h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+    .blog-post-body p { margin-bottom: 16px; }
+    .blog-post-body p:last-child { margin-bottom: 0; }
+    .blog-back { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--border); padding: 7px 14px; cursor: pointer; border-radius: 4px; margin-bottom: 24px; transition: color 0.15s, border-color 0.15s; }
+    .blog-back:hover { color: var(--accent); border-color: var(--accent); }
+
+    .article-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .article-card .atag { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 8px; display: block; }
+    .article-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+    .article-card p { font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .faq-item:first-of-type { border-top: 1px solid var(--border); }
+    .faq-q { font-size: 14px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; user-select: none; }
+    .faq-q .arrow { color: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+    .faq-a { font-size: 13px; color: var(--muted); line-height: 1.7; display: none; margin-top: 10px; }
+    .faq-item.open .faq-a { display: block; }
+
+    .legal-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); scroll-margin-top: 40px; }
+    .legal-section h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+    .legal-section p { color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 14px; }
+    .legal-section h3 { font-size: 14px; font-weight: 700; margin: 24px 0 8px; color: var(--text); }
+
+    footer { width: 100%; max-width: 680px; padding: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; flex-wrap: wrap; gap: 12px; margin-top: 60px; }
+    footer p { font-size: 12px; color: #444; font-family: 'DM Mono', monospace; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    footer a { font-size: 12px; color: #555; text-decoration: none; font-family: 'DM Mono', monospace; transition: color 0.2s; }
+    footer a:hover { color: var(--muted); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Batch converter */
+    .card-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .add-btn { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: background 0.15s; }
+    .add-btn:hover { background: var(--surface2); }
+
+    .slot { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .slot-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .slot-name-wrap { display: flex; align-items: center; gap: 6px; }
+    .slot-name { font-size: 13px; font-weight: 700; color: var(--text); cursor: pointer; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+    .slot-name-edit input { background: transparent; border: none; border-bottom: 1px solid var(--accent); color: var(--text); font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; outline: none; width: 120px; }
+    .gif-ext { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); margin-left: 1px; }
+    .pen-icon { color: var(--muted); font-size: 13px; cursor: pointer; transition: color 0.15s; }
+    .pen-icon:hover { color: var(--accent); }
+    .remove-btn { background: none; border: none; color: #555; font-size: 14px; cursor: pointer; transition: color 0.15s; }
+    .remove-btn:hover { color: var(--accent2); }
+
+    .slot-body { display: flex; gap: 12px; align-items: center; }
+    .slot-dl-col { display: flex; align-items: center; justify-content: center; min-width: 64px; }
+    .slot-preview-wrap { width: 72px; height: 72px; flex-shrink: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--bg); }
+    .slot-preview { width: 100%; height: 100%; object-fit: contain; }
+    .slot-preview-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-size: 22px; }
+
+    .slot-right { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .slot-url { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
+    .slot-url:focus { border-color: var(--accent); }
+    .slot-url::placeholder { color: #333; }
+
+    .slot-status-row { display: flex; justify-content: space-between; min-height: 16px; }
+    .slot-status { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
+    .slot-pct { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); }
+
+    .bar-track { width: 100%; height: 3px; background: var(--surface); border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.3s ease; }
+
+    .dl-btn { background: none; border: 1px solid var(--accent); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 10px; padding: 12px 10px; cursor: pointer; transition: background 0.2s, transform 0.15s; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 56px; }
+    .dl-btn:hover { background: rgba(0,212,255,0.08); transform: translateY(-1px); }
+    .dl-btn svg { display: block; }
+    .dl-btn span { font-size: 10px; letter-spacing: 0.05em; }
+
+    .batch-actions { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+    .convert-all-btn { background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 10px; padding: 12px 24px; cursor: pointer; transition: opacity 0.2s; }
+    .convert-all-btn:hover { opacity: 0.88; }
+    .dl-zip-btn { background: none; border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; border-radius: 10px; padding: 12px 20px; cursor: pointer; transition: background 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+    .dl-zip-btn:hover { background: var(--surface2); }
+
+    /* Try it out */
+    .sample-card { display: flex; gap: 20px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-top: 16px; }
+    .sample-left { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+    .sample-img { width: 80px; height: 80px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); }
+    .sample-hint { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); text-align: center; }
+    .sample-right { flex: 1; display: flex; flex-direction: column; gap: 12px; min-width: 0; overflow: hidden; }
+    .sample-url-row { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow: hidden; min-width: 0; }
+    .sample-url-row code { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 0; min-width: 100%; }
+    .sample-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sample-copy-btn { background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; border: none; border-radius: 8px; padding: 9px 18px; cursor: pointer; transition: opacity 0.2s; }
+    .sample-copy-btn.secondary { background: none; border: 1px solid var(--border); color: var(--text); font-weight: 400; font-family: 'DM Mono', monospace; font-size: 12px; }
+    .sample-copy-btn:hover { opacity: 0.85; }
+    .sample-copy-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Accessibility */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* Clean Responsive Layout Restructuring (No Duplicates) */
+    @media (max-width: 940px) {
+      .page-with-history {
+        flex-direction: column;
+      }
+      .history-panel {
+        width: 100%;
+        height: auto;
+        max-height: 420px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        position: static;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .steps { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .article-grid { grid-template-columns: 1fr; }
+      .slot-body { flex-direction: column; }
+      .slot-preview-wrap { width: 100%; height: 100px; }
+      .sample-card { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Contact modal -->
+<div id="contact-modal">
+  <div class="contact-box">
+    <button class="contact-close" onclick="document.getElementById('contact-modal').classList.remove('show')">✕</button>
+    <h3>Send a message</h3>
+    <p>Got feedback, a bug to report, or just want to say something? Drop it here.</p>
+    <div id="contact-form-wrap">
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <select name="type" required>
+          <option value="" disabled selected>What is this about?</option>
+          <option value="feedback">General feedback</option>
+          <option value="bug">Bug report</option>
+          <option value="feature">Feature request</option>
+          <option value="other">Something else</option>
+        </select>
+        <input type="email" name="email" placeholder="Your email (optional)" />
+        <textarea name="message" placeholder="Your message..." required></textarea>
+        <button type="submit" class="contact-submit">Send →</button>
+      </form>
+    </div>
+    <div class="contact-success" id="contact-success">
+      <div class="tick">✓</div>
+      <p>Message sent. Thanks for reaching out.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie consent banner -->
+<div id="cookie-banner">
+  <p>We use cookies from Google AdSense to show ads. These help keep the tool free. <a href="#cookies">Learn more</a></p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
+    <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+  </div>
+</div>
+
+<!-- Ad blocker banner -->
+<div id="adblock-banner">
+  This site is free to use. Ads are the only thing keeping it running. Turning off your ad blocker for this page helps a lot.
+  <button id="banner-close" onclick="document.getElementById('adblock-banner').style.display='none'">✕</button>
+</div>
+
+<a href="#main-content" style="position:absolute;top:-100px;left:0;background:var(--accent);color:#000;padding:8px 16px;font-family:'DM Mono',monospace;font-size:12px;z-index:9999;transition:top 0.15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to content</a>
+
+<div class="page-with-history">
+  <div class="converter-col">
+    <header>
+      <a class="logo" href="/">
+        <div class="logo-icon"><img src="logo.png" alt="StickerToGIF logo" /></div>
+        <span class="logo-text">sticker<span>to</span>gif</span>
+      </a>
+      <nav>
+        <a href="#how-it-works">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#blog">Blog</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <div class="hero">
+        <div class="badge">free · no signup · instant</div>
+        <h1>TikTok Sticker to GIF Converter</h1>
+        <p>Drag any TikTok sticker out of your DMs, paste the URL, and get a GIF you can send anywhere.</p>
+        <div class="counter-wrap">
+          <span class="counter-num" id="counter-num">—</span>
+          <span class="counter-label">stickers converted</span>
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.8;max-width:680px;margin:0 auto 24px;text-align:center">
+        According to StickerToGIF's analysis, TikTok stickers are animated WebP files (.awebp) hosted on TikTok's CDN. Dragging a sticker out of a TikTok DM in Chrome or Edge reveals the direct file URL. Pasting that URL here converts it to a standard GIF in seconds — no upload, no account, no watermark.
+      </p>
+      <div class="card">
+        <div class="card-header-row">
+          <span class="input-label">STICKER URLS</span>
+          <button class="add-btn" onclick="addSlot()">+ Add another</button>
+        </div>
+        <div id="slots"></div>
+        <div class="batch-actions">
+          <button class="convert-all-btn" onclick="convertAll()">Convert all →</button>
+          <button class="dl-zip-btn" id="dl-zip-btn" onclick="downloadZip()" style="display:none">Download all as ZIP</button>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">01 —</div>
+          <h3>Drag the sticker</h3>
+          <p>In TikTok DMs on desktop, drag a sticker out of the chat. Your browser will show the URL.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02 —</div>
+          <h3>Paste and convert</h3>
+          <p>Paste the URL above and hit Convert. The frames get decoded right in your browser, nothing uploaded.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03 —</div>
+          <h3>Download GIF</h3>
+          <p>Your GIF saves automatically. Works in Discord, iMessage, WhatsApp, wherever GIFs are supported.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        ⚠ Sticker URLs expire after a few hours. If it stops working, just drag the sticker out again to get a fresh one.
+      </div>
+
+      <div class="section" id="try-it">
+        <div class="section-label">TRY IT OUT</div>
+        <h2>Test with a sample sticker</h2>
+        <p>No TikTok sticker URL handy? Use this one. Copy the sample URL below, paste it into the converter, and hit Convert all.</p>
+        <div class="sample-card">
+          <div class="sample-left">
+            <img src="sample.awebp" class="sample-img" alt="Sample TikTok sticker" />
+            <div class="sample-hint">sample only — do not drag out</div>
+          </div>
+          <div class="sample-right">
+            <div class="sample-url-row">
+              <code id="sample-url-text">https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/tos-alisg-i-dhq7zx4c1p-sg/3f9a21bc7e4d48fa92c08b1e5d7f3a92~tplv-dhq7zx4c1p-video2sticker-mid.awebp?rk3s=00edd399&x-expires=9999999999&x-signature=sAmPlEsTiCkErToGiF00000</code>
+            </div>
+            <div class="sample-actions">
+              <button class="sample-copy-btn" onclick="loadSample()">Load into converter</button>
+              <button class="sample-copy-btn secondary" onclick="copySampleUrl()">Copy URL</button>
+              <span id="sample-confirm" style="display:none;font-size:11px;font-family:'DM Mono',monospace;color:var(--accent)">done!</span>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-top:10px;margin-bottom:0">"Load into converter" fills the URL field above automatically. Or copy the URL and paste it yourself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="video">
+        <div class="section-label">SEE IT IN ACTION</div>
+        <h2>Watch how it works</h2>
+        <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);">
+          <iframe
+            src="https://www.youtube.com/embed/cmj2eewo0Do"
+            title="TikTok Sticker to GIF tutorial"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          </iframe>
+        </div>
+      </div>
+
+      <section aria-label="How it works" class="section" id="how-it-works">
+        <div class="section-label">HOW IT WORKS</div>
+        <h2>What's actually happening</h2>
+        <p>TikTok stores their stickers as animated WebP files on a public CDN. When you drag one out of a DM in your browser, the file URL shows up. That URL points to a .awebp file, which is an animated format most apps outside TikTok won't play.</p>
+        <p>This tool grabs that file, reads each frame, and turns it into a regular GIF. The whole thing runs in your browser. Nothing gets sent to a server.</p>
+        <p>There's one small exception: a proxy forwards the request to TikTok's CDN because browsers won't fetch files from other domains directly. That proxy doesn't log or store anything. It just passes the file through.</p>
+      </section>
+
+      <div class="section" id="about-webp">
+        <div class="section-label">FORMATS EXPLAINED</div>
+        <h2>WebP vs GIF</h2>
+        <p>TikTok uses animated WebP for stickers. It's a format made by Google that handles animation well and keeps file sizes small. The problem is most apps don't support it outside of browsers.</p>
+        <p>GIF is old, from 1987. But it works everywhere. Discord, iMessage, WhatsApp, email, Reddit. That's the whole reason to convert in the first place.</p>
+        <p>The file will get bigger when you convert. That's normal. A 200KB sticker can turn into a 1.5MB GIF. It's still small enough to send in most apps without issues.</p>
+      </div>
+
+      <div class="section" id="use-cases">
+        <div class="section-label">WHERE TO USE YOUR GIFS</div>
+        <h2>Where people use them</h2>
+        <div class="article-grid">
+          <div class="article-card">
+            <span class="atag">DISCORD</span>
+            <h3>Server emojis or reactions in chat</h3>
+            <p>Discord plays animated GIFs inline. Nitro users can upload them as server emojis too. TikTok stickers work well as reactions.</p>
+          </div>
+          <div class="article-card">
+            <span class="atag">IMESSAGE</span>
+            <h3>Send to friends on iPhone</h3>
+            <p>iMessage plays GIFs right in the chat. The person receiving it doesn't need TikTok at all.</p>
+          </div>
+          <div class="article-card">
+            <span class="atag">WHATSAPP</span>
+            <h3>Share in group chats</h3>
+            <p>WhatsApp supports GIFs in chat. Good way to use TikTok stickers with people who aren't on TikTok.</p>
+          </div>
+          <div class="article-card">
+            <span class="atag">TENOR / GIPHY</span>
+            <h3>Upload to GIF platforms</h3>
+            <p>Upload to Tenor or Giphy and the GIF becomes searchable. Anyone can use it, not just you.</p>
+          </div>
+        </div>
+      </div>
+
+      <section aria-label="Frequently Asked Questions" class="section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="section-label">FAQ</div>
+        <h2>Common questions</h2>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why does the URL stop working after a while?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">TikTok puts an expiry timestamp in the URL. Once it passes, the link stops working. Just drag the sticker out again from TikTok to get a new one. Takes about five seconds.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this work on mobile?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Not right now. It needs Chrome or Edge on a desktop. The browser feature it uses isn't available on mobile or Safari yet.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is it really free?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Yes. No account, no watermark, no limit. The site runs on ads so if you find it useful, turning off your ad blocker helps keep it free.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why is the GIF file bigger than the original sticker?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">GIF compresses worse than WebP. A 40-frame sticker can go from a few hundred KB to 1 or 2MB as a GIF. That's normal. The file is still small enough to share in most apps.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">How do I get the sticker URL from TikTok?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Open TikTok in a desktop browser, not the app. Go to your DMs, find a sticker, then click and drag it out of the chat. The URL shows up in your browser. It ends in .awebp. Copy that and paste it here.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this store or share my data?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">No. The proxy just fetches the file from TikTok and passes it back. It doesn't log anything. The actual conversion happens in your browser.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Can I convert any TikTok sticker?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Any sticker that gives you an .awebp URL when dragged out should work. Most TikTok DM stickers do. If the URL doesn't end in .awebp or it's expired, it won't convert.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is this affiliated with TikTok?<span class="arrow">▼</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">No. This is an independent project. TikTok belongs to ByteDance. This site just converts files that TikTok already hosts publicly on their CDN.</span></div>
+        </div>
+      </section>
+
+      <section aria-label="Blog and guides" class="section" id="blog">
+        <div class="section-label">BLOG</div>
+        <h2>Guides and tips</h2>
+
+        <div id="blog-list">
+          <div class="blog-grid">
+            <a class="blog-card" onclick="openPost('post1');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Guide</span>
+                <h3>How to save TikTok stickers as GIF in 30 seconds</h3>
+                <p>A step by step walkthrough of dragging a sticker out of TikTok DMs, getting the URL, and converting it.</p>
+                <div class="blog-meta">AntonAnon · May 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post2');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>Why TikTok stickers are WebP and why that matters</h3>
+                <p>TikTok uses a format most apps can't play. Here's why they chose it and what it means for sharing stickers outside the app.</p>
+                <div class="blog-meta">AntonAnon · May 2026 · 4 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post3');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Tips</span>
+                <h3>Best places to use TikTok sticker GIFs</h3>
+                <p>Discord, iMessage, WhatsApp, Tenor. A rundown of where converted stickers work best and how to get the most out of them.</p>
+                <div class="blog-meta">AntonAnon · May 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post4');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>GIF vs WebP vs MP4 — which format should you use?</h3>
+                <p>Each format has tradeoffs. This breaks down when to use GIF, when WebP is better, and when MP4 wins.</p>
+                <div class="blog-meta">AntonAnon · May 2026 · 5 min read</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Blog posts -->
+        <div id="blog-post-wrap" style="display:none">
+
+          <div class="blog-post" id="post1">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Guide</div>
+              <h1 class="blog-post-title">How to Save TikTok Stickers as GIF in 30 Seconds</h1>
+              <div class="blog-post-meta">AntonAnon · May 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>TikTok has thousands of animated stickers in its DM system. The problem is there's no official way to save them. No download button, no export option. But there's a trick that works right now.</p>
+              <h2>Step 1 — Open TikTok in a desktop browser</h2>
+              <p>This doesn't work in the TikTok app. You need to open TikTok.com in Chrome or Edge on a laptop or desktop. Log in and go to your direct messages.</p>
+              <h2>Step 2 — Find a message with a sticker</h2>
+              <p>Open any DM conversation where someone has sent a sticker, or where you've sent one. The stickers appear as animated images in the chat.</p>
+              <h2>Step 3 — Drag the sticker out of the chat</h2>
+              <p>Click on the sticker and drag it out of the chat window into a blank area of your browser tab. Don't drop it on a link or button. When you release it, the browser will show a URL in the address bar or a new tab will open with the sticker URL. It ends in .awebp.</p>
+              <h2>Step 4 — Copy the URL and paste it here</h2>
+              <p>Copy that .awebp URL and paste it into the converter above. Hit Convert all and your GIF will download automatically in a few seconds.</p>
+              <h2>One thing to know</h2>
+              <p>The URL expires after a few hours. TikTok signs their CDN links with a timestamp. If you wait too long after dragging, the conversion will fail and you'll need to drag the sticker out again to get a fresh URL.</p>
+            
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post2">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Explainer</div>
+              <h1 class="blog-post-title">Why TikTok Stickers Are WebP and Why That Matters</h1>
+              <div class="blog-post-meta">AntonAnon · May 2026 · 4 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>If you've ever tried to save a TikTok sticker and noticed the file ends in .awebp, you're looking at animated WebP. It's a format Google developed as a modern replacement for GIF and PNG. TikTok uses it because it's genuinely better in almost every technical way.</p>
+              <h2>What makes WebP better than GIF</h2>
+              <p>The same animation saved as WebP can be 3 to 5 times smaller than the GIF version. It supports more colors, handles transparency cleanly, and compresses video-like content far more efficiently. For a platform serving billions of sticker impressions a day, that difference in file size adds up to a huge amount of bandwidth saved.</p>
+              <h2>So why doesn't everyone just use WebP</h2>
+              <p>The problem is support. GIF is from 1987 and works everywhere — email clients, Discord, iMessage, Reddit, older apps, messaging platforms built years ago. WebP is newer and while all modern browsers support it, most third-party apps and platforms don't. If you want to send a TikTok sticker on WhatsApp, iMessage, or upload it to Tenor, WebP simply won't work.</p>
+              <h2>That's why conversion still matters</h2>
+              <p>Converting to GIF trades file size for compatibility. Your sticker gets bigger but it works anywhere. A 200KB TikTok sticker might become a 1.5MB GIF. That's the cost of universal support. For most uses — sending in a chat, using as a reaction, uploading to a GIF platform — the tradeoff is worth it.</p>
+              <h2>What about MP4</h2>
+              <p>MP4 is even more efficient than WebP for video content but it doesn't support transparency and doesn't autoplay silently everywhere the way GIF does. For short looping animations with no background, GIF remains the most compatible format available.</p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post3">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Tips</div>
+              <h1 class="blog-post-title">Best Places to Use TikTok Sticker GIFs</h1>
+              <div class="blog-post-meta">AntonAnon · May 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>Once you've converted a TikTok sticker to GIF, you've got a file that works almost anywhere. Here's where it works best.</p>
+              <h2>Discord</h2>
+              <p>Discord plays animated GIFs inline in chat. You can also upload them as custom server emojis if you have Nitro or manage a server. TikTok stickers make great reaction emojis because they're expressive and most people haven't seen them outside of TikTok.</p>
+              <h2>iMessage</h2>
+              <p>Drop a GIF file into an iMessage conversation and it plays right in the chat. The person receiving it doesn't need TikTok, a special app, or anything. It just plays.</p>
+              <h2>WhatsApp</h2>
+              <p>WhatsApp supports GIFs in chat on both iOS and Android. Send it the same way you'd send any image. It autoplays in the conversation.</p>
+              <h2>Tenor and Giphy</h2>
+              <p>Upload your converted GIF to Tenor or Giphy and it becomes searchable. Anyone using a keyboard or app that pulls from those platforms can find it. If the sticker is popular or funny, it can get a lot of impressions this way.</p>
+              <h2>Reddit</h2>
+              <p>Reddit supports GIF uploads in posts and comments. Good for reaction content or adding some personality to a thread.</p>
+              <h2>Email</h2>
+              <p>Most email clients display GIFs inline. If you're sending something casual or want a fun header image, a converted sticker works fine.</p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post4">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Explainer</div>
+              <h1 class="blog-post-title">GIF vs WebP vs MP4 — Which Format Should You Use?</h1>
+              <div class="blog-post-meta">AntonAnon · May 2026 · 5 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>When it comes to short looping animations, three formats dominate the conversation: GIF, WebP, and MP4. Each has a different history, different strengths, and different reasons to use or avoid it depending on what you're doing.</p>
+              <h2>GIF — the universal option</h2>
+              <p>GIF is from 1987. It was designed for simple graphics with limited colors and small file sizes back when the internet was slow. By modern standards it's inefficient — it only supports 256 colors per frame, has no real compression for video content, and produces large files for anything complex. But it works everywhere. Every platform, every email client, every messaging app built in the last 30 years supports it. That's why it still dominates for animated reaction content.</p>
+              <h2>WebP — the smart choice for the web</h2>
+              <p>Google developed WebP as a modern image format that handles both static and animated content efficiently. Animated WebP files are typically 3 to 5 times smaller than equivalent GIFs. They support millions of colors and full transparency. TikTok uses WebP for stickers because the bandwidth savings at scale are significant. The downside is support outside of browsers is still patchy. Most native apps and older platforms don't handle WebP animated files.</p>
+              <h2>MP4 — best compression, worst flexibility</h2>
+              <p>For pure compression efficiency, MP4 wins easily. A 2MB GIF might be 100KB as an MP4. Modern platforms like Twitter and Tenor actually convert uploaded GIFs to MP4 behind the scenes and serve them as silent looping video. The problems with MP4 for this use case are that it doesn't support transparency, it requires video playback infrastructure rather than simple image display, and autoplay behavior varies across platforms.</p>
+              <h2>Which should you use</h2>
+              <p>For sharing in chats, reactions, or uploading to GIF platforms, GIF is still the safest choice because of universal compatibility. For your own website or a platform where you control the tech stack, WebP animated or MP4 will give you much smaller files. For video content with sound, MP4 every time. StickerToGIF converts to GIF specifically because that's what works everywhere a TikTok sticker might end up.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="legal-section" id="privacy">
+        <h2>Privacy Policy</h2>
+        <p>Last updated May 2026.</p>
+        <p>This site does not collect personal information. No accounts, no registration, no login. Nothing you enter is stored on our servers.</p>
+        <h3>Proxy requests</h3>
+        <p>When you convert a sticker, the URL you paste is sent through a proxy to fetch the file from TikTok's CDN. This proxy does not log URLs, IP addresses, or any other data.</p>
+        <h3>Analytics</h3>
+        <p>We may use basic anonymous analytics to understand general usage. No personally identifiable information is included.</p>
+        <h3>Advertising</h3>
+        <p>This site uses Google AdSense to show ads. Google may use cookies to serve ads based on your browsing. You can learn more at Google's privacy policy. We do not control which ads are shown.</p>
+        <h3>Third parties</h3>
+        <p>This site loads fonts from Google Fonts. Google may collect data per their own privacy policy.</p>
+        <h3>Contact</h3>
+        <p>Questions? Use the contact link in the footer.</p>
+      </div>
+
+      <div class="legal-section" id="terms">
+        <h2>Terms of Use</h2>
+        <p>Last updated May 2026.</p>
+        <p>By using this site you agree to these terms.</p>
+        <h3>What this tool does</h3>
+        <p>This tool converts publicly accessible animated WebP files to GIF format. It does not bypass any login, paywall, or access restriction.</p>
+        <h3>Your responsibility</h3>
+        <p>You are responsible for how you use the GIFs you download. Only convert content you have the right to use. Do not use this tool to infringe on the rights of creators or copyright holders.</p>
+        <h3>No warranties</h3>
+        <p>This tool is provided as-is. We make no guarantees it will always work, especially since TikTok can change their URL format at any time.</p>
+        <h3>Changes</h3>
+        <p>We may update these terms at any time. Continued use of the site means you accept the current terms.</p>
+      </div>
+
+      <div class="legal-section" id="copyright">
+        <h2>Copyright Claims</h2>
+        <p>This site does not host, store, or distribute TikTok stickers. It converts files fetched directly from TikTok's CDN using URLs provided by the user.</p>
+        <p>If you believe content accessible through this tool infringes your copyright, contact us using the link below and we will respond promptly.</p>
+        <p>TikTok and all related marks are property of ByteDance. This site is not affiliated with or endorsed by TikTok.</p>
+      </div>
+
+      <div class="legal-section" id="cookies">
+        <h2>Cookie Policy</h2>
+        <p>Last updated May 2026.</p>
+        <p>This site uses cookies in limited ways. Here is what you should know.</p>
+        <h3>What cookies we use</h3>
+        <p>We do not set any cookies ourselves. However, Google AdSense, which we use to show ads, may set cookies on your browser to serve relevant ads based on your browsing activity. These are third-party cookies controlled by Google.</p>
+        <h3>Google AdSense cookies</h3>
+        <p>Google uses cookies to serve ads on this site. You can opt out of personalized ads by visiting <a href="https://www.google.com/settings/ads" style="color:var(--accent)">Google's ad settings</a>. For more information on how Google uses data, visit <a href="https://policies.google.com/technologies/ads" style="color:var(--accent)">Google's advertising policies</a>.</p>
+        <h3>How to control cookies</h3>
+        <p>You can control or delete cookies through your browser settings. Disabling cookies may affect how ads are shown but will not affect the core functionality of this tool.</p>
+        <h3>Consent</h3>
+        <p>By continuing to use this site, you consent to cookies being set by Google AdSense as described above.</p>
+      </div>
+
+      <div class="legal-section" id="about" style="scroll-margin-top:40px">
+        <h2>About this site</h2>
+        <p>Hi, I'm AntonAnon. I built this after noticing that TikTok stickers are just animated WebP files hosted on a public CDN. When you drag a sticker out of a DM in your browser, the file URL shows up right there. No tool existed to convert them to GIF easily, so I made one.</p>
+        <p>This is a one-person side project. I build small web tools that solve problems I run into. StickerToGIF started as a personal experiment and turned into something other people found useful too.</p>
+        <p>The site runs on ads, which is the only thing keeping it free and online. If it helped you, share it with someone who'd want it.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">Questions or feedback? <button onclick="document.getElementById('contact-modal').classList.add('show')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;padding:0;text-decoration:underline">Send a message</button></p>
+      </div>
+    </main>
+
+    <footer>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <p>© 2026 stickertogif — Built by <a href="#about" style="color:var(--accent);text-decoration:none">AntonAnon</a></p>
+        <p style="font-size:11px">A free tool to convert TikTok stickers to GIF. No signup, no watermark.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#blog">Blog</a>
+        <a href="#about">About</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Use</a>
+        <a href="#cookies">Cookie Policy</a>
+        <a href="#copyright">Copyright Claims</a>
+        <a href="#" onclick="document.getElementById('contact-modal').classList.add('show');return false">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="history-panel">
+    <div class="history-panel-header">
+      <span class="history-panel-title">History</span>
+      <button class="clear-history-btn" onclick="clearAllHistory()">Clear all</button>
+    </div>
+    <div class="history-panel-body" id="history-grid">
+      <div class="history-empty">No conversions yet.</div>
+    </div>
+  </div>
+</div>
+
+<canvas id="c" style="display:none"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+  const PROXY = 'https://tiktok-proxy.cabarlesebantonio.workers.dev';
+  let slotCount = 0;
+  const gifBlobs = {};
+  let convertingCount = 0;
+
+  window.addEventListener('load', function() {
+    const testAd = document.createElement('div');
+    testAd.innerHTML = '&nbsp;';
+    testAd.className = 'adsbox';
+    testAd.style.cssText = 'position:absolute;top:-999px;left:-999px;width:1px;height:1px;';
+    document.body.appendChild(testAd);
+    setTimeout(function() {
+      if (testAd.offsetHeight === 0) {
+        document.getElementById('adblock-banner').classList.add('show');
+      }
+      document.body.removeChild(testAd);
+    }, 300);
+    addSlot();
+  });
+
+  const SAMPLE_FAKE_URL = 'https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/tos-alisg-i-dhq7zx4c1p-sg/3f9a21bc7e4d48fa92c08b1e5d7f3a92~tplv-dhq7zx4c1p-video2sticker-mid.awebp?rk3s=00edd399&x-expires=9999999999&x-signature=sAmPlEsTiCkErToGiF00000';
+  const SAMPLE_REAL_URL = window.location.origin + '/sample.awebp';
+  const sampleSlots = {};
+
+  function loadSample() {
+    const slots = document.querySelectorAll('.slot');
+    let loaded = false;
+    for (const slot of slots) {
+      const id = parseInt(slot.id.replace('slot-', ''));
+      const input = document.getElementById('url-' + id);
+      if (input && !input.value.trim()) {
+        input.value = SAMPLE_FAKE_URL;
+        sampleSlots[id] = true;
+        previewSticker(id);
+        loaded = true;
+        break;
+      }
+    }
+    if (!loaded) {
+      addSlot();
+      const newId = slotCount - 1;
+      setTimeout(() => {
+        document.getElementById('url-' + newId).value = SAMPLE_FAKE_URL;
+        sampleSlots[newId] = true;
+        previewSticker(newId);
+      }, 50);
+    }
+    showSampleConfirm('loaded!');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function copySampleUrl() {
+    navigator.clipboard.writeText(SAMPLE_FAKE_URL).then(() => showSampleConfirm('copied!'));
+  }
+
+  function showSampleConfirm(msg) {
+    const el = document.getElementById('sample-confirm');
+    el.textContent = msg;
+    el.style.display = 'inline';
+    setTimeout(() => el.style.display = 'none', 2000);
+  }
+
+  // ── Conversion counter ──
+  async function loadCounter() {
+    try {
+      const res = await fetch('https://tiktok-proxy.cabarlesebantonio.workers.dev/count');
+      const data = await res.json();
+      if (typeof data.value === 'number') {
+        document.getElementById('counter-num').textContent = data.value.toLocaleString();
+      }
+    } catch(e) { /* silent */ }
+  }
+
+  async function incrementCounter() {
+    try {
+      const res = await fetch('https://tiktok-proxy.cabarlesebantonio.workers.dev/count', { method: 'POST' });
+      const data = await res.json();
+      if (typeof data.value === 'number') {
+        document.getElementById('counter-num').textContent = data.value.toLocaleString();
+      }
+    } catch(e) { /* silent */ }
+  }
+
+  loadCounter();
+
+  function openContact(){ document.getElementById('contact-modal').classList.add('show'); }
+  function closeContact(){ document.getElementById('contact-modal').classList.remove('show'); }
+
+  // Contact form
+  async function submitContact(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://formspree.io/f/xojrrrzb', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('contact-form-wrap').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('contact-modal').classList.remove('show');
+          document.getElementById('contact-form-wrap').style.display = 'block';
+          document.getElementById('contact-success').style.display = 'none';
+          form.reset();
+        }, 3000);
+      }
+    } catch(err) {
+      alert('Something went wrong. Try again.');
+    }
+  }
+
+  // Cookie consent
+  (function(){
+    if(!localStorage.getItem('cookie_consent')){
+      document.getElementById('cookie-banner').classList.add('show');
+    }
+  })();
+  function acceptCookies(){
+    localStorage.setItem('cookie_consent','accepted');
+    document.getElementById('cookie-banner').classList.remove('show');
+  }
+  function declineCookies(){
+    localStorage.setItem('cookie_consent','declined');
+    document.getElementById('cookie-banner').classList.remove('show');
+  }
+
+  // Blog
+  function openPost(id){
+    document.getElementById('blog-list').style.display='none';
+    document.getElementById('blog-post-wrap').style.display='block';
+    document.querySelectorAll('.blog-post').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('blog').scrollIntoView({behavior:'smooth'});
+  }
+  function closePosts(){
+    document.getElementById('blog-list').style.display='block';
+    document.getElementById('blog-post-wrap').style.display='none';
+  }
+
+  function toggleFaq(el) {
+    el.closest('.faq-item').classList.toggle('open');
+  }
+
+  // ── IndexedDB History ──
+  let db = null;
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('stickertogif_v2', 1);
+      req.onupgradeneeded = e => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('gifs')) {
+          const store = d.createObjectStore('gifs', { keyPath: 'id', autoIncrement: true });
+          store.createIndex('ts', 'ts', { unique: false });
+        }
+      };
+      req.onsuccess = e => { db = e.target.result; resolve(db); };
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function makeThumbnail(blob) {
+    return new Promise(resolve => {
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement('canvas');
+        c.width = 80; c.height = 80;
+        const ctx = c.getContext('2d');
+        const s = Math.min(80/img.width, 80/img.height);
+        const dw = img.width*s, dh = img.height*s;
+        ctx.drawImage(img, (80-dw)/2, (80-dh)/2, dw, dh);
+        URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/png', 0.6));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(''); };
+      img.src = url;
+    });
+  }
+
+  async function saveToHistory(blob, name) {
+    if (!db) await openDB();
+    const thumb = await makeThumbnail(blob);
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('gifs', 'readwrite');
+      tx.objectStore('gifs').add({
+        blob, thumb, name,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ts: Date.now()
+      });
+      tx.oncomplete = () => { loadHistory(); resolve(); };
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function loadHistory() {
+    if (!db) await openDB();
+    const tx = db.transaction('gifs', 'readonly');
+    const req = tx.objectStore('gifs').getAll();
+    req.onsuccess = () => {
+      const items = req.result.sort((a, b) => b.ts - a.ts);
+      renderHistory(items);
+    };
+  }
+
+  function renderHistory(items) {
+    const grid = document.getElementById('history-grid');
+    grid.innerHTML = '';
+    if (!items.length) {
+      grid.innerHTML = '<div class="history-empty">No conversions yet.<br>Convert a sticker and it shows up here.</div>';
+      return;
+    }
+    items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'history-card';
+      card.innerHTML = `
+        <img class="history-thumb" src="${item.thumb}" alt="${item.name}" />
+        <div class="history-info">
+          <div class="history-name">${item.name}.gif</div>
+          <div class="history-date">${item.date}</div>
+        </div>
+        <div class="history-actions">
+          <button class="history-dl-btn" onclick="downloadFromHistory(${item.id})">⬇</button>
+          <button class="history-del-btn" onclick="deleteFromHistory(${item.id})">✕</button>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  async function downloadFromHistory(id) {
+    if (!db) return;
+    const tx = db.transaction('gifs', 'readonly');
+    const req = tx.objectStore('gifs').get(id);
+    req.onsuccess = () => {
+      if (!req.result) return;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(req.result.blob);
+      a.download = req.result.name + '.gif';
+      a.click();
+    };
+  }
+
+  async function deleteFromHistory(id) {
+    if (!db) return;
+    const tx = db.transaction('gifs', 'readwrite');
+    tx.objectStore('gifs').delete(id);
+    tx.oncomplete = () => loadHistory();
+  }
+
+  async function clearAllHistory() {
+    if (!confirm('Clear all history?')) return;
+    if (!db) await openDB();
+    const tx = db.transaction('gifs', 'readwrite');
+    tx.objectStore('gifs').clear();
+    tx.oncomplete = () => loadHistory();
+  }
+
+  openDB().then(() => loadHistory());
+
+  function addSlot() {
+    const id = slotCount++;
+    const div = document.createElement('div');
+    div.className = 'slot';
+    div.id = 'slot-' + id;
+    div.innerHTML = `
+      <div class="slot-top">
+        <div class="slot-name-wrap">
+          <span class="slot-name" id="name-display-${id}" ondblclick="editName(${id})">sticker</span>
+          <span class="slot-name-edit" style="display:none">
+            <input id="name-input-${id}" type="text" value="sticker" onblur="saveName(${id})" onkeydown="if(event.key==='Enter')saveName(${id})" />
+          </span>
+          <span class="gif-ext">.gif</span>
+          <span class="pen-icon" onclick="editName(${id})">✎</span>
+        </div>
+        <button class="remove-btn" onclick="removeSlot(${id})">✕</button>
+      </div>
+      <div class="slot-body">
+        <div class="slot-preview-wrap">
+          <img id="preview-${id}" class="slot-preview" src="" alt="" style="display:none" />
+          <div class="slot-preview-placeholder" id="placeholder-${id}">?</div>
+        </div>
+        <div class="slot-right">
+          <input id="url-${id}" type="text" class="slot-url" placeholder="https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/...awebp?..."
+            oninput="previewSticker(${id})" />
+          <div class="slot-status-row">
+            <span id="status-${id}" class="slot-status"></span>
+            <span id="pct-${id}" class="slot-pct"></span>
+          </div>
+          <div class="bar-track" id="bar-wrap-${id}" style="display:none">
+            <div class="bar-fill" id="bar-${id}"></div>
+          </div>
+        </div>
+        <div class="slot-dl-col">
+          <button class="dl-btn" id="dl-btn-${id}" style="display:none" onclick="downloadSingle(${id})" title="Download GIF">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>.gif</span>
+          </button>
+        </div>
+      </div>
+    `;
+    document.getElementById('slots').appendChild(div);
+  }
+
+  function removeSlot(id) {
+    const el = document.getElementById('slot-' + id);
+    if (el) el.remove();
+    delete gifBlobs[id];
+    updateZipBtn();
+  }
+
+  // Edit filename
+  function editName(id) {
+    document.getElementById('name-display-' + id).style.display = 'none';
+    const wrap = document.getElementById('name-input-' + id).parentElement;
+    wrap.style.display = 'inline';
+    document.getElementById('name-input-' + id).focus();
+  }
+
+  function saveName(id) {
+    const val = document.getElementById('name-input-' + id).value.trim() || 'sticker';
+    document.getElementById('name-display-' + id).textContent = val;
+    document.getElementById('name-display-' + id).style.display = 'inline';
+    document.getElementById('name-input-' + id).parentElement.style.display = 'none';
+  }
+
+  function previewSticker(id) {
+    const rawUrl = document.getElementById('url-' + id).value.trim();
+    const url = rawUrl;
+    const img = document.getElementById('preview-' + id);
+    const ph = document.getElementById('placeholder-' + id);
+    const previewSrc = (typeof sampleSlots !== 'undefined' && sampleSlots[id]) ? (window.location.origin + '/sample.awebp') : rawUrl;
+    if (url && url.includes('awebp')) {
+      img.src = previewSrc;
+      img.style.display = 'block';
+      ph.style.display = 'none';
+      img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
+    } else {
+      img.style.display = 'none';
+      ph.style.display = 'flex';
+    }
+  }
+
+  function updateZipBtn() {
+    const count = Object.keys(gifBlobs).length;
+    document.getElementById('dl-zip-btn').style.display = count > 1 ? 'inline-flex' : 'none';
+  }
+
+  async function convertSlot(id) {
+    const url = document.getElementById('url-' + id).value.trim();
+    if (!url) return;
+    const status = document.getElementById('status-' + id);
+    const pct = document.getElementById('pct-' + id);
+    const barWrap = document.getElementById('bar-wrap-' + id);
+    const bar = document.getElementById('bar-' + id);
+    const dlBtn = document.getElementById('dl-btn-' + id);
+
+    const setP = (p) => {
+      bar.style.width = p + '%';
+      pct.textContent = Math.round(p) + '%';
+    };
+
+    barWrap.style.display = 'block';
+    status.textContent = 'fetching...';
+    setP(0);
+
+    return new Promise(async (resolve) => {
+      try {
+        const resolvedUrl = (typeof sampleSlots !== 'undefined' && sampleSlots[id]) ? SAMPLE_REAL_URL : url;
+        const isSameOrigin = resolvedUrl.startsWith(window.location.origin);
+        const fetchUrl = isSameOrigin ? resolvedUrl : `${PROXY}?url=${encodeURIComponent(resolvedUrl)}`;
+        const res = await fetch(fetchUrl);
+        const blob = await res.blob();
+        const buf = await blob.arrayBuffer();
+        const decoder = new ImageDecoder({ data: buf, type: 'image/webp' });
+        await decoder.tracks.ready;
+        const frameCount = decoder.tracks.selectedTrack.frameCount;
+
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        const gif = new GIF({ workers: 2, quality: 10, workerScript: 'gif.worker.js' });
+
+        status.textContent = `encoding ${frameCount} frames...`;
+
+        for (let i = 0; i < frameCount; i++) {
+          const { image } = await decoder.decode({ frameIndex: i });
+          canvas.width = image.codedWidth;
+          canvas.height = image.codedHeight;
+          ctx.drawImage(image, 0, 0);
+          gif.addFrame(canvas, { copy: true, delay: 1000 / 15 });
+          setP((i + 1) / frameCount * 80);
+        }
+
+        gif.on('progress', p => { setP(80 + p * 20); status.textContent = 'rendering...'; });
+
+        gif.on('finished', result => {
+          setP(100);
+          status.textContent = 'done!';
+          const gifName = document.getElementById('name-display-' + id).textContent;
+          gifBlobs[id] = { blob: result, name: gifName };
+          dlBtn.style.display = 'inline-flex';
+          updateZipBtn();
+          saveToHistory(result, gifName);
+          incrementCounter();
+          resolve();
+        });
+
+        gif.render();
+      } catch (err) {
+        status.textContent = 'error: ' + err.message;
+        resolve();
+      }
+    });
+  }
+
+  function downloadSingle(id) {
+    const entry = gifBlobs[id];
+    if (!entry) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(entry.blob);
+    a.download = entry.name + '.gif';
+    a.click();
+  }
+
+  async function convertAll() {
+    const slots = document.querySelectorAll('.slot');
+    const zipBtn = document.getElementById('dl-zip-btn');
+    if (zipBtn) { zipBtn.disabled = true; zipBtn.style.opacity = '0.4'; zipBtn.style.pointerEvents = 'none'; }
+    for (const slot of slots) {
+      const id = parseInt(slot.id.replace('slot-', ''));
+      const url = document.getElementById('url-' + id).value.trim();
+      if (url) await convertSlot(id);
+    }
+    if (zipBtn) { zipBtn.disabled = false; zipBtn.style.opacity = ''; zipBtn.style.pointerEvents = ''; }
+    updateZipBtn();
+  }
+
+  async function downloadZip() {
+    const entries = Object.entries(gifBlobs);
+    if (!entries.length) return;
+    const zip = new JSZip();
+    const nameCounts = {};
+    for (const [id, entry] of entries) {
+      let filename = (entry.name || 'sticker').trim();
+      if (!filename) filename = 'sticker';
+      if (nameCounts[filename] === undefined) {
+        nameCounts[filename] = 0;
+      } else {
+        nameCounts[filename]++;
+        filename = filename + '_' + nameCounts[filename];
+      }
+      zip.file(filename + '.gif', entry.blob);
+    }
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(zipBlob);
+    a.download = 'stickers.zip';
+    a.click();
+  }
+</script>
+</body>
+</html>
