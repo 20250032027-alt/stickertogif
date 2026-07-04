@@ -1545,7 +1545,7 @@
 
         const canvas = document.getElementById('c');
         const ctx = canvas.getContext('2d');
-        const gif = new GIF({ workers: 2, quality: 10, workerScript: 'gif.worker.js' });
+        const gif = new GIF({ workers: 4, quality: 10, workerScript: 'gif.worker.js' });
 
         status.textContent = `encoding ${frameCount} frames...`;
 
@@ -1627,20 +1627,24 @@
   }
 </script>
 <style>
-  .kofi-btn { display:inline-flex; align-items:center; gap:6px; background:#72a4f2; color:#0a0a0a; padding:6px 14px; border:none; border-radius:20px; font-weight:700; font-family:'DM Mono',monospace; font-size:13px; cursor:pointer; text-decoration:none; }
+  .kofi-btn { display:inline-flex; align-items:center; gap:6px; background:#72a4f2; color:#fff; padding:6px 14px; border:none; border-radius:20px; font-weight:700; font-family:'DM Mono',monospace; font-size:13px; cursor:pointer; text-decoration:none; }
   .kofi-btn:hover { background:#5f92e6; }
+  nav .kofi-btn { margin-left:24px; }
   .kofi-float { position:fixed; bottom:20px; right:20px; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,0.35); }
   .kofi-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
   .kofi-modal-overlay.open { display:flex; }
   .kofi-modal-box { background:#fff; border-radius:12px; overflow:hidden; width:100%; max-width:420px; max-height:85vh; position:relative; }
   .kofi-modal-close { position:absolute; top:8px; right:10px; background:none; border:none; font-size:20px; cursor:pointer; color:#333; z-index:2; line-height:1; }
   .kofi-modal-box iframe { display:block; width:100%; height:70vh; border:none; }
+  .kofi-modal-fallback { padding:10px 14px; font-family:'DM Mono',monospace; font-size:12px; color:#555; text-align:center; border-top:1px solid #eee; }
+  .kofi-modal-fallback a { color:#3f6fc9; }
 </style>
 <button class="kofi-btn kofi-float" onclick="openKofiModal()">☕ Support on Ko-fi</button>
 <div class="kofi-modal-overlay" id="kofi-modal-overlay" onclick="if(event.target===this)closeKofiModal()">
   <div class="kofi-modal-box">
     <button class="kofi-modal-close" onclick="closeKofiModal()">✕</button>
     <iframe id="kofiframe" src="" title="Support on Ko-fi"></iframe>
+    <div class="kofi-modal-fallback">Nothing showing above? Some ad blockers block this. <a href="https://ko-fi.com/T0C322K0PN" target="_blank" rel="noopener">Open Ko-fi directly instead →</a></div>
   </div>
 </div>
 <script>
