@@ -487,6 +487,7 @@
         <a href="#faq">FAQ</a>
         <a href="#blog">Blog</a>
         <a href="#about">About</a>
+        <a href="https://ko-fi.com/T0C322K0PN" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#72a4f2;color:#0a0a0a;padding:6px 14px;border-radius:20px;font-weight:700;text-decoration:none">Support on Ko-fi</a>
       </nav>
     </header>
 
@@ -702,6 +703,70 @@
                 <div class="blog-meta">AntonAnon · May 2026 · 5 min read</div>
               </div>
             </a>
+            <a class="blog-card" onclick="openPost('post5');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>What actually happens when you drag a TikTok sticker out of a DM</h3>
+                <p>It looks like a trick. It isn't. Here's what a browser is really doing when you pull a sticker out of a chat window.</p>
+                <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post6');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Guide</span>
+                <h3>What to do when a TikTok sticker URL won't convert</h3>
+                <p>Nine times out of ten it's one of four things. A checklist to run through before assuming the tool is broken.</p>
+                <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post7');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>A short history of the GIF, and why it refuses to die</h3>
+                <p>Built in 1987 for dial-up modems, technically outclassed for decades, and still everywhere. Here's why.</p>
+                <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post8');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>What animated stickers are actually made of</h3>
+                <p>It looks like a tiny video. It's closer to a flipbook. A plain guide to frames, color limits, and loops.</p>
+                <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post9');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Guide</span>
+                <h3>Sticker packs, screenshots, and copyright: what's actually okay to save</h3>
+                <p>An honest, non-legal-advice answer to a question that comes up a lot.</p>
+                <div class="blog-meta">AntonAnon · July 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post10');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Tips</span>
+                <h3>Why some TikTok stickers won't drag out of the chat</h3>
+                <p>Static stickers, old messages, and a few browser quirks that trip people up.</p>
+                <div class="blog-meta">AntonAnon · July 2026 · 2 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post11');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>Why your GIF download is always bigger than the sticker</h3>
+                <p>The FAQ answers this in one line. Here's the full version, with the actual reasons behind the size jump.</p>
+                <div class="blog-meta">AntonAnon · July 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" onclick="openPost('post12');return false;" href="#">
+              <div class="blog-card-body">
+                <span class="blog-tag">Guide</span>
+                <h3>How drag and drop file URLs work in any browser, not just TikTok</h3>
+                <p>The trick this tool relies on isn't specific to TikTok at all. Here's the general version.</p>
+                <div class="blog-meta">AntonAnon · July 2026 · 3 min read</div>
+              </div>
+            </a>
           </div>
         </div>
 
@@ -796,6 +861,182 @@
             </div>
           </div>
 
+          <div class="blog-post" id="post5">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Explainer</div>
+              <h1 class="blog-post-title">What Actually Happens When You Drag a TikTok Sticker Out of a DM</h1>
+              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>Dragging a file out of a browser tab feels like a trick the first time you do it. It isn't one. It's just a browser doing something it's always been able to do. Most sites just never let you see it happen.</p>
+              <h2>Every image in your browser already has an address</h2>
+              <p>Anything a website shows you, a sticker, a profile photo, a background image, has to load from somewhere. That somewhere is a file sitting on a server with an address, same as any webpage. TikTok's stickers aren't stored specially or hidden. They're plain files sitting on a CDN, a network of servers built for fast delivery, same as the photos on any other site.</p>
+              <h2>Dragging reveals what was already there</h2>
+              <p>When you click and drag a sticker out of the chat window, your browser treats it like any draggable image. It shows you the file's actual address instead of keeping it wrapped inside the app's interface. Nothing gets unlocked or bypassed here. The file was already sitting in your browser the moment the sticker appeared on screen. That's just how images load.</p>
+              <h2>Why the link expires</h2>
+              <p>TikTok adds a timestamp to each file's address, called a signature. It's a security measure meant to stop people from sharing raw CDN links that work forever. Once the timestamp passes, usually a few hours after the sticker loaded, the link stops responding and you'll need to drag the sticker out again to get a fresh one.</p>
+              <h2>Why this only works on desktop</h2>
+              <p>The TikTok app hides file addresses on purpose. Mobile apps generally don't expose drag targets the way a desktop browser does. That's an interface choice, not a security measure. Open TikTok.com in Chrome or Edge on a computer and the same sticker that hides its file path on your phone will show it right away.</p>
+              <h2>What this means for saving stickers</h2>
+              <p>Since the file was already loaded into your browser to display it, converting it afterward isn't accessing anything new. It's changing a format, nothing more. That's the entire idea behind this tool. Take a file your browser already has, and turn it into something that plays outside of TikTok too.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post6">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Guide</div>
+              <h1 class="blog-post-title">What to Do When a TikTok Sticker URL Won't Convert</h1>
+              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>Nine times out of ten, a failed conversion comes down to one of four things. Here's how to check each one before assuming something's broken.</p>
+              <h2>Check the URL actually ends in .awebp</h2>
+              <p>If you copied more than just the sticker link, extra text, a stray space, or part of the page address, the tool won't recognize it. Paste the URL into a blank tab first. If it doesn't load an image directly, you've copied the wrong thing.</p>
+              <h2>Check if the link has expired</h2>
+              <p>TikTok signs sticker URLs with a timestamp, usually valid for a few hours. If you dragged the sticker out a while ago and are only now getting around to converting it, that's most likely the issue. Go back to the DM, drag the sticker out again, and use the fresh URL right away.</p>
+              <h2>Check your connection during conversion</h2>
+              <p>The proxy has to fetch the file from TikTok's CDN before your browser can decode it. A dropped connection mid-fetch fails the same way any download would. Try again on a stable connection.</p>
+              <h2>Check if TikTok changed something on their end</h2>
+              <p>This happens rarely, but it happens. TikTok occasionally adjusts how their CDN signs or serves files, and a small independent tool like this one sometimes needs a day or two to catch up. If a conversion consistently fails and the first three checks came up clean, that's usually what's going on. Send a message through the contact form. Reports like that are genuinely the fastest way anything gets fixed.</p>
+              <h2>What converting will never fix</h2>
+              <p>If the sticker itself never loaded properly in your chat, a broken thumbnail or a placeholder icon, there's no file to convert. The tool only works with stickers that actually rendered correctly first.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post7">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Explainer</div>
+              <h1 class="blog-post-title">A Short History of the GIF, and Why It Refuses to Die</h1>
+              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>The GIF is older than the modern internet. It was built in 1987 by a team at CompuServe, back when dial-up modems made every kilobyte count and full color photography online wasn't really an option yet.</p>
+              <h2>It was built for a different problem than the one it solves today</h2>
+              <p>The original format compressed simple graphics and basic animation for slow connections. It was never designed with looping stickers, memes, or reaction images in mind, those uses came decades later. It just happened to be the one animated format every browser, app, and operating system agreed to support without asking twice.</p>
+              <h2>Better formats exist, and always have</h2>
+              <p>WebP, APNG, and now AVIF all beat GIF on file size and color depth. TikTok itself skips GIF entirely and uses WebP for stickers. None of that has mattered much, because compatibility beats quality almost every time on the internet. A slightly bigger file that works everywhere wins over a smaller one that only works in some apps.</p>
+              <h2>The compatibility that keeps it alive</h2>
+              <p>Discord, iMessage, WhatsApp, email clients, Reddit, basically every messaging platform built in the last fifteen years handles GIF natively, no plugin and no special support needed. That's forty years of universal agreement nobody's eager to break, even with better formats sitting right there mostly unused by the people sending them around.</p>
+              <h2>What probably happens next</h2>
+              <p>Modern platforms already quietly convert uploaded GIFs into short muted videos behind the scenes, Twitter and Tenor both do this, to save bandwidth while still showing you something that looks and behaves like a GIF. The format's name has basically turned into a generic word for "short looping animation," regardless of what file type is actually doing the work underneath. That's probably how it survives another decade. Not by staying technically relevant, but by staying impossible to fully replace in how people talk about this stuff.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post8">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Explainer</div>
+              <h1 class="blog-post-title">What Animated Stickers Are Actually Made Of</h1>
+              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>An animated sticker looks like a tiny video, but under the hood it's closer to a flipbook. Here's what's actually going on.</p>
+              <h2>It's just a stack of still images</h2>
+              <p>Every animated format, GIF, WebP, or otherwise, stores a series of individual frames, each one a complete still image. Played back fast enough, usually somewhere between 10 and 30 frames per second, your eye reads the sequence as smooth motion instead of a slideshow.</p>
+              <h2>Color count is where formats really differ</h2>
+              <p>Classic GIF is limited to 256 colors per frame, a restriction from 1987 that's never gone away. That's fine for simple line art and flat colors, but it's why gradients and skin tones in GIFs sometimes look slightly banded. WebP has no such limit, which is part of why TikTok's stickers look cleaner in their original format than they do after converting to GIF.</p>
+              <h2>Compression works frame by frame, and between frames</h2>
+              <p>Formats get smaller by not fully redrawing pixels that didn't change from one frame to the next. A sticker where only a character's mouth moves can store most of the image once and just update the small region that's animating. This is also part of why some conversions produce oddly large files. Converting to a format with worse inter-frame compression means the file has to store more redundant information to look the same.</p>
+              <h2>The loop is just a setting, not a special trick</h2>
+              <p>Looping doesn't require anything clever. Both GIF and WebP have a simple flag in the file telling whatever's playing it to go back to frame one once it hits the end, either a set number of times or forever. That one setting is the entire difference between an animation that plays once and one that loops indefinitely.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post9">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Guide</div>
+              <h1 class="blog-post-title">Sticker Packs, Screenshots, and Copyright: What's Actually Okay to Save</h1>
+              <div class="blog-post-meta">AntonAnon · July 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>This comes up a lot, so it's worth answering directly instead of burying it in a FAQ. Here's the honest version. Not legal advice, just a plain read on how this actually works.</p>
+              <h2>Saving something you already have access to isn't the same as stealing it</h2>
+              <p>If a sticker showed up in your own TikTok conversation, your device already downloaded and displayed that file. Saving a copy of something you were already sent isn't meaningfully different from screenshotting a text message or saving a photo someone sent you directly. The content reached you through the normal, intended way the app works.</p>
+              <h2>What actually crosses a line</h2>
+              <p>Redistributing someone else's original artwork at scale, claiming you made it, or using a creator's sticker pack commercially without permission, those are the situations where copyright genuinely gets involved. Converting a sticker for your own personal use, sending it in a different chat app, keeping it for yourself, sits nowhere near that territory.</p>
+              <h2>TikTok stickers specifically are a gray area worth understanding</h2>
+              <p>Some TikTok stickers are official platform assets made by TikTok itself, not by individual creators, and used across millions of conversations. Others are made by third parties and can carry more meaningful ownership questions. When in doubt about a specific sticker's origin, the safest approach is simple. Treat it the way you'd treat any image someone sent you personally, keep it for personal use, and don't repackage or resell it.</p>
+              <h2>What this tool does and doesn't do</h2>
+              <p>This site converts one file format into another. It doesn't unlock private content, bypass any login, or provide access to anything you couldn't already see in your own chats. It's the same category of tool as a screenshot utility, just built for a file type your browser doesn't normally let you save directly.</p>
+              <h2>The simple rule</h2>
+              <p>If you received it, personal use is fine. If you're planning to resell it, claim credit for it, or distribute someone's original work at scale, that's a different conversation, and one worth having with whoever actually made it.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post10">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Tips</div>
+              <h1 class="blog-post-title">Why Some TikTok Stickers Won't Drag Out of the Chat</h1>
+              <div class="blog-post-meta">AntonAnon · July 2026 · 2 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>Not every sticker behaves the same way when you try to drag it. A few specific situations trip people up consistently.</p>
+              <h2>Static stickers versus animated ones</h2>
+              <p>Some TikTok stickers aren't animated at all, they're just still images styled to look like part of a sticker pack. These still drag out fine, but running a still image through a GIF converter is pointless. If the sticker never moved in the chat, there's nothing to animate afterward either.</p>
+              <h2>Stickers sent a long time ago</h2>
+              <p>TikTok doesn't guarantee old DM content stays on their CDN forever. A sticker from months ago might already be gone from wherever it was originally hosted, even though the message still shows in your chat history. If a very old sticker won't drag out at all, that's likely why.</p>
+              <h2>Dropping it in the wrong spot</h2>
+              <p>Dragging a sticker onto a link, a button, or an input field instead of a blank area can trigger that element instead of revealing the file URL. Always drop it somewhere empty. An unused part of the browser tab works best.</p>
+              <h2>Browser-specific quirks</h2>
+              <p>This works most reliably in Chrome and Edge. Firefox and Safari handle drag events differently, in ways that occasionally don't expose the underlying file URL the same way. If dragging isn't working at all, switching browsers is worth trying before assuming the sticker itself is the problem.</p>
+              <h2>When it's just a loading issue</h2>
+              <p>If the sticker hasn't fully rendered yet, a placeholder icon or spinner still showing, there's no file loaded to drag out. Give the chat a second to finish loading images before trying.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post11">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Explainer</div>
+              <h1 class="blog-post-title">Why Your GIF Download Is Always Bigger Than the Sticker</h1>
+              <div class="blog-post-meta">AntonAnon · July 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>This is one of the most common questions the FAQ gets, so it's worth a proper explanation instead of one line.</p>
+              <h2>WebP was built to be small. GIF wasn't</h2>
+              <p>TikTok's stickers use WebP specifically because it compresses animated content far more efficiently than GIF ever has. A sticker that's 150KB as WebP can easily become 1 to 2MB as GIF, sometimes more, for content that looks identical to the eye.</p>
+              <h2>The 256 color limit forces extra work</h2>
+              <p>GIF can only use 256 colors per frame. Converting a WebP sticker, which has no such limit, into GIF means every frame has to get its colors reduced down to fit that ceiling, through a process called dithering. Dithering itself doesn't inflate file size, but the color-limited encoding GIF uses overall is just far less efficient at storing animated content than WebP's newer compression methods.</p>
+              <h2>Frame count adds up fast</h2>
+              <p>A smooth, DM-length TikTok sticker might have 20 to 40 frames. GIF has to store meaningfully more data per frame than WebP does to represent the same motion, so the size difference compounds with every additional frame in the animation.</p>
+              <h2>Is the tradeoff worth it</h2>
+              <p>For sending in Discord, iMessage, WhatsApp, email, or Reddit, yes. Those platforms don't reliably support playing back animated WebP files, some browsers do, but chat apps mostly don't, so GIF is genuinely the only format that guarantees the sticker will actually animate wherever you send it. The bigger file size is the price of universal compatibility, and for a sticker still well under the size of a typical photo, it's a fair trade.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
+          <div class="blog-post" id="post12">
+            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
+            <div class="blog-post-header">
+              <div class="blog-tag">Guide</div>
+              <h1 class="blog-post-title">How Drag and Drop File URLs Work in Any Browser, Not Just TikTok</h1>
+              <div class="blog-post-meta">AntonAnon · July 2026 · 3 min read</div>
+            </div>
+            <div class="blog-post-body">
+              <p>The trick this tool relies on isn't specific to TikTok at all. It's a basic browser behavior that works on plenty of sites. Most people just never think to try it.</p>
+              <h2>Any image on any webpage can usually be dragged</h2>
+              <p>Most images displayed in a browser, on any site, can be clicked and dragged into a blank browser tab or the desktop. Doing so either opens the image directly or shows its underlying file address, depending on the browser. This isn't a hack. It's a standard feature built into how browsers handle images, meant for things like dragging a photo into an email draft.</p>
+              <h2>Right-click often gets you there faster</h2>
+              <p>On most images, right-clicking and choosing "Copy image address" or "Open image in new tab" does the same thing dragging does, just through a menu instead of a mouse gesture. Some sites disable right-click specifically to discourage this. TikTok's DM interface doesn't block dragging the same way, which is exactly why this trick works there.</p>
+              <h2>Why some sites actively try to stop this</h2>
+              <p>Sites that don't want their images easily copied sometimes use invisible overlays, background images instead of actual img tags, or scripts that intercept right-click and drag events. None of this actually makes an image impossible to save, since the browser still has to download the file to display it. It just adds friction for casual users.</p>
+              <h2>The takeaway</h2>
+              <p>If you've ever wondered whether there's an easier way to save something a website is showing you without a screenshot, dragging or right-clicking the image is usually the first thing worth trying, on TikTok or anywhere else. It won't work everywhere, but it works far more often than people expect.</p>
+              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -822,7 +1063,7 @@
         <h3>What this tool does</h3>
         <p>This tool converts publicly accessible animated WebP files to GIF format. It does not bypass any login, paywall, or access restriction.</p>
         <h3>Your responsibility</h3>
-        <p>You are responsible for how you use the GIFs you download. Only convert content you have the right to use. Do not use this tool to infringe on the rights of creators or copyright holders.</p>
+        <p>This is a personal use tool, built for saving stickers you've already sent or received in your own TikTok DMs. You are responsible for how you use the GIFs you download. Only convert content you have the right to use. Do not use this tool to infringe on the rights of creators or copyright holders.</p>
         <h3>No warranties</h3>
         <p>This tool is provided as-is. We make no guarantees it will always work, especially since TikTok can change their URL format at any time.</p>
         <h3>Changes</h3>
@@ -831,7 +1072,7 @@
 
       <div class="legal-section" id="copyright">
         <h2>Copyright Claims</h2>
-        <p>This site does not host, store, or distribute TikTok stickers. It converts files fetched directly from TikTok's CDN using URLs provided by the user.</p>
+        <p>This site does not host, store, or distribute TikTok stickers. It converts files fetched directly from TikTok's CDN using URLs provided by the user. If a sticker is already visible in your own TikTok DMs, your browser has already loaded that file from TikTok's servers. This tool just changes its format so you can save and reuse it.</p>
         <p>If you believe content accessible through this tool infringes your copyright, contact us using the link below and we will respond promptly.</p>
         <p>TikTok and all related marks are property of ByteDance. This site is not affiliated with or endorsed by TikTok.</p>
       </div>
@@ -853,6 +1094,7 @@
       <div class="legal-section" id="about" style="scroll-margin-top:40px">
         <h2>About this site</h2>
         <p>Hi, I'm AntonAnon. I built this after noticing that TikTok stickers are just animated WebP files hosted on a public CDN. When you drag a sticker out of a DM in your browser, the file URL shows up right there. No tool existed to convert them to GIF easily, so I made one.</p>
+        <p style="font-size:13px">This is meant for personal use, saving stickers from your own conversations. It's not built for scraping TikTok's sticker library at scale, and it only works one URL at a time (or in the small batches you paste in yourself).</p>
         <p>This is a one-person side project. I build small web tools that solve problems I run into. StickerToGIF started as a personal experiment and turned into something other people found useful too.</p>
         <p>The site runs on ads, which is the only thing keeping it free and online. If it helped you, share it with someone who'd want it.</p>
         <p style="margin-top:8px;font-size:12px;color:var(--muted)">Questions or feedback? <button onclick="document.getElementById('contact-modal').classList.add('show')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;padding:0;text-decoration:underline">Send a message</button></p>
@@ -908,7 +1150,24 @@
       }
       document.body.removeChild(testAd);
     }, 300);
-    addSlot();
+
+    // If a bookmarklet or link sent sticker URLs via ?urls=, load them straight into slots
+    const params = new URLSearchParams(window.location.search);
+    const urlsParam = params.get('urls');
+    if (urlsParam) {
+      const urls = urlsParam.split(',').map(u => u.trim()).filter(Boolean);
+      urls.forEach(function(u) {
+        addSlot();
+        const newId = slotCount - 1;
+        setTimeout(function() {
+          document.getElementById('url-' + newId).value = u;
+          previewSticker(newId);
+        }, 50);
+      });
+      if (urls.length === 0) addSlot();
+    } else {
+      addSlot();
+    }
   });
 
   const SAMPLE_FAKE_URL = 'https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/tos-alisg-i-dhq7zx4c1p-sg/3f9a21bc7e4d48fa92c08b1e5d7f3a92~tplv-dhq7zx4c1p-video2sticker-mid.awebp?rk3s=00edd399&x-expires=9999999999&x-signature=sAmPlEsTiCkErToGiF00000';
