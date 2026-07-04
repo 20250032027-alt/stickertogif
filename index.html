@@ -796,15 +796,16 @@
 
   function addSlot() {
     const id = slotCount++;
+    const randomName = String(Math.floor(100000 + Math.random() * 900000));
     const div = document.createElement('div');
     div.className = 'slot';
     div.id = 'slot-' + id;
     div.innerHTML = `
       <div class="slot-top">
         <div class="slot-name-wrap">
-          <span class="slot-name" id="name-display-${id}" ondblclick="editName(${id})">sticker</span>
+          <span class="slot-name" id="name-display-${id}" ondblclick="editName(${id})">${randomName}</span>
           <span class="slot-name-edit" style="display:none">
-            <input id="name-input-${id}" type="text" value="sticker" onblur="saveName(${id})" onkeydown="if(event.key==='Enter')saveName(${id})" />
+            <input id="name-input-${id}" type="text" value="${randomName}" onblur="saveName(${id})" onkeydown="if(event.key==='Enter')saveName(${id})" />
           </span>
           <span class="gif-ext">.gif</span>
           <span class="pen-icon" onclick="editName(${id})">✎</span>
@@ -854,7 +855,7 @@
   }
 
   function saveName(id) {
-    const val = document.getElementById('name-input-' + id).value.trim() || 'sticker';
+    const val = document.getElementById('name-input-' + id).value.trim() || String(Math.floor(100000 + Math.random() * 900000));
     document.getElementById('name-display-' + id).textContent = val;
     document.getElementById('name-display-' + id).style.display = 'inline';
     document.getElementById('name-input-' + id).parentElement.style.display = 'none';
@@ -945,14 +946,13 @@
 
         gif.on('finished', result => {
           setP(100);
-          status.textContent = 'done, downloaded!';
+          status.textContent = 'done!';
           const gifName = document.getElementById('name-display-' + id).textContent;
           gifBlobs[id] = { blob: result, name: gifName };
           dlBtn.style.display = 'inline-flex';
           updateZipBtn();
           saveToHistory(result, gifName);
           incrementCounter();
-          downloadSingle(id);
           resolve();
         });
 
