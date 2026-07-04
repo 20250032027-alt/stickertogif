@@ -91,343 +91,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7492388540350253" crossorigin="anonymous"></script>
-  <style>
-    :root {
-      --bg: #0e0e0f;
-      --surface: #181819;
-      --surface2: #222224;
-      --border: #2a2a2d;
-      --accent: #00d4ff;
-      --accent2: #ff2d78;
-      --text: #f0f0f0;
-      --muted: #888;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Contact modal */
-    #contact-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
-    #contact-modal.show { display: flex; }
-    .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; max-width: 440px; width: 100%; position: relative; }
-    .contact-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 16px 16px 0 0; }
-    .contact-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
-    .contact-box p { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 20px; line-height: 1.6; }
-    .contact-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; transition: color 0.15s; }
-    .contact-close:hover { color: var(--text); }
-    .contact-form { display: flex; flex-direction: column; gap: 12px; }
-    .contact-form input, .contact-form textarea, .contact-form select { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; border-radius: 8px; transition: border-color 0.15s; }
-    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); }
-    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #444; }
-    .contact-form textarea { resize: vertical; min-height: 100px; }
-    .contact-form select { appearance: none; cursor: pointer; }
-    .contact-form option { background: var(--surface2); }
-    .contact-submit { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; }
-    .contact-submit:hover { opacity: 0.88; }
-    .contact-success { display: none; text-align: center; padding: 20px 0; }
-    .contact-success p { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; line-height: 1.8; }
-    .contact-success .tick { font-size: 36px; margin-bottom: 12px; }
-
-    /* Cookie consent banner */
-    #cookie-banner {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 16px 24px;
-      z-index: 999;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    #cookie-banner.show { display: flex; }
-    #cookie-banner p { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); line-height: 1.6; max-width: 600px; }
-    #cookie-banner a { color: var(--accent); }
-    .cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
-    .cookie-accept { padding: 8px 20px; background: var(--accent); color: #000; font-family: 'DM Mono', monospace; font-size: 11px; border: none; cursor: pointer; border-radius: 4px; font-weight: 500; transition: opacity 0.15s; }
-    .cookie-accept:hover { opacity: 0.85; }
-    .cookie-decline { padding: 8px 16px; background: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; border: 1px solid var(--border); cursor: pointer; border-radius: 4px; transition: color 0.15s, border-color 0.15s; }
-    .cookie-decline:hover { color: var(--text); border-color: var(--accent); }
-
-    /* Ad blocker banner */
-    #adblock-banner {
-      display: none;
-      width: 100%;
-      background: rgba(255,45,120,0.08);
-      border-bottom: 1px solid rgba(255,45,120,0.2);
-      padding: 10px 24px;
-      text-align: center;
-      font-size: 12px;
-      font-family: 'DM Mono', monospace;
-      color: #ff6699;
-      position: relative;
-      z-index: 10;
-    }
-    #adblock-banner.show { display: block; }
-    #adblock-banner a { color: var(--accent); text-decoration: underline; cursor: pointer; }
-    #banner-close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff6699; cursor: pointer; font-size: 14px; }
-
-    header {
-      width: 100%;
-      max-width: 680px;
-      padding: 28px 24px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      z-index: 1;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
-    .logo-text { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
-    .logo-text span { color: var(--accent); }
-
-    nav a { color: var(--muted); text-decoration: none; font-size: 13px; font-family: 'DM Mono', monospace; margin-left: 20px; transition: color 0.2s; }
-    nav a:hover { color: var(--text); }
-
-    main { width: 100%; max-width: 680px; padding: 60px 24px 40px; position: relative; z-index: 1; }
-
-    .hero { text-align: center; margin-bottom: 48px; animation: fadeUp 0.6s 0.1s ease both; }
-
-    .badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
-      border-radius: 99px; padding: 4px 12px; font-size: 11px;
-      font-family: 'DM Mono', monospace; color: var(--accent); margin-bottom: 20px; letter-spacing: 0.05em;
-    }
-    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); animation: pulse 2s infinite; }
-
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 16px; }
-    h1 .line2 { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero p { color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 420px; margin: 0 auto; }
-    .counter-wrap { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 10px 22px; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15); border-radius: 99px; }
-    .counter-num { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--accent); letter-spacing: -0.5px; }
-    .counter-label { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
-
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; animation: fadeUp 0.6s 0.2s ease both; position: relative; overflow: hidden; }
-    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-
-    .input-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; display: block; }
-
-    .steps { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; animation: fadeUp 0.6s 0.3s ease both; }
-    .step-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
-    .step-num { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; }
-    .step-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-    .step-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-    .note { margin-top: 16px; padding: 12px 16px; background: rgba(255,45,120,0.06); border: 1px solid rgba(255,45,120,0.15); border-radius: 8px; font-size: 12px; font-family: 'DM Mono', monospace; color: #ff6699; animation: fadeUp 0.6s 0.4s ease both; }
-
-    .section { margin-top: 80px; scroll-margin-top: 40px; }
-    .section-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
-    .section h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 24px; }
-    .section p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
-
-    /* History side panel */
-    .page-with-history { width: 100%; max-width: 100%; display: flex; align-items: flex-start; align-self: stretch; }
-    .converter-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
-    .history-panel { width: 220px; flex-shrink: 0; border-left: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; align-self: flex-start; }
-    .history-panel-header { padding: 14px 16px 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-    .history-panel-title { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
-    .history-panel-body { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
-    .history-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; gap: 8px; padding: 8px; align-items: center; transition: border-color 0.15s; }
-    .history-card:hover { border-color: var(--accent); }
-    .history-thumb { width: 44px; height: 44px; object-fit: contain; background: var(--bg); display: block; flex-shrink: 0; border-radius: 4px; }
-    .history-info { flex: 1; min-width: 0; }
-    .history-name { font-size: 10px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; font-family: 'DM Mono', monospace; }
-    .history-date { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--muted); }
-    .history-actions { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
-    .history-dl-btn { padding: 4px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: var(--accent); color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
-    .history-del-btn { padding: 4px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: none; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; }
-    .history-del-btn:hover { color: var(--accent2); border-color: var(--accent2); }
-    .history-empty { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; text-align: center; padding: 16px 8px; line-height: 1.6; }
-    .clear-history-btn { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); background: none; border: none; cursor: pointer; transition: color 0.15s; }
-    .clear-history-btn:hover { color: var(--accent2); }
-
-    /* Blog section */
-    .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
-    .blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.15s; cursor: pointer; text-decoration: none; display: block; }
-    .blog-card:hover { border-color: var(--accent); }
-    .blog-card-body { padding: 20px; }
-    .blog-tag { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; display: block; }
-    .blog-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; letter-spacing: -0.2px; }
-    .blog-card p { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
-    .blog-meta { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-    .blog-meta::before { content: ''; display: block; width: 16px; height: 1px; background: var(--border); }
-
-    /* Blog post full */
-    .blog-post { display: none; }
-    .blog-post.active { display: block; }
-    .blog-post-header { margin-bottom: 24px; }
-    .blog-post-title { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; line-height: 1.2; }
-    .blog-post-meta { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
-    .blog-post-body { font-size: 14px; color: var(--muted); line-height: 1.9; }
-    .blog-post-body h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
-    .blog-post-body p { margin-bottom: 16px; }
-    .blog-post-body p:last-child { margin-bottom: 0; }
-    .blog-back { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--border); padding: 7px 14px; cursor: pointer; border-radius: 4px; margin-bottom: 24px; transition: color 0.15s, border-color 0.15s; }
-    .blog-back:hover { color: var(--accent); border-color: var(--accent); }
-
-    .article-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
-    .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-    .article-card .atag { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 8px; display: block; }
-    .article-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
-    .article-card p { font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0; }
-
-    .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
-    .faq-item:first-of-type { border-top: 1px solid var(--border); }
-    .faq-q { font-size: 14px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; user-select: none; }
-    .faq-q .arrow { color: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; flex-shrink: 0; transition: transform 0.2s; }
-    .faq-item.open .arrow { transform: rotate(180deg); }
-    .faq-a { font-size: 13px; color: var(--muted); line-height: 1.7; display: none; margin-top: 10px; }
-    .faq-item.open .faq-a { display: block; }
-
-    .legal-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); scroll-margin-top: 40px; }
-    .legal-section h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
-    .legal-section p { color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 14px; }
-    .legal-section h3 { font-size: 14px; font-weight: 700; margin: 24px 0 8px; color: var(--text); }
-
-    footer { width: 100%; max-width: 680px; padding: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; flex-wrap: wrap; gap: 12px; margin-top: 60px; }
-    footer p { font-size: 12px; color: #444; font-family: 'DM Mono', monospace; }
-    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
-    footer a { font-size: 12px; color: #555; text-decoration: none; font-family: 'DM Mono', monospace; transition: color 0.2s; }
-    footer a:hover { color: var(--muted); }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Batch converter */
-    .card-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .add-btn { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: background 0.15s; }
-    .add-btn:hover { background: var(--surface2); }
-
-    .slot { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-    .slot-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .slot-name-wrap { display: flex; align-items: center; gap: 6px; }
-    .slot-name { font-size: 13px; font-weight: 700; color: var(--text); cursor: pointer; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
-    .slot-name-edit input { background: transparent; border: none; border-bottom: 1px solid var(--accent); color: var(--text); font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; outline: none; width: 120px; }
-    .gif-ext { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); margin-left: 1px; }
-    .pen-icon { color: var(--muted); font-size: 13px; cursor: pointer; transition: color 0.15s; }
-    .pen-icon:hover { color: var(--accent); }
-    .remove-btn { background: none; border: none; color: #555; font-size: 14px; cursor: pointer; transition: color 0.15s; }
-    .remove-btn:hover { color: var(--accent2); }
-
-    .slot-body { display: flex; gap: 12px; align-items: center; }
-    .slot-dl-col { display: flex; align-items: center; justify-content: center; min-width: 64px; }
-    .slot-preview-wrap { width: 72px; height: 72px; flex-shrink: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--bg); }
-    .slot-preview { width: 100%; height: 100%; object-fit: contain; }
-    .slot-preview-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-size: 22px; }
-
-    .slot-right { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-    .slot-url { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
-    .slot-url:focus { border-color: var(--accent); }
-    .slot-url::placeholder { color: #333; }
-
-    .slot-status-row { display: flex; justify-content: space-between; min-height: 16px; }
-    .slot-status { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
-    .slot-pct { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); }
-
-    .bar-track { width: 100%; height: 3px; background: var(--surface); border-radius: 99px; overflow: hidden; }
-    .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.3s ease; }
-
-    .dl-btn { background: none; border: 1px solid var(--accent); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 10px; padding: 12px 10px; cursor: pointer; transition: background 0.2s, transform 0.15s; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 56px; }
-    .dl-btn:hover { background: rgba(0,212,255,0.08); transform: translateY(-1px); }
-    .dl-btn svg { display: block; }
-    .dl-btn span { font-size: 10px; letter-spacing: 0.05em; }
-
-    .batch-actions { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
-    .convert-all-btn { background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 10px; padding: 12px 24px; cursor: pointer; transition: opacity 0.2s; }
-    .convert-all-btn:hover { opacity: 0.88; }
-    .dl-zip-btn { background: none; border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; border-radius: 10px; padding: 12px 20px; cursor: pointer; transition: background 0.15s; display: inline-flex; align-items: center; gap: 6px; }
-    .dl-zip-btn:hover { background: var(--surface2); }
-
-    /* Try it out */
-    .sample-card { display: flex; gap: 20px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-top: 16px; }
-    .sample-left { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
-    .sample-img { width: 80px; height: 80px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); }
-    .sample-hint { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); text-align: center; }
-    .sample-right { flex: 1; display: flex; flex-direction: column; gap: 12px; min-width: 0; overflow: hidden; }
-    .sample-url-row { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow: hidden; min-width: 0; }
-    .sample-url-row code { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 0; min-width: 100%; }
-    .sample-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .sample-copy-btn { background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; border: none; border-radius: 8px; padding: 9px 18px; cursor: pointer; transition: opacity 0.2s; }
-    .sample-copy-btn.secondary { background: none; border: 1px solid var(--border); color: var(--text); font-weight: 400; font-family: 'DM Mono', monospace; font-size: 12px; }
-    .sample-copy-btn:hover { opacity: 0.85; }
-    .sample-copy-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* Accessibility */
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
-
-    /* Clean Responsive Layout Restructuring (No Duplicates) */
-    @media (max-width: 940px) {
-      .page-with-history {
-        flex-direction: column;
-      }
-      .history-panel {
-        width: 100%;
-        height: auto;
-        max-height: 420px;
-        border-left: none;
-        border-top: 1px solid var(--border);
-        position: static;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .steps { grid-template-columns: 1fr; }
-      .blog-grid { grid-template-columns: 1fr; }
-      .article-grid { grid-template-columns: 1fr; }
-      .slot-body { flex-direction: column; }
-      .slot-preview-wrap { width: 100%; height: 100px; }
-      .sample-card { flex-direction: column; }
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
@@ -671,7 +335,7 @@
 
         <div id="blog-list">
           <div class="blog-grid">
-            <a class="blog-card" onclick="openPost('post1');return false;" href="#">
+            <a class="blog-card" href="/blog/how-to-save-tiktok-stickers-as-gif.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Guide</span>
                 <h3>How to save TikTok stickers as GIF in 30 seconds</h3>
@@ -679,7 +343,7 @@
                 <div class="blog-meta">AntonAnon · May 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post2');return false;" href="#">
+            <a class="blog-card" href="/blog/why-tiktok-stickers-are-webp.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
                 <h3>Why TikTok stickers are WebP and why that matters</h3>
@@ -687,7 +351,7 @@
                 <div class="blog-meta">AntonAnon · May 2026 · 4 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post3');return false;" href="#">
+            <a class="blog-card" href="/blog/best-places-to-use-tiktok-sticker-gifs.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Tips</span>
                 <h3>Best places to use TikTok sticker GIFs</h3>
@@ -695,7 +359,7 @@
                 <div class="blog-meta">AntonAnon · May 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post4');return false;" href="#">
+            <a class="blog-card" href="/blog/gif-vs-webp-vs-mp4.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
                 <h3>GIF vs WebP vs MP4 — which format should you use?</h3>
@@ -703,7 +367,7 @@
                 <div class="blog-meta">AntonAnon · May 2026 · 5 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post5');return false;" href="#">
+            <a class="blog-card" href="/blog/what-happens-when-you-drag-a-tiktok-sticker.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
                 <h3>What actually happens when you drag a TikTok sticker out of a DM</h3>
@@ -711,7 +375,7 @@
                 <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post6');return false;" href="#">
+            <a class="blog-card" href="/blog/sticker-url-wont-convert.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Guide</span>
                 <h3>What to do when a TikTok sticker URL won't convert</h3>
@@ -719,7 +383,7 @@
                 <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post7');return false;" href="#">
+            <a class="blog-card" href="/blog/history-of-the-gif.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
                 <h3>A short history of the GIF, and why it refuses to die</h3>
@@ -727,7 +391,7 @@
                 <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post8');return false;" href="#">
+            <a class="blog-card" href="/blog/what-animated-stickers-are-made-of.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
                 <h3>What animated stickers are actually made of</h3>
@@ -735,7 +399,7 @@
                 <div class="blog-meta">AntonAnon · June 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post9');return false;" href="#">
+            <a class="blog-card" href="/blog/sticker-copyright-personal-use.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Guide</span>
                 <h3>Sticker packs, screenshots, and copyright: what's actually okay to save</h3>
@@ -743,7 +407,7 @@
                 <div class="blog-meta">AntonAnon · July 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post10');return false;" href="#">
+            <a class="blog-card" href="/blog/why-stickers-wont-drag-out.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Tips</span>
                 <h3>Why some TikTok stickers won't drag out of the chat</h3>
@@ -751,7 +415,7 @@
                 <div class="blog-meta">AntonAnon · July 2026 · 2 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post11');return false;" href="#">
+            <a class="blog-card" href="/blog/why-gif-downloads-are-bigger.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
                 <h3>Why your GIF download is always bigger than the sticker</h3>
@@ -759,7 +423,7 @@
                 <div class="blog-meta">AntonAnon · July 2026 · 3 min read</div>
               </div>
             </a>
-            <a class="blog-card" onclick="openPost('post12');return false;" href="#">
+            <a class="blog-card" href="/blog/drag-and-drop-file-urls-explained.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Guide</span>
                 <h3>How drag and drop file URLs work in any browser, not just TikTok</h3>
@@ -770,274 +434,6 @@
           </div>
         </div>
 
-        <!-- Blog posts -->
-        <div id="blog-post-wrap" style="display:none">
-
-          <div class="blog-post" id="post1">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Guide</div>
-              <h1 class="blog-post-title">How to Save TikTok Stickers as GIF in 30 Seconds</h1>
-              <div class="blog-post-meta">AntonAnon · May 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>TikTok has thousands of animated stickers in its DM system. The problem is there's no official way to save them. No download button, no export option. But there's a trick that works right now.</p>
-              <h2>Step 1 — Open TikTok in a desktop browser</h2>
-              <p>This doesn't work in the TikTok app. You need to open TikTok.com in Chrome or Edge on a laptop or desktop. Log in and go to your direct messages.</p>
-              <h2>Step 2 — Find a message with a sticker</h2>
-              <p>Open any DM conversation where someone has sent a sticker, or where you've sent one. The stickers appear as animated images in the chat.</p>
-              <h2>Step 3 — Drag the sticker out of the chat</h2>
-              <p>Click on the sticker and drag it out of the chat window into a blank area of your browser tab. Don't drop it on a link or button. When you release it, the browser will show a URL in the address bar or a new tab will open with the sticker URL. It ends in .awebp.</p>
-              <h2>Step 4 — Copy the URL and paste it here</h2>
-              <p>Copy that .awebp URL and paste it into the converter above. Hit Convert all and your GIF will download automatically in a few seconds.</p>
-              <h2>One thing to know</h2>
-              <p>The URL expires after a few hours. TikTok signs their CDN links with a timestamp. If you wait too long after dragging, the conversion will fail and you'll need to drag the sticker out again to get a fresh URL.</p>
-            
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post2">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Explainer</div>
-              <h1 class="blog-post-title">Why TikTok Stickers Are WebP and Why That Matters</h1>
-              <div class="blog-post-meta">AntonAnon · May 2026 · 4 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>If you've ever tried to save a TikTok sticker and noticed the file ends in .awebp, you're looking at animated WebP. It's a format Google developed as a modern replacement for GIF and PNG. TikTok uses it because it's genuinely better in almost every technical way.</p>
-              <h2>What makes WebP better than GIF</h2>
-              <p>The same animation saved as WebP can be 3 to 5 times smaller than the GIF version. It supports more colors, handles transparency cleanly, and compresses video-like content far more efficiently. For a platform serving billions of sticker impressions a day, that difference in file size adds up to a huge amount of bandwidth saved.</p>
-              <h2>So why doesn't everyone just use WebP</h2>
-              <p>The problem is support. GIF is from 1987 and works everywhere — email clients, Discord, iMessage, Reddit, older apps, messaging platforms built years ago. WebP is newer and while all modern browsers support it, most third-party apps and platforms don't. If you want to send a TikTok sticker on WhatsApp, iMessage, or upload it to Tenor, WebP simply won't work.</p>
-              <h2>That's why conversion still matters</h2>
-              <p>Converting to GIF trades file size for compatibility. Your sticker gets bigger but it works anywhere. A 200KB TikTok sticker might become a 1.5MB GIF. That's the cost of universal support. For most uses — sending in a chat, using as a reaction, uploading to a GIF platform — the tradeoff is worth it.</p>
-              <h2>What about MP4</h2>
-              <p>MP4 is even more efficient than WebP for video content but it doesn't support transparency and doesn't autoplay silently everywhere the way GIF does. For short looping animations with no background, GIF remains the most compatible format available.</p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post3">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Tips</div>
-              <h1 class="blog-post-title">Best Places to Use TikTok Sticker GIFs</h1>
-              <div class="blog-post-meta">AntonAnon · May 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>Once you've converted a TikTok sticker to GIF, you've got a file that works almost anywhere. Here's where it works best.</p>
-              <h2>Discord</h2>
-              <p>Discord plays animated GIFs inline in chat. You can also upload them as custom server emojis if you have Nitro or manage a server. TikTok stickers make great reaction emojis because they're expressive and most people haven't seen them outside of TikTok.</p>
-              <h2>iMessage</h2>
-              <p>Drop a GIF file into an iMessage conversation and it plays right in the chat. The person receiving it doesn't need TikTok, a special app, or anything. It just plays.</p>
-              <h2>WhatsApp</h2>
-              <p>WhatsApp supports GIFs in chat on both iOS and Android. Send it the same way you'd send any image. It autoplays in the conversation.</p>
-              <h2>Tenor and Giphy</h2>
-              <p>Upload your converted GIF to Tenor or Giphy and it becomes searchable. Anyone using a keyboard or app that pulls from those platforms can find it. If the sticker is popular or funny, it can get a lot of impressions this way.</p>
-              <h2>Reddit</h2>
-              <p>Reddit supports GIF uploads in posts and comments. Good for reaction content or adding some personality to a thread.</p>
-              <h2>Email</h2>
-              <p>Most email clients display GIFs inline. If you're sending something casual or want a fun header image, a converted sticker works fine.</p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post4">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Explainer</div>
-              <h1 class="blog-post-title">GIF vs WebP vs MP4 — Which Format Should You Use?</h1>
-              <div class="blog-post-meta">AntonAnon · May 2026 · 5 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>When it comes to short looping animations, three formats dominate the conversation: GIF, WebP, and MP4. Each has a different history, different strengths, and different reasons to use or avoid it depending on what you're doing.</p>
-              <h2>GIF — the universal option</h2>
-              <p>GIF is from 1987. It was designed for simple graphics with limited colors and small file sizes back when the internet was slow. By modern standards it's inefficient — it only supports 256 colors per frame, has no real compression for video content, and produces large files for anything complex. But it works everywhere. Every platform, every email client, every messaging app built in the last 30 years supports it. That's why it still dominates for animated reaction content.</p>
-              <h2>WebP — the smart choice for the web</h2>
-              <p>Google developed WebP as a modern image format that handles both static and animated content efficiently. Animated WebP files are typically 3 to 5 times smaller than equivalent GIFs. They support millions of colors and full transparency. TikTok uses WebP for stickers because the bandwidth savings at scale are significant. The downside is support outside of browsers is still patchy. Most native apps and older platforms don't handle WebP animated files.</p>
-              <h2>MP4 — best compression, worst flexibility</h2>
-              <p>For pure compression efficiency, MP4 wins easily. A 2MB GIF might be 100KB as an MP4. Modern platforms like Twitter and Tenor actually convert uploaded GIFs to MP4 behind the scenes and serve them as silent looping video. The problems with MP4 for this use case are that it doesn't support transparency, it requires video playback infrastructure rather than simple image display, and autoplay behavior varies across platforms.</p>
-              <h2>Which should you use</h2>
-              <p>For sharing in chats, reactions, or uploading to GIF platforms, GIF is still the safest choice because of universal compatibility. For your own website or a platform where you control the tech stack, WebP animated or MP4 will give you much smaller files. For video content with sound, MP4 every time. StickerToGIF converts to GIF specifically because that's what works everywhere a TikTok sticker might end up.</p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post5">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Explainer</div>
-              <h1 class="blog-post-title">What Actually Happens When You Drag a TikTok Sticker Out of a DM</h1>
-              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>Dragging a file out of a browser tab feels like a trick the first time you do it. It isn't one. It's just a browser doing something it's always been able to do. Most sites just never let you see it happen.</p>
-              <h2>Every image in your browser already has an address</h2>
-              <p>Anything a website shows you, a sticker, a profile photo, a background image, has to load from somewhere. That somewhere is a file sitting on a server with an address, same as any webpage. TikTok's stickers aren't stored specially or hidden. They're plain files sitting on a CDN, a network of servers built for fast delivery, same as the photos on any other site.</p>
-              <h2>Dragging reveals what was already there</h2>
-              <p>When you click and drag a sticker out of the chat window, your browser treats it like any draggable image. It shows you the file's actual address instead of keeping it wrapped inside the app's interface. Nothing gets unlocked or bypassed here. The file was already sitting in your browser the moment the sticker appeared on screen. That's just how images load.</p>
-              <h2>Why the link expires</h2>
-              <p>TikTok adds a timestamp to each file's address, called a signature. It's a security measure meant to stop people from sharing raw CDN links that work forever. Once the timestamp passes, usually a few hours after the sticker loaded, the link stops responding and you'll need to drag the sticker out again to get a fresh one.</p>
-              <h2>Why this only works on desktop</h2>
-              <p>The TikTok app hides file addresses on purpose. Mobile apps generally don't expose drag targets the way a desktop browser does. That's an interface choice, not a security measure. Open TikTok.com in Chrome or Edge on a computer and the same sticker that hides its file path on your phone will show it right away.</p>
-              <h2>What this means for saving stickers</h2>
-              <p>Since the file was already loaded into your browser to display it, converting it afterward isn't accessing anything new. It's changing a format, nothing more. That's the entire idea behind this tool. Take a file your browser already has, and turn it into something that plays outside of TikTok too.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post6">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Guide</div>
-              <h1 class="blog-post-title">What to Do When a TikTok Sticker URL Won't Convert</h1>
-              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>Nine times out of ten, a failed conversion comes down to one of four things. Here's how to check each one before assuming something's broken.</p>
-              <h2>Check the URL actually ends in .awebp</h2>
-              <p>If you copied more than just the sticker link, extra text, a stray space, or part of the page address, the tool won't recognize it. Paste the URL into a blank tab first. If it doesn't load an image directly, you've copied the wrong thing.</p>
-              <h2>Check if the link has expired</h2>
-              <p>TikTok signs sticker URLs with a timestamp, usually valid for a few hours. If you dragged the sticker out a while ago and are only now getting around to converting it, that's most likely the issue. Go back to the DM, drag the sticker out again, and use the fresh URL right away.</p>
-              <h2>Check your connection during conversion</h2>
-              <p>The proxy has to fetch the file from TikTok's CDN before your browser can decode it. A dropped connection mid-fetch fails the same way any download would. Try again on a stable connection.</p>
-              <h2>Check if TikTok changed something on their end</h2>
-              <p>This happens rarely, but it happens. TikTok occasionally adjusts how their CDN signs or serves files, and a small independent tool like this one sometimes needs a day or two to catch up. If a conversion consistently fails and the first three checks came up clean, that's usually what's going on. Send a message through the contact form. Reports like that are genuinely the fastest way anything gets fixed.</p>
-              <h2>What converting will never fix</h2>
-              <p>If the sticker itself never loaded properly in your chat, a broken thumbnail or a placeholder icon, there's no file to convert. The tool only works with stickers that actually rendered correctly first.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post7">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Explainer</div>
-              <h1 class="blog-post-title">A Short History of the GIF, and Why It Refuses to Die</h1>
-              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>The GIF is older than the modern internet. It was built in 1987 by a team at CompuServe, back when dial-up modems made every kilobyte count and full color photography online wasn't really an option yet.</p>
-              <h2>It was built for a different problem than the one it solves today</h2>
-              <p>The original format compressed simple graphics and basic animation for slow connections. It was never designed with looping stickers, memes, or reaction images in mind, those uses came decades later. It just happened to be the one animated format every browser, app, and operating system agreed to support without asking twice.</p>
-              <h2>Better formats exist, and always have</h2>
-              <p>WebP, APNG, and now AVIF all beat GIF on file size and color depth. TikTok itself skips GIF entirely and uses WebP for stickers. None of that has mattered much, because compatibility beats quality almost every time on the internet. A slightly bigger file that works everywhere wins over a smaller one that only works in some apps.</p>
-              <h2>The compatibility that keeps it alive</h2>
-              <p>Discord, iMessage, WhatsApp, email clients, Reddit, basically every messaging platform built in the last fifteen years handles GIF natively, no plugin and no special support needed. That's forty years of universal agreement nobody's eager to break, even with better formats sitting right there mostly unused by the people sending them around.</p>
-              <h2>What probably happens next</h2>
-              <p>Modern platforms already quietly convert uploaded GIFs into short muted videos behind the scenes, Twitter and Tenor both do this, to save bandwidth while still showing you something that looks and behaves like a GIF. The format's name has basically turned into a generic word for "short looping animation," regardless of what file type is actually doing the work underneath. That's probably how it survives another decade. Not by staying technically relevant, but by staying impossible to fully replace in how people talk about this stuff.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post8">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Explainer</div>
-              <h1 class="blog-post-title">What Animated Stickers Are Actually Made Of</h1>
-              <div class="blog-post-meta">AntonAnon · June 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>An animated sticker looks like a tiny video, but under the hood it's closer to a flipbook. Here's what's actually going on.</p>
-              <h2>It's just a stack of still images</h2>
-              <p>Every animated format, GIF, WebP, or otherwise, stores a series of individual frames, each one a complete still image. Played back fast enough, usually somewhere between 10 and 30 frames per second, your eye reads the sequence as smooth motion instead of a slideshow.</p>
-              <h2>Color count is where formats really differ</h2>
-              <p>Classic GIF is limited to 256 colors per frame, a restriction from 1987 that's never gone away. That's fine for simple line art and flat colors, but it's why gradients and skin tones in GIFs sometimes look slightly banded. WebP has no such limit, which is part of why TikTok's stickers look cleaner in their original format than they do after converting to GIF.</p>
-              <h2>Compression works frame by frame, and between frames</h2>
-              <p>Formats get smaller by not fully redrawing pixels that didn't change from one frame to the next. A sticker where only a character's mouth moves can store most of the image once and just update the small region that's animating. This is also part of why some conversions produce oddly large files. Converting to a format with worse inter-frame compression means the file has to store more redundant information to look the same.</p>
-              <h2>The loop is just a setting, not a special trick</h2>
-              <p>Looping doesn't require anything clever. Both GIF and WebP have a simple flag in the file telling whatever's playing it to go back to frame one once it hits the end, either a set number of times or forever. That one setting is the entire difference between an animation that plays once and one that loops indefinitely.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post9">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Guide</div>
-              <h1 class="blog-post-title">Sticker Packs, Screenshots, and Copyright: What's Actually Okay to Save</h1>
-              <div class="blog-post-meta">AntonAnon · July 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>This comes up a lot, so it's worth answering directly instead of burying it in a FAQ. Here's the honest version. Not legal advice, just a plain read on how this actually works.</p>
-              <h2>Saving something you already have access to isn't the same as stealing it</h2>
-              <p>If a sticker showed up in your own TikTok conversation, your device already downloaded and displayed that file. Saving a copy of something you were already sent isn't meaningfully different from screenshotting a text message or saving a photo someone sent you directly. The content reached you through the normal, intended way the app works.</p>
-              <h2>What actually crosses a line</h2>
-              <p>Redistributing someone else's original artwork at scale, claiming you made it, or using a creator's sticker pack commercially without permission, those are the situations where copyright genuinely gets involved. Converting a sticker for your own personal use, sending it in a different chat app, keeping it for yourself, sits nowhere near that territory.</p>
-              <h2>TikTok stickers specifically are a gray area worth understanding</h2>
-              <p>Some TikTok stickers are official platform assets made by TikTok itself, not by individual creators, and used across millions of conversations. Others are made by third parties and can carry more meaningful ownership questions. When in doubt about a specific sticker's origin, the safest approach is simple. Treat it the way you'd treat any image someone sent you personally, keep it for personal use, and don't repackage or resell it.</p>
-              <h2>What this tool does and doesn't do</h2>
-              <p>This site converts one file format into another. It doesn't unlock private content, bypass any login, or provide access to anything you couldn't already see in your own chats. It's the same category of tool as a screenshot utility, just built for a file type your browser doesn't normally let you save directly.</p>
-              <h2>The simple rule</h2>
-              <p>If you received it, personal use is fine. If you're planning to resell it, claim credit for it, or distribute someone's original work at scale, that's a different conversation, and one worth having with whoever actually made it.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post10">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Tips</div>
-              <h1 class="blog-post-title">Why Some TikTok Stickers Won't Drag Out of the Chat</h1>
-              <div class="blog-post-meta">AntonAnon · July 2026 · 2 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>Not every sticker behaves the same way when you try to drag it. A few specific situations trip people up consistently.</p>
-              <h2>Static stickers versus animated ones</h2>
-              <p>Some TikTok stickers aren't animated at all, they're just still images styled to look like part of a sticker pack. These still drag out fine, but running a still image through a GIF converter is pointless. If the sticker never moved in the chat, there's nothing to animate afterward either.</p>
-              <h2>Stickers sent a long time ago</h2>
-              <p>TikTok doesn't guarantee old DM content stays on their CDN forever. A sticker from months ago might already be gone from wherever it was originally hosted, even though the message still shows in your chat history. If a very old sticker won't drag out at all, that's likely why.</p>
-              <h2>Dropping it in the wrong spot</h2>
-              <p>Dragging a sticker onto a link, a button, or an input field instead of a blank area can trigger that element instead of revealing the file URL. Always drop it somewhere empty. An unused part of the browser tab works best.</p>
-              <h2>Browser-specific quirks</h2>
-              <p>This works most reliably in Chrome and Edge. Firefox and Safari handle drag events differently, in ways that occasionally don't expose the underlying file URL the same way. If dragging isn't working at all, switching browsers is worth trying before assuming the sticker itself is the problem.</p>
-              <h2>When it's just a loading issue</h2>
-              <p>If the sticker hasn't fully rendered yet, a placeholder icon or spinner still showing, there's no file loaded to drag out. Give the chat a second to finish loading images before trying.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post11">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Explainer</div>
-              <h1 class="blog-post-title">Why Your GIF Download Is Always Bigger Than the Sticker</h1>
-              <div class="blog-post-meta">AntonAnon · July 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>This is one of the most common questions the FAQ gets, so it's worth a proper explanation instead of one line.</p>
-              <h2>WebP was built to be small. GIF wasn't</h2>
-              <p>TikTok's stickers use WebP specifically because it compresses animated content far more efficiently than GIF ever has. A sticker that's 150KB as WebP can easily become 1 to 2MB as GIF, sometimes more, for content that looks identical to the eye.</p>
-              <h2>The 256 color limit forces extra work</h2>
-              <p>GIF can only use 256 colors per frame. Converting a WebP sticker, which has no such limit, into GIF means every frame has to get its colors reduced down to fit that ceiling, through a process called dithering. Dithering itself doesn't inflate file size, but the color-limited encoding GIF uses overall is just far less efficient at storing animated content than WebP's newer compression methods.</p>
-              <h2>Frame count adds up fast</h2>
-              <p>A smooth, DM-length TikTok sticker might have 20 to 40 frames. GIF has to store meaningfully more data per frame than WebP does to represent the same motion, so the size difference compounds with every additional frame in the animation.</p>
-              <h2>Is the tradeoff worth it</h2>
-              <p>For sending in Discord, iMessage, WhatsApp, email, or Reddit, yes. Those platforms don't reliably support playing back animated WebP files, some browsers do, but chat apps mostly don't, so GIF is genuinely the only format that guarantees the sticker will actually animate wherever you send it. The bigger file size is the price of universal compatibility, and for a sticker still well under the size of a typical photo, it's a fair trade.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-          <div class="blog-post" id="post12">
-            <button class="blog-back" onclick="closePosts()">← Back to blog</button>
-            <div class="blog-post-header">
-              <div class="blog-tag">Guide</div>
-              <h1 class="blog-post-title">How Drag and Drop File URLs Work in Any Browser, Not Just TikTok</h1>
-              <div class="blog-post-meta">AntonAnon · July 2026 · 3 min read</div>
-            </div>
-            <div class="blog-post-body">
-              <p>The trick this tool relies on isn't specific to TikTok at all. It's a basic browser behavior that works on plenty of sites. Most people just never think to try it.</p>
-              <h2>Any image on any webpage can usually be dragged</h2>
-              <p>Most images displayed in a browser, on any site, can be clicked and dragged into a blank browser tab or the desktop. Doing so either opens the image directly or shows its underlying file address, depending on the browser. This isn't a hack. It's a standard feature built into how browsers handle images, meant for things like dragging a photo into an email draft.</p>
-              <h2>Right-click often gets you there faster</h2>
-              <p>On most images, right-clicking and choosing "Copy image address" or "Open image in new tab" does the same thing dragging does, just through a menu instead of a mouse gesture. Some sites disable right-click specifically to discourage this. TikTok's DM interface doesn't block dragging the same way, which is exactly why this trick works there.</p>
-              <h2>Why some sites actively try to stop this</h2>
-              <p>Sites that don't want their images easily copied sometimes use invisible overlays, background images instead of actual img tags, or scripts that intercept right-click and drag events. None of this actually makes an image impossible to save, since the browser still has to download the file to display it. It just adds friction for casual users.</p>
-              <h2>The takeaway</h2>
-              <p>If you've ever wondered whether there's an easier way to save something a website is showing you without a screenshot, dragging or right-clicking the image is usually the first thing worth trying, on TikTok or anywhere else. It won't work everywhere, but it works far more often than people expect.</p>
-              <p style="margin-top:20px"><a href="#" onclick="closePosts();window.scrollTo(0,0);return false" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:12px">→ Try converting a TikTok sticker now</a></p>
-            </div>
-          </div>
-
-        </div>
       </section>
 
       <div class="legal-section" id="privacy">
@@ -1277,19 +673,6 @@
   function declineCookies(){
     localStorage.setItem('cookie_consent','declined');
     document.getElementById('cookie-banner').classList.remove('show');
-  }
-
-  // Blog
-  function openPost(id){
-    document.getElementById('blog-list').style.display='none';
-    document.getElementById('blog-post-wrap').style.display='block';
-    document.querySelectorAll('.blog-post').forEach(p=>p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.getElementById('blog').scrollIntoView({behavior:'smooth'});
-  }
-  function closePosts(){
-    document.getElementById('blog-list').style.display='block';
-    document.getElementById('blog-post-wrap').style.display='none';
   }
 
   function toggleFaq(el) {
