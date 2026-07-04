@@ -487,7 +487,7 @@
         <a href="#faq">FAQ</a>
         <a href="#blog">Blog</a>
         <a href="#about">About</a>
-        <a href="https://ko-fi.com/T0C322K0PN" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#72a4f2;color:#0a0a0a;padding:6px 14px;border-radius:20px;font-weight:700;text-decoration:none">Support on Ko-fi</a>
+        <button onclick="openKofiModal()" class="kofi-btn">☕ Support on Ko-fi</button>
       </nav>
     </header>
 
@@ -1477,6 +1477,9 @@
     document.getElementById('name-input-' + id).parentElement.style.display = 'none';
   }
 
+  const autoTriggered = {};
+  const autoTimers = {};
+
   function previewSticker(id) {
     const rawUrl = document.getElementById('url-' + id).value.trim();
     const url = rawUrl;
@@ -1488,9 +1491,20 @@
       img.style.display = 'block';
       ph.style.display = 'none';
       img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
+      if (!autoTriggered[id] && !gifBlobs[id]) {
+        clearTimeout(autoTimers[id]);
+        autoTimers[id] = setTimeout(() => {
+          if (!autoTriggered[id] && !gifBlobs[id]) {
+            autoTriggered[id] = true;
+            convertSlot(id);
+          }
+        }, 400);
+      }
     } else {
       img.style.display = 'none';
       ph.style.display = 'flex';
+      autoTriggered[id] = false;
+      clearTimeout(autoTimers[id]);
     }
   }
 
@@ -1548,13 +1562,14 @@
 
         gif.on('finished', result => {
           setP(100);
-          status.textContent = 'done!';
+          status.textContent = 'done, downloaded!';
           const gifName = document.getElementById('name-display-' + id).textContent;
           gifBlobs[id] = { blob: result, name: gifName };
           dlBtn.style.display = 'inline-flex';
           updateZipBtn();
           saveToHistory(result, gifName);
           incrementCounter();
+          downloadSingle(id);
           resolve();
         });
 
@@ -1611,7 +1626,32 @@
     a.click();
   }
 </script>
-<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-<script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'T0C322K0PN');kofiwidget2.draw();</script>
+<style>
+  .kofi-btn { display:inline-flex; align-items:center; gap:6px; background:#72a4f2; color:#0a0a0a; padding:6px 14px; border:none; border-radius:20px; font-weight:700; font-family:'DM Mono',monospace; font-size:13px; cursor:pointer; text-decoration:none; }
+  .kofi-btn:hover { background:#5f92e6; }
+  .kofi-float { position:fixed; bottom:20px; right:20px; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,0.35); }
+  .kofi-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
+  .kofi-modal-overlay.open { display:flex; }
+  .kofi-modal-box { background:#fff; border-radius:12px; overflow:hidden; width:100%; max-width:420px; max-height:85vh; position:relative; }
+  .kofi-modal-close { position:absolute; top:8px; right:10px; background:none; border:none; font-size:20px; cursor:pointer; color:#333; z-index:2; line-height:1; }
+  .kofi-modal-box iframe { display:block; width:100%; height:70vh; border:none; }
+</style>
+<button class="kofi-btn kofi-float" onclick="openKofiModal()">☕ Support on Ko-fi</button>
+<div class="kofi-modal-overlay" id="kofi-modal-overlay" onclick="if(event.target===this)closeKofiModal()">
+  <div class="kofi-modal-box">
+    <button class="kofi-modal-close" onclick="closeKofiModal()">✕</button>
+    <iframe id="kofiframe" src="" title="Support on Ko-fi"></iframe>
+  </div>
+</div>
+<script>
+  function openKofiModal(){
+    const frame = document.getElementById('kofiframe');
+    if(!frame.src) frame.src = 'https://ko-fi.com/T0C322K0PN/?hidefeed=true&widget=true&embed=true&preview=true';
+    document.getElementById('kofi-modal-overlay').classList.add('open');
+  }
+  function closeKofiModal(){
+    document.getElementById('kofi-modal-overlay').classList.remove('open');
+  }
+</script>
 </body>
 </html>
