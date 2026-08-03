@@ -52,6 +52,13 @@
         </div>
         <div id="queue-status" style="color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin-bottom:16px"></div>
         <div id="queue-list"></div>
+
+        <div class="card-header-row" style="margin:40px 0 16px">
+          <span class="input-label">PUBLISHED STICKERS</span>
+        </div>
+        <input id="published-search" type="text" class="slot-url" style="width:100%;margin-bottom:16px" placeholder="Search published stickers by name or tag..." oninput="filterPublished()" />
+        <div id="published-status" style="color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin-bottom:16px"></div>
+        <div id="published-list"></div>
       </div>
     </main>
   </div>
@@ -91,6 +98,43 @@
     document.getElementById('login-card').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     loadQueue();
+    loadPublished();
+  }
+
+  // Builds one editable row: image, name input, tags input, report
+  // details (if any), and action buttons. Used for both the review
+  // queue and the published-stickers list below it.
+  async function buildStickerRow(item) {
+    const { data: reports } = await db.from('reports').select('reason, details, created_at').eq('sticker_id', item.id);
+    const { data: urlData } = db.storage.from('stickers').getPublicUrl(item.storage_path);
+    const row = document.createElement('div');
+    row.className = 'slot';
+    const reportLines = (reports || []).map(r => `<div style="font-size:11px;color:var(--muted)">- ${r.reason}${r.details ? ': ' + r.details : ''}</div>`).join('');
+    const approveBtn = item.status !== 'published'
+      ? `<button class="dl-btn" onclick="setStatus('${item.id}','published')">Approve</button>`
+      : '';
+    row.innerHTML = `
+      <div class="slot-top">
+        <div class="slot-name-wrap" style="flex:1">
+          <input id="name-input-${item.id}" class="slot-url" style="font-family:'Syne',sans-serif;font-weight:700;max-width:260px" value="${item.name}" />
+          <span class="gif-ext">status: ${item.status}, ${item.report_count} report(s)</span>
+        </div>
+      </div>
+      <div class="slot-body">
+        <div class="slot-preview-wrap"><img src="${urlData.publicUrl}" style="width:100%;height:100%;object-fit:contain" /></div>
+        <div class="slot-right">
+          <input id="tags-input-${item.id}" class="slot-url" placeholder="tags, comma separated" value="${(item.tags || []).join(', ')}" />
+          ${reportLines}
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="add-btn" onclick="saveEdits('${item.id}')">Save changes</button>
+            ${approveBtn}
+            <button class="convert-btn" onclick="setStatus('${item.id}','hidden')">Hide</button>
+            <button class="slot-report-btn" onclick="removeSticker('${item.id}')">Remove permanently</button>
+          </div>
+          <span id="save-status-${item.id}" class="slot-status"></span>
+        </div>
+      </div>`;
+    return row;
   }
 
   async function loadQueue() {
@@ -115,38 +159,71 @@
     statusEl.textContent = data.length + ' item(s) waiting on review.';
     listEl.innerHTML = '';
     for (const item of data) {
-      const { data: reports } = await db.from('reports').select('reason, details, created_at').eq('sticker_id', item.id);
-      const { data: urlData } = db.storage.from('stickers').getPublicUrl(item.storage_path);
-      const row = document.createElement('div');
-      row.className = 'slot';
-      const reportLines = (reports || []).map(r => `<div style="font-size:11px;color:var(--muted)">- ${r.reason}${r.details ? ': ' + r.details : ''}</div>`).join('');
-      row.innerHTML = `
-        <div class="slot-top">
-          <div class="slot-name-wrap">
-            <span class="slot-name">${item.name}</span>
-            <span class="gif-ext">status: ${item.status}, ${item.report_count} report(s)</span>
-          </div>
-        </div>
-        <div class="slot-body">
-          <div class="slot-preview-wrap"><img src="${urlData.publicUrl}" style="width:100%;height:100%;object-fit:contain" /></div>
-          <div class="slot-right">
-            <div style="font-size:12px;color:var(--muted)">${(item.tags || []).map(t => '#' + t).join(' ')}</div>
-            ${reportLines}
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="dl-btn" onclick="setStatus('${item.id}','published')">Approve</button>
-              <button class="convert-btn" onclick="setStatus('${item.id}','hidden')">Hide</button>
-              <button class="slot-report-btn" onclick="removeSticker('${item.id}')">Remove permanently</button>
-            </div>
-          </div>
-        </div>`;
-      listEl.appendChild(row);
+      listEl.appendChild(await buildStickerRow(item));
     }
+  }
+
+  let allPublished = [];
+
+  async function loadPublished() {
+    const statusEl = document.getElementById('published-status');
+    statusEl.textContent = 'Loading...';
+    const { data, error } = await db
+      .from('stickers')
+      .select('id, name, tags, storage_path, status, report_count, created_at')
+      .eq('status', 'published')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      statusEl.textContent = 'Could not load published stickers.';
+      return;
+    }
+    allPublished = data || [];
+    statusEl.textContent = allPublished.length + ' published sticker(s).';
+    renderPublished(allPublished);
+  }
+
+  async function renderPublished(items) {
+    const listEl = document.getElementById('published-list');
+    listEl.innerHTML = '';
+    if (!items.length) {
+      listEl.innerHTML = '<div class="history-empty">No published stickers match.</div>';
+      return;
+    }
+    for (const item of items) {
+      listEl.appendChild(await buildStickerRow(item));
+    }
+  }
+
+  function filterPublished() {
+    const q = document.getElementById('published-search').value.trim().toLowerCase();
+    if (!q) { renderPublished(allPublished); return; }
+    const filtered = allPublished.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      (s.tags || []).some(t => t.toLowerCase().includes(q))
+    );
+    renderPublished(filtered);
+  }
+
+  async function saveEdits(id) {
+    const nameInput = document.getElementById('name-input-' + id);
+    const tagsInput = document.getElementById('tags-input-' + id);
+    const saveStatus = document.getElementById('save-status-' + id);
+    const name = nameInput.value.trim();
+    const tags = tagsInput.value.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+    if (!name) { saveStatus.textContent = 'Name can\'t be empty.'; saveStatus.style.color = 'var(--accent2)'; return; }
+    const { error } = await db.from('stickers').update({ name, tags }).eq('id', id);
+    if (error) { saveStatus.textContent = 'Save failed: ' + error.message; saveStatus.style.color = 'var(--accent2)'; return; }
+    saveStatus.textContent = 'Saved.';
+    saveStatus.style.color = 'var(--accent)';
+    setTimeout(() => { saveStatus.textContent = ''; }, 2500);
   }
 
   async function setStatus(id, status) {
     const { error } = await db.from('stickers').update({ status, report_count: status === 'published' ? 0 : undefined }).eq('id', id);
     if (error) { alert('Update failed: ' + error.message); return; }
     loadQueue();
+    loadPublished();
   }
 
   async function removeSticker(id) {
@@ -154,6 +231,7 @@
     const { error } = await db.from('stickers').update({ status: 'removed' }).eq('id', id);
     if (error) { alert('Remove failed: ' + error.message); return; }
     loadQueue();
+    loadPublished();
   }
 
   checkAuth();
