@@ -115,12 +115,17 @@
     header {
       width: 100%;
       max-width: 680px;
-      padding: 28px 24px 0;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
-      z-index: 1;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(14,14,15,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
       animation: fadeUp 0.6s ease both;
     }
 
@@ -266,8 +271,9 @@
     .slot-preview { width: 100%; height: 100%; object-fit: contain; }
     .slot-preview-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-size: 22px; }
 
-    .slot-right { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-    .slot-url { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
+    .slot-right { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .slot-input-row { display: flex; }
+    .slot-url { flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px 0 0 8px; border-right: none; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
     .slot-url:focus { border-color: var(--accent); }
     .slot-url::placeholder { color: #333; }
 
@@ -277,18 +283,17 @@
     .slot-pct { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); }
     .slot-report-btn { background: none; border: none; color: var(--accent2); font-family: 'DM Mono', monospace; font-size: 11px; text-decoration: underline; cursor: pointer; padding: 0; }
     .slot-report-btn:hover { opacity: 0.8; }
-    .slot-action-row { display: flex; justify-content: flex-end; }
 
     .bar-track { width: 100%; height: 3px; background: var(--surface); border-radius: 99px; overflow: hidden; }
     .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.3s ease; }
 
-    .dl-btn { background: none; border: 1px solid var(--accent); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: background 0.2s, transform 0.15s, border-color 0.15s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-    .dl-btn:hover { background: rgba(0,212,255,0.08); transform: translateY(-1px); }
+    .dl-btn { flex-shrink: 0; background: none; border: 1px solid var(--accent); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 0 8px 8px 0; padding: 10px 14px; cursor: pointer; transition: background 0.2s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .dl-btn:hover { background: rgba(0,212,255,0.08); }
     .dl-btn svg { display: block; flex-shrink: 0; }
     .dl-btn span { letter-spacing: 0.02em; }
 
-    .convert-btn { background: linear-gradient(135deg, var(--accent2), #c91f63); color: #fff; border: none; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-    .convert-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .convert-btn { flex-shrink: 0; background: linear-gradient(135deg, var(--accent2), #c91f63); color: #fff; border: none; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 0 8px 8px 0; padding: 10px 14px; cursor: pointer; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .convert-btn:hover { opacity: 0.88; }
     .convert-btn svg { display: block; flex-shrink: 0; }
     .convert-btn span { letter-spacing: 0.02em; }
 
@@ -343,6 +348,9 @@
       .slot-body { flex-direction: column; }
       .slot-preview-wrap { width: 100%; height: 100px; }
       .sample-card { flex-direction: column; }
+      .slot-input-row { flex-direction: column; gap: 8px; }
+      .slot-url { border-radius: 8px; border-right: 1px solid var(--border); }
+      .convert-btn, .dl-btn { border-radius: 8px; justify-content: center; }
     }
 
 /* Standalone blog article pages */
