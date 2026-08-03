@@ -402,13 +402,19 @@
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
 .gallery-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.15s; }
 .gallery-card:hover { border-color: var(--accent); }
-.gallery-card-img { width: 100%; aspect-ratio: 1; object-fit: contain; background: var(--bg); }
-.gallery-card-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
-.gallery-card-name { font-size: 12px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.gallery-card-tags { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--accent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-height: 14px; }
-.gallery-card-meta { display: flex; align-items: center; gap: 5px; font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); }
-.gallery-card-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
-.gallery-card-actions .dl-btn { padding: 6px 10px; font-size: 11px; }
+
+.gallery-card-img-wrap { position: relative; }
+.gallery-card-img { width: 100%; aspect-ratio: 1; object-fit: contain; background: var(--bg); display: block; }
+.gallery-card-report-icon { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; background: rgba(0,0,0,0.55); backdrop-filter: blur(3px); border: none; border-radius: 50%; color: #fff; opacity: 0.7; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s, color 0.15s; }
+.gallery-card-report-icon:hover { opacity: 1; color: var(--accent2); }
+.gallery-card-dl-badge { position: absolute; bottom: 6px; right: 6px; display: flex; align-items: center; gap: 4px; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 99px; }
+
+.gallery-card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.gallery-card-name { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gallery-card-tags { display: flex; flex-wrap: wrap; gap: 4px; min-height: 20px; }
+.tag-chip { background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.gallery-card-dl-btn { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 9px; background: none; border: 1px solid var(--accent); color: var(--accent); border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; text-decoration: none; cursor: pointer; transition: background 0.15s; }
+.gallery-card-dl-btn:hover { background: rgba(0,212,255,0.08); }
 
 .publish-row { margin-top: 2px; }
 .publish-toggle-btn { background: none; border: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px; }

@@ -174,21 +174,23 @@
       const card = document.createElement('div');
       card.className = 'gallery-card';
       card.innerHTML = `
-        <img src="${url}" alt="${item.name}" loading="lazy" class="gallery-card-img" />
+        <div class="gallery-card-img-wrap">
+          <img src="${url}" alt="${item.name}" loading="lazy" class="gallery-card-img" />
+          <button class="gallery-card-report-icon" onclick="openReportModal('${item.id}')" title="Report this sticker">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </button>
+          <span class="gallery-card-dl-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            ${(item.download_count || 0).toLocaleString()}
+          </span>
+        </div>
         <div class="gallery-card-body">
           <div class="gallery-card-name">${item.name}</div>
-          <div class="gallery-card-tags">${(item.tags || []).map(t => '#' + t).join(' ')}</div>
-          <div class="gallery-card-meta">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>${(item.download_count || 0).toLocaleString()} downloads</span>
-          </div>
-          <div class="gallery-card-actions">
-            <a href="${url}" download="${item.name}.gif" class="dl-btn" style="text-decoration:none" onclick="trackDownload('${item.id}')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span>.gif</span>
-            </a>
-            <button class="slot-report-btn" onclick="openReportModal('${item.id}')">report</button>
-          </div>
+          <div class="gallery-card-tags">${(item.tags || []).map(t => `<span class="tag-chip">${t}</span>`).join('')}</div>
+          <a href="${url}" download="${item.name}.gif" class="gallery-card-dl-btn" onclick="trackDownload('${item.id}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download GIF
+          </a>
         </div>`;
       grid.appendChild(card);
     });
