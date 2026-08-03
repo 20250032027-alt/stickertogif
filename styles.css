@@ -272,8 +272,8 @@
     .slot-preview-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-size: 22px; }
 
     .slot-right { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-    .slot-input-row { display: flex; }
-    .slot-url { flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px 0 0 8px; border-right: none; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
+    .slot-input-row { display: flex; align-items: stretch; gap: 8px; }
+    .slot-url { flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
     .slot-url:focus { border-color: var(--accent); }
     .slot-url::placeholder { color: #333; }
 
@@ -287,12 +287,12 @@
     .bar-track { width: 100%; height: 3px; background: var(--surface); border-radius: 99px; overflow: hidden; }
     .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.3s ease; }
 
-    .dl-btn { flex-shrink: 0; background: none; border: 1px solid var(--accent); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 0 8px 8px 0; padding: 10px 14px; cursor: pointer; transition: background 0.2s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .dl-btn { flex-shrink: 0; background: none; border: 1px solid var(--accent); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: background 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; }
     .dl-btn:hover { background: rgba(0,212,255,0.08); }
     .dl-btn svg { display: block; flex-shrink: 0; }
     .dl-btn span { letter-spacing: 0.02em; }
 
-    .convert-btn { flex-shrink: 0; background: linear-gradient(135deg, var(--accent2), #c91f63); color: #fff; border: none; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 0 8px 8px 0; padding: 10px 14px; cursor: pointer; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .convert-btn { flex-shrink: 0; background: linear-gradient(135deg, var(--accent2), #c91f63); color: #fff; border: none; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: opacity 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; }
     .convert-btn:hover { opacity: 0.88; }
     .convert-btn svg { display: block; flex-shrink: 0; }
     .convert-btn span { letter-spacing: 0.02em; }
@@ -348,9 +348,7 @@
       .slot-body { flex-direction: column; }
       .slot-preview-wrap { width: 100%; height: 100px; }
       .sample-card { flex-direction: column; }
-      .slot-input-row { flex-direction: column; gap: 8px; }
-      .slot-url { border-radius: 8px; border-right: 1px solid var(--border); }
-      .convert-btn, .dl-btn { border-radius: 8px; justify-content: center; }
+      .slot-input-row { flex-direction: column; }
     }
 
 /* Standalone blog article pages */
