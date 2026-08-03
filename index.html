@@ -1004,7 +1004,7 @@
   let gifsicleReadyPromise = null;
   function loadGifsicle() {
     if (!gifsicleReadyPromise) {
-      gifsicleReadyPromise = import('vendor/gifsicle.min.js').then(m => m.default);
+      gifsicleReadyPromise = import('/vendor/gifsicle.min.js').then(m => m.default);
     }
     return gifsicleReadyPromise;
   }
