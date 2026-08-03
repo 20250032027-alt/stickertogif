@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moderation - StickerToGIF</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-config.js"></script>
+</head>
+<body>
+
+<div class="page-with-history">
+  <div class="converter-col">
+    <header>
+      <a class="logo" href="/">
+        <div class="logo-icon"><img src="/logo.png" alt="StickerToGIF logo" /></div>
+        <span class="logo-text">sticker<span>to</span>gif</span>
+      </a>
+      <nav>
+        <a href="/">Convert</a>
+        <a href="/gallery.html">Gallery</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <div class="hero">
+        <div class="badge">moderation</div>
+        <h1 style="font-size:32px">Review Queue</h1>
+      </div>
+
+      <!-- Login -->
+      <div class="card" id="login-card">
+        <div class="card-header-row"><span class="input-label">SIGN IN</span></div>
+        <form id="login-form" style="display:flex;flex-direction:column;gap:10px" onsubmit="doLogin(event)">
+          <input type="email" id="login-email" class="slot-url" placeholder="Email" required />
+          <input type="password" id="login-password" class="slot-url" placeholder="Password" required />
+          <button type="submit" class="convert-all-btn" style="align-self:flex-start">Sign in →</button>
+          <div id="login-error" style="color:var(--accent2);font-size:12px;font-family:'DM Mono',monospace;display:none"></div>
+        </form>
+      </div>
+
+      <!-- Dashboard, hidden until authenticated as an admin -->
+      <div id="dashboard" style="display:none">
+        <div class="card-header-row" style="margin-bottom:16px">
+          <span class="input-label">PENDING REVIEW &amp; REPORTED</span>
+          <button class="add-btn" onclick="signOut()">Sign out</button>
+        </div>
+        <div id="queue-status" style="color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin-bottom:16px"></div>
+        <div id="queue-list"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  const { createClient } = supabase;
+  const db = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+  async function doLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+    const { error } = await db.auth.signInWithPassword({ email, password });
+    if (error) {
+      errEl.textContent = error.message;
+      errEl.style.display = 'block';
+      return;
+    }
+    checkAuth();
+  }
+
+  async function signOut() {
+    await db.auth.signOut();
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login-card').style.display = 'block';
+  }
+
+  async function checkAuth() {
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) return;
+    // Row Level Security only returns rows if this user is actually in
+    // the admins table (see schema.sql) - a non-admin login just sees
+    // an empty queue, it can't see or touch anyone else's data.
+    document.getElementById('login-card').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadQueue();
+  }
+
+  async function loadQueue() {
+    const statusEl = document.getElementById('queue-status');
+    const listEl = document.getElementById('queue-list');
+    statusEl.textContent = 'Loading...';
+    const { data, error } = await db
+      .from('stickers')
+      .select('id, name, tags, storage_path, status, report_count, created_at')
+      .in('status', ['pending_review', 'hidden'])
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      statusEl.textContent = 'Could not load the queue. Are you in the admins table? See SETUP.md.';
+      return;
+    }
+    if (!data.length) {
+      statusEl.textContent = 'Nothing waiting on review right now.';
+      listEl.innerHTML = '';
+      return;
+    }
+    statusEl.textContent = data.length + ' item(s) waiting on review.';
+    listEl.innerHTML = '';
+    for (const item of data) {
+      const { data: reports } = await db.from('reports').select('reason, details, created_at').eq('sticker_id', item.id);
+      const { data: urlData } = db.storage.from('stickers').getPublicUrl(item.storage_path);
+      const row = document.createElement('div');
+      row.className = 'slot';
+      const reportLines = (reports || []).map(r => `<div style="font-size:11px;color:var(--muted)">- ${r.reason}${r.details ? ': ' + r.details : ''}</div>`).join('');
+      row.innerHTML = `
+        <div class="slot-top">
+          <div class="slot-name-wrap">
+            <span class="slot-name">${item.name}</span>
+            <span class="gif-ext">status: ${item.status}, ${item.report_count} report(s)</span>
+          </div>
+        </div>
+        <div class="slot-body">
+          <div class="slot-preview-wrap"><img src="${urlData.publicUrl}" style="width:100%;height:100%;object-fit:contain" /></div>
+          <div class="slot-right">
+            <div style="font-size:12px;color:var(--muted)">${(item.tags || []).map(t => '#' + t).join(' ')}</div>
+            ${reportLines}
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="dl-btn" onclick="setStatus('${item.id}','published')">Approve</button>
+              <button class="convert-btn" onclick="setStatus('${item.id}','hidden')">Hide</button>
+              <button class="slot-report-btn" onclick="removeSticker('${item.id}')">Remove permanently</button>
+            </div>
+          </div>
+        </div>`;
+      listEl.appendChild(row);
+    }
+  }
+
+  async function setStatus(id, status) {
+    const { error } = await db.from('stickers').update({ status, report_count: status === 'published' ? 0 : undefined }).eq('id', id);
+    if (error) { alert('Update failed: ' + error.message); return; }
+    loadQueue();
+  }
+
+  async function removeSticker(id) {
+    if (!confirm('Permanently remove this sticker? This cannot be undone.')) return;
+    const { error } = await db.from('stickers').update({ status: 'removed' }).eq('id', id);
+    if (error) { alert('Remove failed: ' + error.message); return; }
+    loadQueue();
+  }
+
+  checkAuth();
+</script>
+</body>
+</html>

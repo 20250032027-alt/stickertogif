@@ -90,6 +90,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-config.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7492388540350253" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -147,6 +149,7 @@
         <span class="logo-text">sticker<span>to</span>gif</span>
       </a>
       <nav>
+        <a href="/gallery.html">Gallery</a>
         <a href="#how-it-works">How it works</a>
         <a href="#faq">FAQ</a>
         <a href="#blog">Blog</a>
@@ -439,38 +442,49 @@
 
       <div class="legal-section" id="privacy">
         <h2>Privacy Policy</h2>
-        <p>Last updated May 2026.</p>
-        <p>This site does not collect personal information. No accounts, no registration, no login. Nothing you enter is stored on our servers.</p>
+        <p>Last updated August 2026.</p>
+        <p>The converter itself still works with no accounts, no registration, and no login - nothing you convert or paste into the URL field is stored on our servers. The one exception is the optional Gallery feature, described below.</p>
         <h3>Proxy requests</h3>
         <p>When you convert a sticker, the URL you paste is sent through a proxy to fetch the file from TikTok's CDN. This proxy does not log URLs, IP addresses, or any other data.</p>
+        <h3>The Gallery is opt-in and does store data</h3>
+        <p>If you choose to publish a converted GIF to the public Gallery, we store the GIF file itself, the name and tags you give it, and a random anonymous identifier tied to your browser (not your identity) used only to loosely rate-limit uploads and reports and to help us respond to abuse. Anything you publish is visible to anyone who visits the Gallery and is not private. You can ask us to remove something you published by using the report link on it or contacting us directly.</p>
+        <h3>Reports</h3>
+        <p>If you report a Gallery item, we store the reason you selected and any details you provide, along with the same anonymous browser identifier, so we can review the report and prevent abuse of the reporting system itself.</p>
         <h3>Analytics</h3>
         <p>We may use basic anonymous analytics to understand general usage. No personally identifiable information is included.</p>
         <h3>Advertising</h3>
         <p>This site uses Google AdSense to show ads. Google may use cookies to serve ads based on your browsing. You can learn more at Google's privacy policy. We do not control which ads are shown.</p>
         <h3>Third parties</h3>
-        <p>This site loads fonts from Google Fonts. Google may collect data per their own privacy policy.</p>
+        <p>This site loads fonts from Google Fonts and uses Supabase to host Gallery data and files. Both may collect data per their own privacy policies.</p>
         <h3>Contact</h3>
         <p>Questions? Use the contact link in the footer.</p>
       </div>
 
       <div class="legal-section" id="terms">
         <h2>Terms of Use</h2>
-        <p>Last updated May 2026.</p>
+        <p>Last updated August 2026.</p>
         <p>By using this site you agree to these terms.</p>
         <h3>What this tool does</h3>
         <p>This tool converts publicly accessible animated WebP files to GIF format. It does not bypass any login, paywall, or access restriction.</p>
         <h3>Your responsibility</h3>
-        <p>This is a personal use tool, built for saving stickers you've already sent or received in your own TikTok DMs. You are responsible for how you use the GIFs you download. Only convert content you have the right to use. Do not use this tool to infringe on the rights of creators or copyright holders.</p>
+        <p>The converter is a personal use tool, built for saving stickers you've already sent or received in your own TikTok DMs. You are responsible for how you use the GIFs you download. Only convert content you have the right to use. Do not use this tool to infringe on the rights of creators or copyright holders.</p>
+        <h3>Publishing to the Gallery</h3>
+        <p>Publishing a GIF to the Gallery is optional and is a separate action from converting it. By publishing, you confirm you have the right to share the content publicly, and you grant us a license to store, display, and let others download that specific file through the Gallery. You can request removal at any time; we may also remove anything at our discretion, including in response to reports or takedown notices. Do not publish sexual content involving minors, content that infringes someone else's rights, hate symbols, or anything illegal - accounts and uploads involved in this may be permanently removed and, where legally required, reported to the appropriate authorities.</p>
         <h3>No warranties</h3>
-        <p>This tool is provided as-is. We make no guarantees it will always work, especially since TikTok can change their URL format at any time.</p>
+        <p>This tool is provided as-is. We make no guarantees it will always work, especially since TikTok can change their URL format at any time, and no guarantee the Gallery will always be available.</p>
         <h3>Changes</h3>
         <p>We may update these terms at any time. Continued use of the site means you accept the current terms.</p>
       </div>
 
       <div class="legal-section" id="copyright">
-        <h2>Copyright Claims</h2>
-        <p>This site does not host, store, or distribute TikTok stickers. It converts files fetched directly from TikTok's CDN using URLs provided by the user. If a sticker is already visible in your own TikTok DMs, your browser has already loaded that file from TikTok's servers. This tool just changes its format so you can save and reuse it.</p>
-        <p>If you believe content accessible through this tool infringes your copyright, contact us using the link below and we will respond promptly.</p>
+        <h2>Copyright / DMCA Policy</h2>
+        <p>Last updated August 2026.</p>
+        <p>The converter itself does not host, store, or distribute TikTok stickers - it converts files fetched directly from TikTok's CDN using a URL you provide, from content already visible in your own TikTok DMs.</p>
+        <p>The Gallery is different: it's a public collection of GIFs that users have chosen to upload and share, and we do host and serve that content.</p>
+        <h3>Reporting a Gallery item</h3>
+        <p>Every Gallery item has a report link that flags it for review, and copyright is one of the report reasons available there.</p>
+        <h3>Formal takedown notice</h3>
+        <p>If you're a rights holder and want to submit a formal DMCA takedown notice, contact our designated agent at <strong>[DMCA agent name/email - fill this in once registered, see SETUP.md]</strong> with: (1) identification of the copyrighted work, (2) the URL of the specific Gallery item, (3) your contact information, (4) a statement that you have a good-faith belief the use is unauthorized, and (5) a statement made under penalty of perjury that the notice is accurate and you're authorized to act on the copyright owner's behalf. We'll remove or disable access to the reported material and notify the uploader.</p>
         <p>TikTok and all related marks are property of ByteDance. This site is not affiliated with or endorsed by TikTok.</p>
       </div>
 
@@ -533,6 +547,22 @@
   const gifBlobs = {};
   const lastErrors = {};
   let convertingCount = 0;
+
+  // Gallery publish client. Works even before supabase-config.js is
+  // filled in with real values - publishToGallery() below just fails
+  // gracefully with an error message until it is.
+  const galleryDb = (typeof supabase !== 'undefined')
+    ? supabase.createClient(window.SUPABASE_URL || '', window.SUPABASE_ANON_KEY || '')
+    : null;
+
+  function getSessionId() {
+    let id = localStorage.getItem('s2g_session');
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem('s2g_session', id);
+    }
+    return id;
+  }
 
   window.addEventListener('load', function() {
     const testAd = document.createElement('div');
@@ -858,6 +888,18 @@
           <div class="bar-track" id="bar-wrap-${id}" style="display:none">
             <div class="bar-fill" id="bar-${id}"></div>
           </div>
+          <div class="publish-row" id="publish-row-${id}" style="display:none">
+            <button class="publish-toggle-btn" id="publish-toggle-${id}" onclick="togglePublishPanel(${id})">+ Publish to gallery</button>
+            <div class="publish-panel" id="publish-panel-${id}" style="display:none">
+              <input type="text" id="publish-tags-${id}" class="slot-url" placeholder="tags, comma separated (e.g. reaction, funny, cat)" />
+              <label class="publish-consent">
+                <input type="checkbox" id="publish-consent-${id}" />
+                I have the right to share this and it doesn't violate anyone's copyright.
+              </label>
+              <button class="convert-btn" id="publish-btn-${id}" onclick="publishToGallery(${id})">Publish</button>
+              <span id="publish-status-${id}" class="slot-status"></span>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -952,6 +994,18 @@
     return xmuxReadyPromise;
   }
 
+  // ── GIF compression ──
+  // gifsicle-wasm-browser ships as an ES module, so it's loaded with a
+  // dynamic import() (works fine from inside a regular <script>) rather
+  // than a script tag + global, unlike webpxmux above.
+  let gifsicleReadyPromise = null;
+  function loadGifsicle() {
+    if (!gifsicleReadyPromise) {
+      gifsicleReadyPromise = import('vendor/gifsicle.min.js').then(m => m.default);
+    }
+    return gifsicleReadyPromise;
+  }
+
   // Unpacks webpxmux's 0xRRGGBBAA-per-pixel Uint32Array into a
   // standard canvas ImageData buffer.
   function framesToImageData(frame, width, height) {
@@ -1032,7 +1086,7 @@
             const delayMs = image.duration ? image.duration / 1000 : 1000 / 15;
             gif.addFrame(canvas, { copy: true, delay: delayMs });
             image.close();
-            setP((i + 1) / frameCount * 80);
+            setP((i + 1) / frameCount * 70);
           }
         } else {
           // Compatibility path: WASM decoder (Firefox, Safari, etc.)
@@ -1051,20 +1105,45 @@
             ctx.putImageData(imgData, 0, 0);
             const delayMs = frame.duration || (1000 / 15);
             gif.addFrame(canvas, { copy: true, delay: delayMs });
-            setP((i + 1) / frameCount * 80);
+            setP((i + 1) / frameCount * 70);
           }
         }
 
-        gif.on('progress', p => { setP(80 + p * 20); status.textContent = 'rendering...'; });
+        gif.on('progress', p => { setP(70 + p * 15); status.textContent = 'rendering...'; });
 
-        gif.on('finished', result => {
+        gif.on('finished', async result => {
+          setP(85);
+          status.textContent = 'compressing...';
+
+          // Run the raw gif.js output through gifsicle (WASM) for real
+          // compression - frame-diffing plus lossy LZW, usually a large
+          // size cut with barely-visible quality loss. If it fails for
+          // any reason, we fall back to the uncompressed GIF rather than
+          // losing the conversion entirely.
+          let finalBlob = result;
+          try {
+            const gifsicle = await loadGifsicle();
+            const outFiles = await gifsicle.run({
+              input: [{ file: result, name: 'in.gif' }],
+              command: ['-O2 --lossy=40 in.gif -o /out/out.gif']
+            });
+            if (outFiles && outFiles[0] && outFiles[0].size > 0) {
+              finalBlob = outFiles[0];
+            }
+          } catch (e) {
+            console.warn('GIF compression skipped:', e);
+          }
+
           setP(100);
-          status.textContent = 'done!';
+          const savedPct = result.size > 0 ? Math.round((1 - finalBlob.size / result.size) * 100) : 0;
+          status.textContent = savedPct > 0 ? `done! (${savedPct}% smaller)` : 'done!';
           const gifName = document.getElementById('name-display-' + id).textContent;
-          gifBlobs[id] = { blob: result, name: gifName };
+          gifBlobs[id] = { blob: finalBlob, name: gifName };
           dlBtn.style.display = 'inline-flex';
+          const publishRow = document.getElementById('publish-row-' + id);
+          if (publishRow) publishRow.style.display = 'block';
           updateZipBtn();
-          saveToHistory(result, gifName);
+          saveToHistory(finalBlob, gifName);
           incrementCounter();
           done(true);
           resolve();
@@ -1088,6 +1167,63 @@
     a.href = URL.createObjectURL(entry.blob);
     a.download = entry.name + '.gif';
     a.click();
+  }
+
+  function togglePublishPanel(id) {
+    const panel = document.getElementById('publish-panel-' + id);
+    const toggle = document.getElementById('publish-toggle-' + id);
+    const opening = panel.style.display === 'none';
+    panel.style.display = opening ? 'flex' : 'none';
+    toggle.textContent = opening ? '- Publish to gallery' : '+ Publish to gallery';
+  }
+
+  async function publishToGallery(id) {
+    const entry = gifBlobs[id];
+    if (!entry) return;
+    const statusEl = document.getElementById('publish-status-' + id);
+    const consent = document.getElementById('publish-consent-' + id).checked;
+    if (!consent) {
+      statusEl.textContent = 'Check the box to confirm you have the right to share this.';
+      statusEl.style.color = 'var(--accent2)';
+      return;
+    }
+    if (!galleryDb || !window.SUPABASE_URL || window.SUPABASE_URL.includes('YOUR-PROJECT')) {
+      statusEl.textContent = 'Gallery isn\'t set up yet (see supabase-config.js).';
+      statusEl.style.color = 'var(--accent2)';
+      return;
+    }
+    const tagsRaw = document.getElementById('publish-tags-' + id).value.trim();
+    const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim().toLowerCase()).filter(Boolean) : [];
+    const publishBtn = document.getElementById('publish-btn-' + id);
+    publishBtn.disabled = true;
+    statusEl.style.color = 'var(--muted)';
+    statusEl.textContent = 'uploading...';
+
+    try {
+      const path = `${crypto.randomUUID()}.gif`;
+      const { error: uploadError } = await galleryDb.storage
+        .from('stickers')
+        .upload(path, entry.blob, { contentType: 'image/gif' });
+      if (uploadError) throw uploadError;
+
+      const { error: insertError } = await galleryDb.from('stickers').insert({
+        name: entry.name,
+        tags,
+        storage_path: path,
+        file_size: entry.blob.size,
+        uploader_session: getSessionId()
+      });
+      if (insertError) throw insertError;
+
+      statusEl.style.color = 'var(--accent)';
+      statusEl.textContent = 'submitted! it\'ll appear in the gallery once reviewed.';
+      publishBtn.style.display = 'none';
+    } catch (err) {
+      statusEl.style.color = 'var(--accent2)';
+      statusEl.textContent = 'publish failed: ' + err.message;
+      publishBtn.disabled = false;
+      console.error(err);
+    }
   }
 
   async function convertAll() {

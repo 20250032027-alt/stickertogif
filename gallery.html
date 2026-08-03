@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticker Gallery - Browse Converted TikTok Sticker GIFs | StickerToGIF</title>
+  <meta name="description" content="Browse and download TikTok sticker GIFs converted by other users. No conversion needed - just search, download, and go.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="canonical" href="https://www.stickertogif.me/gallery.html" />
+  <link rel="stylesheet" href="/styles.css">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-config.js"></script>
+</head>
+<body>
+
+<div class="page-with-history">
+  <div class="converter-col">
+    <header>
+      <a class="logo" href="/">
+        <div class="logo-icon"><img src="/logo.png" alt="StickerToGIF logo" /></div>
+        <span class="logo-text">sticker<span>to</span>gif</span>
+      </a>
+      <nav>
+        <a href="/">Convert</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#blog">Blog</a>
+        <a href="/#about">About</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <div class="hero">
+        <div class="badge">community gallery · free to browse</div>
+        <h1>Sticker GIF Gallery</h1>
+        <p>Browse GIFs other people have already converted. No TikTok link needed - just search, download, done. Handy if you're on your phone.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header-row">
+          <span class="input-label">SEARCH</span>
+        </div>
+        <input id="gallery-search" type="text" class="slot-url" style="width:100%" placeholder="Search by name or tag..." oninput="filterGallery()" />
+      </div>
+
+      <div id="gallery-status" style="text-align:center;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin:32px 0">Loading stickers...</div>
+      <div id="gallery-grid" class="gallery-grid"></div>
+
+      <div class="note" style="margin-top:32px">
+        Something wrong with a sticker here? Every card has a report link. Illegal content is hidden immediately on a single report; everything else is reviewed after a few reports.
+      </div>
+    </main>
+
+    <footer>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <p>© 2026 stickertogif. Built by <a href="/#about" style="color:var(--accent);text-decoration:none">AntonAnon</a></p>
+        <p style="font-size:11px">A free tool to convert TikTok stickers to GIF. No signup, no watermark.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/#blog">Blog</a>
+        <a href="/#about">About</a>
+        <a href="/#privacy">Privacy Policy</a>
+        <a href="/#terms">Terms of Use</a>
+        <a href="/#cookies">Cookie Policy</a>
+        <a href="/#copyright">Copyright / DMCA</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- Report modal -->
+<div id="report-modal">
+  <div class="contact-box">
+    <button class="contact-close" aria-label="Close" onclick="closeReportModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <h3>Report this sticker</h3>
+    <p>Illegal content is hidden the moment it's reported - no waiting. Other categories get reviewed after a few reports.</p>
+    <div id="report-form-wrap">
+      <form class="contact-form" onsubmit="submitReport(event)">
+        <select name="reason" id="report-reason" required>
+          <option value="" disabled selected>What's wrong with it?</option>
+          <option value="illegal">Illegal content (reviewed immediately)</option>
+          <option value="nsfw">Sexual / NSFW content</option>
+          <option value="hate">Hate symbol or hateful content</option>
+          <option value="copyright">Copyright / IP claim</option>
+          <option value="spam">Spam or duplicate</option>
+          <option value="other">Something else</option>
+        </select>
+        <textarea name="details" placeholder="Any extra details (optional)"></textarea>
+        <button type="submit" class="contact-submit">Submit report →</button>
+      </form>
+    </div>
+    <div class="contact-success" id="report-success">
+      <div class="tick">✓</div>
+      <p>Report received. Thanks for helping keep this clean.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const { createClient } = supabase;
+  const db = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+  // Anonymous per-browser id, used only to loosely rate-limit reports/
+  // uploads from the same browser. Not an account, not identifying.
+  function getSessionId() {
+    let id = localStorage.getItem('s2g_session');
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem('s2g_session', id);
+    }
+    return id;
+  }
+
+  let allStickers = [];
+  let reportingId = null;
+
+  async function loadGallery() {
+    const statusEl = document.getElementById('gallery-status');
+    try {
+      const { data, error } = await db
+        .from('stickers')
+        .select('id, name, tags, storage_path, created_at')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      allStickers = data || [];
+      if (!allStickers.length) {
+        statusEl.textContent = 'No stickers published yet. Convert one and be the first!';
+        return;
+      }
+      statusEl.style.display = 'none';
+      renderGallery(allStickers);
+    } catch (err) {
+      statusEl.textContent = 'Could not load the gallery right now.';
+      console.error(err);
+    }
+  }
+
+  function publicUrl(storagePath) {
+    const { data } = db.storage.from('stickers').getPublicUrl(storagePath);
+    return data.publicUrl;
+  }
+
+  function renderGallery(items) {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '';
+    if (!items.length) {
+      grid.innerHTML = '<div class="history-empty" style="grid-column:1/-1">No matches. Try a different search.</div>';
+      return;
+    }
+    items.forEach(item => {
+      const url = publicUrl(item.storage_path);
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      card.innerHTML = `
+        <img src="${url}" alt="${item.name}" loading="lazy" class="gallery-card-img" />
+        <div class="gallery-card-body">
+          <div class="gallery-card-name">${item.name}</div>
+          <div class="gallery-card-tags">${(item.tags || []).map(t => '#' + t).join(' ')}</div>
+          <div class="gallery-card-actions">
+            <a href="${url}" download="${item.name}.gif" class="dl-btn" style="text-decoration:none">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>.gif</span>
+            </a>
+            <button class="slot-report-btn" onclick="openReportModal('${item.id}')">report</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  function filterGallery() {
+    const q = document.getElementById('gallery-search').value.trim().toLowerCase();
+    if (!q) { renderGallery(allStickers); return; }
+    const filtered = allStickers.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      (s.tags || []).some(t => t.toLowerCase().includes(q))
+    );
+    renderGallery(filtered);
+  }
+
+  function openReportModal(stickerId) {
+    reportingId = stickerId;
+    document.getElementById('report-modal').classList.add('show');
+  }
+  function closeReportModal() {
+    document.getElementById('report-modal').classList.remove('show');
+  }
+
+  async function submitReport(e) {
+    e.preventDefault();
+    if (!reportingId) return;
+    const form = e.target;
+    const reason = form.reason.value;
+    const details = form.details.value;
+    try {
+      const { error } = await db.from('reports').insert({
+        sticker_id: reportingId,
+        reason,
+        details,
+        reporter_session: getSessionId()
+      });
+      if (error) throw error;
+      document.getElementById('report-form-wrap').style.display = 'none';
+      document.getElementById('report-success').style.display = 'block';
+      setTimeout(() => {
+        closeReportModal();
+        document.getElementById('report-form-wrap').style.display = 'block';
+        document.getElementById('report-success').style.display = 'none';
+        form.reset();
+      }, 2500);
+    } catch (err) {
+      alert('Could not submit the report. Try again.');
+      console.error(err);
+    }
+  }
+
+  loadGallery();
+</script>
+</body>
+</html>

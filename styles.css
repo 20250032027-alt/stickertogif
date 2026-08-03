@@ -50,6 +50,8 @@
     /* Contact modal */
     #contact-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
     #contact-modal.show { display: flex; }
+    #report-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+    #report-modal.show { display: flex; }
     .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; max-width: 440px; width: 100%; position: relative; }
     .contact-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 16px 16px 0 0; }
     .contact-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
@@ -355,3 +357,20 @@
 .blog-post-body h2 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
 .blog-index-link { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--border); padding: 7px 14px; cursor: pointer; border-radius: 4px; margin-bottom: 24px; display: inline-block; text-decoration: none; transition: color 0.15s, border-color 0.15s; }
 .blog-index-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Sticker gallery page */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+.gallery-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.gallery-card-img { width: 100%; aspect-ratio: 1; object-fit: contain; background: var(--bg); }
+.gallery-card-body { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-card-name { font-size: 12px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gallery-card-tags { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--accent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gallery-card-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
+.gallery-card-actions .dl-btn { padding: 6px 10px; font-size: 11px; }
+
+.publish-row { margin-top: 2px; }
+.publish-toggle-btn { background: none; border: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px; }
+.publish-toggle-btn:hover { color: var(--accent); }
+.publish-panel { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; padding: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+.publish-consent { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; line-height: 1.5; cursor: pointer; }
+.publish-consent input { margin-top: 2px; flex-shrink: 0; }
