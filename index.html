@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TikTok Sticker to GIF Converter — Free, No Signup | StickerToGIF</title>
+  <title>TikTok Sticker to GIF Converter - Free, No Signup | StickerToGIF</title>
 	<script>
 	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 	</script>
@@ -17,11 +17,11 @@
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.stickertogif.me/">
-  <meta property="og:title" content="TikTok Sticker to GIF Converter — Free, No Signup">
+  <meta property="og:title" content="TikTok Sticker to GIF Converter - Free, No Signup">
   <meta property="og:description" content="Convert TikTok stickers to GIF for free in seconds. No signup, no watermark, no limits.">
   <meta property="og:image" content="https://www.stickertogif.me/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="TikTok Sticker to GIF Converter — Free">
+  <meta name="twitter:title" content="TikTok Sticker to GIF Converter - Free">
   <meta name="twitter:description" content="Drag a TikTok sticker URL, paste it in, get a GIF. Free, no signup.">
   <script type="application/ld+json">
   {
@@ -98,7 +98,7 @@
 <!-- Contact modal -->
 <div id="contact-modal">
   <div class="contact-box">
-    <button class="contact-close" onclick="document.getElementById('contact-modal').classList.remove('show')">✕</button>
+    <button class="contact-close" aria-label="Close" onclick="document.getElementById('contact-modal').classList.remove('show')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <h3>Send a message</h3>
     <p>Got feedback, a bug to report, or just want to say something? Drop it here.</p>
     <div id="contact-form-wrap">
@@ -134,7 +134,7 @@
 <!-- Ad blocker banner -->
 <div id="adblock-banner">
   This site is free to use. Ads are the only thing keeping it running. Turning off your ad blocker for this page helps a lot.
-  <button id="banner-close" onclick="document.getElementById('adblock-banner').style.display='none'">✕</button>
+  <button id="banner-close" aria-label="Dismiss" onclick="document.getElementById('adblock-banner').style.display='none'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
 </div>
 
 <a href="#main-content" style="position:absolute;top:-100px;left:0;background:var(--accent);color:#000;padding:8px 16px;font-family:'DM Mono',monospace;font-size:12px;z-index:9999;transition:top 0.15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to content</a>
@@ -161,13 +161,13 @@
         <h1>TikTok Sticker to GIF Converter</h1>
         <p>Drag any TikTok sticker out of your DMs, paste the URL, and get a GIF you can send anywhere.</p>
         <div class="counter-wrap">
-          <span class="counter-num" id="counter-num">—</span>
+          <span class="counter-num" id="counter-num">...</span>
           <span class="counter-label">stickers converted</span>
         </div>
       </div>
 
       <p style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.8;max-width:680px;margin:0 auto 24px;text-align:center">
-        According to StickerToGIF's analysis, TikTok stickers are animated WebP files (.awebp) hosted on TikTok's CDN. Dragging a sticker out of a TikTok DM in Chrome or Edge reveals the direct file URL. Pasting that URL here converts it to a standard GIF in seconds — no upload, no account, no watermark.
+        According to StickerToGIF's analysis, TikTok stickers are animated WebP files (.awebp) hosted on TikTok's CDN. Dragging a sticker out of a TikTok DM in Chrome or Edge reveals the direct file URL. Pasting that URL here converts it to a standard GIF in seconds. No upload, no account, no watermark.
       </p>
       <div class="card">
         <div class="card-header-row">
@@ -179,28 +179,29 @@
           <button class="convert-all-btn" onclick="convertAll()">Convert all →</button>
           <button class="dl-zip-btn" id="dl-zip-btn" onclick="downloadZip()" style="display:none">Download all as ZIP</button>
         </div>
+        <button class="report-issue-link" onclick="openFeedback()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Something not working? Report it</button>
       </div>
 
       <div class="steps">
         <div class="step-card">
-          <div class="step-num">01 —</div>
+          <div class="step-num">01.</div>
           <h3>Drag the sticker</h3>
           <p>In TikTok DMs on desktop, drag a sticker out of the chat. Your browser will show the URL.</p>
         </div>
         <div class="step-card">
-          <div class="step-num">02 —</div>
+          <div class="step-num">02.</div>
           <h3>Paste and convert</h3>
           <p>Paste the URL above and hit Convert. The frames get decoded right in your browser, nothing uploaded.</p>
         </div>
         <div class="step-card">
-          <div class="step-num">03 —</div>
+          <div class="step-num">03.</div>
           <h3>Download GIF</h3>
           <p>Your GIF saves automatically. Works in Discord, iMessage, WhatsApp, wherever GIFs are supported.</p>
         </div>
       </div>
 
       <div class="note">
-        ⚠ Sticker URLs expire after a few hours. If it stops working, just drag the sticker out again to get a fresh one.
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-right:6px;vertical-align:-2px"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Sticker URLs expire after a few hours. If it stops working, just drag the sticker out again to get a fresh one.
       </div>
 
       <div class="section" id="try-it">
@@ -210,7 +211,7 @@
         <div class="sample-card">
           <div class="sample-left">
             <img src="sample.awebp" class="sample-img" alt="Sample TikTok sticker" />
-            <div class="sample-hint">sample only — do not drag out</div>
+            <div class="sample-hint">sample only, do not drag out</div>
           </div>
           <div class="sample-right">
             <div class="sample-url-row">
@@ -289,42 +290,42 @@
         <h2>Common questions</h2>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why does the URL stop working after a while?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why does the URL stop working after a while?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">TikTok puts an expiry timestamp in the URL. Once it passes, the link stops working. Just drag the sticker out again from TikTok to get a new one. Takes about five seconds.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this work on mobile?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this work on mobile?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Not right now. It needs Chrome or Edge on a desktop. The browser feature it uses isn't available on mobile or Safari yet.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is it really free?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is it really free?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Yes. No account, no watermark, no limit. The site runs on ads so if you find it useful, turning off your ad blocker helps keep it free.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why is the GIF file bigger than the original sticker?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why is the GIF file bigger than the original sticker?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">GIF compresses worse than WebP. A 40-frame sticker can go from a few hundred KB to 1 or 2MB as a GIF. That's normal. The file is still small enough to share in most apps.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">How do I get the sticker URL from TikTok?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">How do I get the sticker URL from TikTok?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Open TikTok in a desktop browser, not the app. Go to your DMs, find a sticker, then click and drag it out of the chat. The URL shows up in your browser. It ends in .awebp. Copy that and paste it here.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this store or share my data?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this store or share my data?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">No. The proxy just fetches the file from TikTok and passes it back. It doesn't log anything. The actual conversion happens in your browser.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Can I convert any TikTok sticker?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Can I convert any TikTok sticker?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Any sticker that gives you an .awebp URL when dragged out should work. Most TikTok DM stickers do. If the URL doesn't end in .awebp or it's expired, it won't convert.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is this affiliated with TikTok?<span class="arrow">▼</span></div>
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is this affiliated with TikTok?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
           <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">No. This is an independent project. TikTok belongs to ByteDance. This site just converts files that TikTok already hosts publicly on their CDN.</span></div>
         </div>
       </section>
@@ -362,7 +363,7 @@
             <a class="blog-card" href="/blog/gif-vs-webp-vs-mp4.html">
               <div class="blog-card-body">
                 <span class="blog-tag">Explainer</span>
-                <h3>GIF vs WebP vs MP4 — which format should you use?</h3>
+                <h3>GIF vs WebP vs MP4: which format should you use?</h3>
                 <p>Each format has tradeoffs. This breaks down when to use GIF, when WebP is better, and when MP4 wins.</p>
                 <div class="blog-meta">AntonAnon · May 2026 · 5 min read</div>
               </div>
@@ -499,7 +500,7 @@
 
     <footer>
       <div style="display:flex;flex-direction:column;gap:6px">
-        <p>© 2026 stickertogif — Built by <a href="#about" style="color:var(--accent);text-decoration:none">AntonAnon</a></p>
+        <p>© 2026 stickertogif. Built by <a href="#about" style="color:var(--accent);text-decoration:none">AntonAnon</a></p>
         <p style="font-size:11px">A free tool to convert TikTok stickers to GIF. No signup, no watermark.</p>
       </div>
       <div class="footer-links">
@@ -525,13 +526,12 @@
   </div>
 </div>
 
-<canvas id="c" style="display:none"></canvas>
-
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
   const PROXY = 'https://tiktok-proxy.cabarlesebantonio.workers.dev';
   let slotCount = 0;
   const gifBlobs = {};
+  const lastErrors = {};
   let convertingCount = 0;
 
   window.addEventListener('load', function() {
@@ -633,6 +633,24 @@
 
   function openContact(){ document.getElementById('contact-modal').classList.add('show'); }
   function closeContact(){ document.getElementById('contact-modal').classList.remove('show'); }
+
+  // Feedback shortcut from the converter card. Opens the contact modal,
+  // preselects "Bug report", and if called with a slot id that has a
+  // known conversion error, prefills the message with the URL and error.
+  function openFeedback(slotId) {
+    const modal = document.getElementById('contact-modal');
+    const typeSelect = modal.querySelector('select[name="type"]');
+    const messageBox = modal.querySelector('textarea[name="message"]');
+    if (typeSelect) typeSelect.value = 'bug';
+    if (messageBox) {
+      const info = (slotId !== undefined) ? lastErrors[slotId] : null;
+      messageBox.value = info
+        ? `Conversion failed.\nSticker URL: ${info.url}\nError shown: ${info.message}\n\n(Add any extra details below)\n`
+        : '';
+    }
+    modal.classList.add('show');
+    if (messageBox) setTimeout(() => messageBox.focus(), 50);
+  }
 
   // Contact form
   async function submitContact(e) {
@@ -757,8 +775,8 @@
           <div class="history-date">${item.date}</div>
         </div>
         <div class="history-actions">
-          <button class="history-dl-btn" onclick="downloadFromHistory(${item.id})">⬇</button>
-          <button class="history-del-btn" onclick="deleteFromHistory(${item.id})">✕</button>
+          <button class="history-dl-btn" aria-label="Download GIF" onclick="downloadFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <button class="history-del-btn" aria-label="Delete" onclick="deleteFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         </div>`;
       grid.appendChild(card);
     });
@@ -796,7 +814,7 @@
 
   function addSlot() {
     const id = slotCount++;
-    const randomName = String(Math.floor(100000 + Math.random() * 900000));
+    const randomName = 'sticker_' + String(Math.floor(100000 + Math.random() * 900000));
     const div = document.createElement('div');
     div.className = 'slot';
     div.id = 'slot-' + id;
@@ -808,9 +826,9 @@
             <input id="name-input-${id}" type="text" value="${randomName}" onblur="saveName(${id})" onkeydown="if(event.key==='Enter')saveName(${id})" />
           </span>
           <span class="gif-ext">.gif</span>
-          <span class="pen-icon" onclick="editName(${id})">✎</span>
+          <span class="pen-icon" role="button" aria-label="Rename" onclick="editName(${id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
         </div>
-        <button class="remove-btn" onclick="removeSlot(${id})">✕</button>
+        <button class="remove-btn" aria-label="Remove this slot" onclick="removeSlot(${id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
       <div class="slot-body">
         <div class="slot-preview-wrap">
@@ -821,7 +839,10 @@
           <input id="url-${id}" type="text" class="slot-url" placeholder="https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/...awebp?..."
             oninput="previewSticker(${id})" />
           <div class="slot-status-row">
-            <span id="status-${id}" class="slot-status"></span>
+            <span class="slot-status-group">
+              <span id="status-${id}" class="slot-status"></span>
+              <button id="report-${id}" class="slot-report-btn" style="display:none" onclick="openFeedback(${id})">report this</button>
+            </span>
             <span id="pct-${id}" class="slot-pct"></span>
           </div>
           <div class="bar-track" id="bar-wrap-${id}" style="display:none">
@@ -829,6 +850,10 @@
           </div>
         </div>
         <div class="slot-dl-col">
+          <button class="convert-btn" id="convert-btn-${id}" style="display:none" onclick="convertSlot(${id})" title="Convert this sticker">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Convert</span>
+          </button>
           <button class="dl-btn" id="dl-btn-${id}" style="display:none" onclick="downloadSingle(${id})" title="Download GIF">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>.gif</span>
@@ -855,40 +880,31 @@
   }
 
   function saveName(id) {
-    const val = document.getElementById('name-input-' + id).value.trim() || String(Math.floor(100000 + Math.random() * 900000));
+    const val = document.getElementById('name-input-' + id).value.trim() || ('sticker_' + String(Math.floor(100000 + Math.random() * 900000)));
     document.getElementById('name-display-' + id).textContent = val;
     document.getElementById('name-display-' + id).style.display = 'inline';
     document.getElementById('name-input-' + id).parentElement.style.display = 'none';
   }
-
-  const autoTriggered = {};
-  const autoTimers = {};
 
   function previewSticker(id) {
     const rawUrl = document.getElementById('url-' + id).value.trim();
     const url = rawUrl;
     const img = document.getElementById('preview-' + id);
     const ph = document.getElementById('placeholder-' + id);
+    const convertBtn = document.getElementById('convert-btn-' + id);
     const previewSrc = (typeof sampleSlots !== 'undefined' && sampleSlots[id]) ? (window.location.origin + '/sample.awebp') : rawUrl;
     if (url && url.includes('awebp')) {
       img.src = previewSrc;
       img.style.display = 'block';
       ph.style.display = 'none';
       img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
-      if (!autoTriggered[id] && !gifBlobs[id]) {
-        clearTimeout(autoTimers[id]);
-        autoTimers[id] = setTimeout(() => {
-          if (!autoTriggered[id] && !gifBlobs[id]) {
-            autoTriggered[id] = true;
-            convertSlot(id);
-          }
-        }, 400);
-      }
+      // Conversion is manual only, never automatic. Show the Convert
+      // button for this slot unless it's already been converted.
+      if (convertBtn && !gifBlobs[id]) convertBtn.style.display = 'inline-flex';
     } else {
       img.style.display = 'none';
       ph.style.display = 'flex';
-      autoTriggered[id] = false;
-      clearTimeout(autoTimers[id]);
+      if (convertBtn) convertBtn.style.display = 'none';
     }
   }
 
@@ -897,23 +913,79 @@
     document.getElementById('dl-zip-btn').style.display = count > 1 ? 'inline-flex' : 'none';
   }
 
+  // ── Cross-browser WebP decoding ──
+  // ImageDecoder (WebCodecs) only exists in Chromium browsers. For
+  // Firefox, Safari, and anything else, we lazy-load a WASM WebP
+  // decoder (webpxmux) so the tool still works, just a bit slower.
+  const supportsImageDecoder = typeof window.ImageDecoder !== 'undefined';
+  let xmuxReadyPromise = null;
+
+  function loadWebpxmuxFallback() {
+    if (xmuxReadyPromise) return xmuxReadyPromise;
+    xmuxReadyPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'vendor/webpxmux.min.js';
+      script.onload = () => {
+        try {
+          const xMux = window.WebPXMux('vendor/webpxmux.wasm');
+          xMux.waitRuntime().then(() => resolve(xMux)).catch(reject);
+        } catch (e) { reject(e); }
+      };
+      script.onerror = () => reject(new Error('Could not load the compatibility decoder.'));
+      document.head.appendChild(script);
+    });
+    return xmuxReadyPromise;
+  }
+
+  // Unpacks webpxmux's 0xRRGGBBAA-per-pixel Uint32Array into a
+  // standard canvas ImageData buffer.
+  function framesToImageData(frame, width, height) {
+    const imgData = new ImageData(width, height);
+    const out = imgData.data;
+    const px = frame.rgba;
+    for (let i = 0; i < px.length; i++) {
+      const v = px[i];
+      const o = i * 4;
+      out[o] = (v >>> 24) & 0xFF;
+      out[o + 1] = (v >>> 16) & 0xFF;
+      out[o + 2] = (v >>> 8) & 0xFF;
+      out[o + 3] = v & 0xFF;
+    }
+    return imgData;
+  }
+
+  const convertingSlots = {};
+
   async function convertSlot(id) {
+    if (convertingSlots[id]) return; // already converting, ignore duplicate triggers
     const url = document.getElementById('url-' + id).value.trim();
     if (!url) return;
+    convertingSlots[id] = true;
+
     const status = document.getElementById('status-' + id);
     const pct = document.getElementById('pct-' + id);
     const barWrap = document.getElementById('bar-wrap-' + id);
     const bar = document.getElementById('bar-' + id);
     const dlBtn = document.getElementById('dl-btn-' + id);
+    const convertBtn = document.getElementById('convert-btn-' + id);
 
     const setP = (p) => {
       bar.style.width = p + '%';
       pct.textContent = Math.round(p) + '%';
     };
 
+    const reportBtn = document.getElementById('report-' + id);
+    if (reportBtn) reportBtn.style.display = 'none';
+    if (convertBtn) convertBtn.style.display = 'none';
+
     barWrap.style.display = 'block';
     status.textContent = 'fetching...';
     setP(0);
+
+    const done = (ok) => {
+      convertingSlots[id] = false;
+      if (!ok && convertBtn) convertBtn.style.display = 'inline-flex'; // allow retry
+    };
 
     return new Promise(async (resolve) => {
       try {
@@ -923,23 +995,49 @@
         const res = await fetch(fetchUrl);
         const blob = await res.blob();
         const buf = await blob.arrayBuffer();
-        const decoder = new ImageDecoder({ data: buf, type: 'image/webp' });
-        await decoder.tracks.ready;
-        const frameCount = decoder.tracks.selectedTrack.frameCount;
 
-        const canvas = document.getElementById('c');
+        // Each conversion gets its own canvas. Using one shared canvas
+        // would let two concurrent conversions overwrite each other's frames.
+        const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         const gif = new GIF({ workers: 4, quality: 10, workerScript: 'gif.worker.js' });
 
-        status.textContent = `encoding ${frameCount} frames...`;
+        if (supportsImageDecoder) {
+          // Fast path: native WebCodecs decoding (Chrome, Edge, Opera).
+          const decoder = new ImageDecoder({ data: buf, type: 'image/webp' });
+          await decoder.tracks.ready;
+          const frameCount = decoder.tracks.selectedTrack.frameCount;
+          status.textContent = `encoding ${frameCount} frames...`;
 
-        for (let i = 0; i < frameCount; i++) {
-          const { image } = await decoder.decode({ frameIndex: i });
-          canvas.width = image.codedWidth;
-          canvas.height = image.codedHeight;
-          ctx.drawImage(image, 0, 0);
-          gif.addFrame(canvas, { copy: true, delay: 1000 / 15 });
-          setP((i + 1) / frameCount * 80);
+          for (let i = 0; i < frameCount; i++) {
+            const { image } = await decoder.decode({ frameIndex: i });
+            canvas.width = image.codedWidth;
+            canvas.height = image.codedHeight;
+            ctx.drawImage(image, 0, 0);
+            const delayMs = image.duration ? image.duration / 1000 : 1000 / 15;
+            gif.addFrame(canvas, { copy: true, delay: delayMs });
+            image.close();
+            setP((i + 1) / frameCount * 80);
+          }
+        } else {
+          // Compatibility path: WASM decoder (Firefox, Safari, etc.)
+          status.textContent = 'loading compatibility decoder...';
+          const xMux = await loadWebpxmuxFallback();
+          status.textContent = 'decoding...';
+          const decoded = await xMux.decodeFrames(new Uint8Array(buf));
+          const frameCount = decoded.frameCount;
+          canvas.width = decoded.width;
+          canvas.height = decoded.height;
+          status.textContent = `encoding ${frameCount} frames...`;
+
+          for (let i = 0; i < frameCount; i++) {
+            const frame = decoded.frames[i];
+            const imgData = framesToImageData(frame, decoded.width, decoded.height);
+            ctx.putImageData(imgData, 0, 0);
+            const delayMs = frame.duration || (1000 / 15);
+            gif.addFrame(canvas, { copy: true, delay: delayMs });
+            setP((i + 1) / frameCount * 80);
+          }
         }
 
         gif.on('progress', p => { setP(80 + p * 20); status.textContent = 'rendering...'; });
@@ -953,12 +1051,16 @@
           updateZipBtn();
           saveToHistory(result, gifName);
           incrementCounter();
+          done(true);
           resolve();
         });
 
         gif.render();
       } catch (err) {
         status.textContent = 'error: ' + err.message;
+        lastErrors[id] = { url, message: err.message };
+        if (reportBtn) reportBtn.style.display = 'inline';
+        done(false);
         resolve();
       }
     });
@@ -980,7 +1082,7 @@
     for (const slot of slots) {
       const id = parseInt(slot.id.replace('slot-', ''));
       const url = document.getElementById('url-' + id).value.trim();
-      if (url) await convertSlot(id);
+      if (url && !gifBlobs[id]) await convertSlot(id);
     }
     if (zipBtn) { zipBtn.disabled = false; zipBtn.style.opacity = ''; zipBtn.style.pointerEvents = ''; }
     updateZipBtn();
@@ -1017,7 +1119,7 @@
   .kofi-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
   .kofi-modal-overlay.open { display:flex; }
   .kofi-modal-box { background:#fff; border-radius:12px; overflow:hidden; width:100%; max-width:420px; max-height:85vh; position:relative; }
-  .kofi-modal-close { position:absolute; top:8px; right:10px; background:none; border:none; font-size:20px; cursor:pointer; color:#333; z-index:2; line-height:1; }
+  .kofi-modal-close { position:absolute; top:8px; right:10px; background:none; border:none; cursor:pointer; color:#333; z-index:2; display:flex; align-items:center; justify-content:center; padding:4px; }
   .kofi-modal-box iframe { display:block; width:100%; height:70vh; border:none; }
   .kofi-modal-fallback { padding:10px 14px; font-family:'DM Mono',monospace; font-size:12px; color:#555; text-align:center; border-top:1px solid #eee; }
   .kofi-modal-fallback a { color:#3f6fc9; }
@@ -1025,7 +1127,7 @@
 <button class="kofi-btn kofi-float" onclick="openKofiModal()">☕ Support on Ko-fi</button>
 <div class="kofi-modal-overlay" id="kofi-modal-overlay" onclick="if(event.target===this)closeKofiModal()">
   <div class="kofi-modal-box">
-    <button class="kofi-modal-close" onclick="closeKofiModal()">✕</button>
+    <button class="kofi-modal-close" aria-label="Close" onclick="closeKofiModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <iframe id="kofiframe" src="" title="Support on Ko-fi"></iframe>
     <div class="kofi-modal-fallback">Nothing showing above? Some ad blockers block this. <a href="https://ko-fi.com/T0C322K0PN" target="_blank" rel="noopener">Open Ko-fi directly instead →</a></div>
   </div>

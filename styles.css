@@ -54,7 +54,7 @@
     .contact-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 16px 16px 0 0; }
     .contact-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
     .contact-box p { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 20px; line-height: 1.6; }
-    .contact-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; transition: color 0.15s; }
+    .contact-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--muted); cursor: pointer; transition: color 0.15s; display: flex; align-items: center; justify-content: center; padding: 4px; }
     .contact-close:hover { color: var(--text); }
     .contact-form { display: flex; flex-direction: column; gap: 12px; }
     .contact-form input, .contact-form textarea, .contact-form select { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 12px; outline: none; border-radius: 8px; transition: border-color 0.15s; }
@@ -110,7 +110,7 @@
     }
     #adblock-banner.show { display: block; }
     #adblock-banner a { color: var(--accent); text-decoration: underline; cursor: pointer; }
-    #banner-close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff6699; cursor: pointer; font-size: 14px; }
+    #banner-close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff6699; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; }
 
     header {
       width: 100%;
@@ -186,8 +186,8 @@
     .history-name { font-size: 10px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; font-family: 'DM Mono', monospace; }
     .history-date { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--muted); }
     .history-actions { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
-    .history-dl-btn { padding: 4px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: var(--accent); color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
-    .history-del-btn { padding: 4px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: none; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; }
+    .history-dl-btn { padding: 5px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: var(--accent); color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+    .history-del-btn { padding: 5px 8px; font-family: 'DM Mono', monospace; font-size: 9px; background: none; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .history-del-btn:hover { color: var(--accent2); border-color: var(--accent2); }
     .history-empty { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; text-align: center; padding: 16px 8px; line-height: 1.6; }
     .clear-history-btn { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); background: none; border: none; cursor: pointer; transition: color 0.15s; }
@@ -254,11 +254,11 @@
     .slot-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .slot-name-wrap { display: flex; align-items: center; gap: 6px; }
     .slot-name { font-size: 13px; font-weight: 700; color: var(--text); cursor: pointer; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
-    .slot-name-edit input { background: transparent; border: none; border-bottom: 1px solid var(--accent); color: var(--text); font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; outline: none; width: 120px; }
+    .slot-name-edit input { background: transparent; border: none; border-bottom: 1px solid var(--accent); color: var(--text); font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; outline: none; width: 160px; }
     .gif-ext { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); margin-left: 1px; }
-    .pen-icon { color: var(--muted); font-size: 13px; cursor: pointer; transition: color 0.15s; }
+    .pen-icon { color: var(--muted); cursor: pointer; transition: color 0.15s; display: inline-flex; align-items: center; }
     .pen-icon:hover { color: var(--accent); }
-    .remove-btn { background: none; border: none; color: #555; font-size: 14px; cursor: pointer; transition: color 0.15s; }
+    .remove-btn { background: none; border: none; color: #555; cursor: pointer; transition: color 0.15s; display: flex; align-items: center; justify-content: center; padding: 4px; }
     .remove-btn:hover { color: var(--accent2); }
 
     .slot-body { display: flex; gap: 12px; align-items: center; }
@@ -272,9 +272,12 @@
     .slot-url:focus { border-color: var(--accent); }
     .slot-url::placeholder { color: #333; }
 
-    .slot-status-row { display: flex; justify-content: space-between; min-height: 16px; }
+    .slot-status-row { display: flex; justify-content: space-between; align-items: center; min-height: 16px; }
+    .slot-status-group { display: flex; align-items: center; gap: 8px; }
     .slot-status { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
     .slot-pct { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); }
+    .slot-report-btn { background: none; border: none; color: var(--accent2); font-family: 'DM Mono', monospace; font-size: 11px; text-decoration: underline; cursor: pointer; padding: 0; }
+    .slot-report-btn:hover { opacity: 0.8; }
 
     .bar-track { width: 100%; height: 3px; background: var(--surface); border-radius: 99px; overflow: hidden; }
     .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.3s ease; }
@@ -284,7 +287,14 @@
     .dl-btn svg { display: block; }
     .dl-btn span { font-size: 10px; letter-spacing: 0.05em; }
 
+    .convert-btn { background: none; border: 1px solid var(--accent2); color: var(--accent2); font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 10px; padding: 12px 10px; cursor: pointer; transition: background 0.2s, transform 0.15s; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 56px; }
+    .convert-btn:hover { background: rgba(255,45,120,0.08); transform: translateY(-1px); }
+    .convert-btn svg { display: block; }
+    .convert-btn span { font-size: 10px; letter-spacing: 0.05em; }
+
     .batch-actions { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+    .report-issue-link { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; cursor: pointer; padding: 10px 0 0; text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
+    .report-issue-link:hover { color: var(--accent2); }
     .convert-all-btn { background: linear-gradient(135deg, var(--accent), #0099cc); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 10px; padding: 12px 24px; cursor: pointer; transition: opacity 0.2s; }
     .convert-all-btn:hover { opacity: 0.88; }
     .dl-zip-btn { background: none; border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; border-radius: 10px; padding: 12px 20px; cursor: pointer; transition: background 0.15s; display: inline-flex; align-items: center; gap: 6px; }
