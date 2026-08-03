@@ -32,34 +32,27 @@
     </header>
 
     <main id="main-content" class="gallery-page-main">
-      <div class="gallery-announce">
-        <span class="gallery-announce-badge">NEW</span>
-        <span class="gallery-announce-text">The Gallery just launched - browse GIFs other people already converted, no TikTok link needed.</span>
-        <button class="gallery-announce-link" onclick="openGalleryInfo()">Learn more</button>
-      </div>
-
-      <div class="gallery-narrow">
-        <div class="hero">
-          <div class="badge">community gallery · free to browse</div>
+      <div class="gallery-compact-header">
+        <div class="gallery-compact-title">
           <h1>Sticker GIF Gallery</h1>
-          <p>Browse GIFs other people have already converted. No TikTok link needed - just search, download, done. Handy if you're on your phone.</p>
+          <p>Browse GIFs already converted by others. No TikTok link needed.</p>
         </div>
-
-        <div class="card">
-          <div class="card-header-row">
-            <span class="input-label">SEARCH</span>
-          </div>
-          <input id="gallery-search" type="text" class="slot-url" style="width:100%" placeholder="Search by name or tag..." oninput="filterGallery()" />
-        </div>
+        <input id="gallery-search" type="text" class="slot-url gallery-compact-search" placeholder="Search by name or tag..." oninput="filterGallery()" />
       </div>
 
-      <div id="gallery-status" style="text-align:center;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin:32px 0">Loading stickers...</div>
+      <div id="gallery-status" style="text-align:center;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin:20px 0">Loading stickers...</div>
       <div id="gallery-grid" class="gallery-grid"></div>
 
       <div class="gallery-narrow">
         <div class="note" style="margin-top:32px">
           Something wrong with a sticker here? Every card has a report link. Illegal content is hidden immediately on a single report; everything else is reviewed after a few reports.
         </div>
+      </div>
+
+      <div class="gallery-narrow">
+        <p style="text-align:center;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:20px">
+          Wondering why this exists? <button class="gallery-announce-link" onclick="openGalleryInfo()" style="font-size:12px">Learn more</button>
+        </p>
       </div>
     </main>
 

@@ -114,6 +114,27 @@
     #adblock-banner a { color: var(--accent); text-decoration: underline; cursor: pointer; }
     #banner-close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff6699; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; }
 
+    /* Gallery launch banner - full-weight, dismissible, sits above everything */
+    #gallery-banner {
+      display: none;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 12px 48px 12px 24px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      position: relative;
+      z-index: 20;
+    }
+    #gallery-banner.show { display: flex; }
+    .gallery-banner-badge { background: rgba(0,0,0,0.25); color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 99px; flex-shrink: 0; }
+    .gallery-banner-text { color: #000; font-size: 13px; text-align: center; }
+    .gallery-banner-text strong { font-weight: 800; }
+    .gallery-banner-cta { color: #000; font-weight: 800; font-size: 13px; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; flex-shrink: 0; }
+    #gallery-banner-close { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #000; opacity: 0.6; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; transition: opacity 0.15s; }
+    #gallery-banner-close:hover { opacity: 1; }
+
     header {
       width: 100%;
       max-width: 900px;
@@ -364,10 +385,13 @@
 .gallery-page-main { max-width: 1100px; }
 .gallery-narrow { max-width: 640px; margin: 0 auto; }
 
-.gallery-announce { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 18px; margin-bottom: 32px; }
-.gallery-announce-badge { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 99px; flex-shrink: 0; }
-.gallery-announce-text { flex: 1; min-width: 200px; font-size: 13px; color: var(--text); }
-.gallery-announce-link { background: none; border: none; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; padding: 0; flex-shrink: 0; }
+.gallery-compact-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+.gallery-compact-title h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 3px; }
+.gallery-compact-title p { font-size: 12px; color: var(--muted); }
+.gallery-compact-search { width: 280px; flex-shrink: 0; }
+@media (max-width: 640px) { .gallery-compact-header { padding-bottom: 14px; } .gallery-compact-search { width: 100%; } }
+
+.gallery-announce-link { background: none; border: none; color: var(--accent); font-family: 'DM Mono', monospace; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; padding: 0; }
 .gallery-announce-link:hover { color: var(--accent2); }
 
 #gallery-info-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }

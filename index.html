@@ -124,6 +124,14 @@
   </div>
 </div>
 
+<!-- Gallery launch announcement -->
+<div id="gallery-banner">
+  <span class="gallery-banner-badge">NEW</span>
+  <span class="gallery-banner-text">The <strong>Sticker Gallery</strong> just launched. Browse and download GIFs other people already converted - no TikTok link needed.</span>
+  <a href="/gallery.html" class="gallery-banner-cta">Check it out →</a>
+  <button id="gallery-banner-close" aria-label="Dismiss" onclick="dismissGalleryBanner()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+
 <!-- Cookie consent banner -->
 <div id="cookie-banner">
   <p>We use cookies from Google AdSense to show ads. These help keep the tool free. <a href="#cookies">Learn more</a></p>
@@ -724,6 +732,17 @@
   function declineCookies(){
     localStorage.setItem('cookie_consent','declined');
     document.getElementById('cookie-banner').classList.remove('show');
+  }
+
+  // Gallery launch banner
+  (function(){
+    if(!localStorage.getItem('gallery_banner_dismissed')){
+      document.getElementById('gallery-banner').classList.add('show');
+    }
+  })();
+  function dismissGalleryBanner(){
+    localStorage.setItem('gallery_banner_dismissed','1');
+    document.getElementById('gallery-banner').classList.remove('show');
   }
 
   function toggleFaq(el) {
