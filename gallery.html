@@ -31,25 +31,35 @@
       </nav>
     </header>
 
-    <main id="main-content">
-      <div class="hero">
-        <div class="badge">community gallery · free to browse</div>
-        <h1>Sticker GIF Gallery</h1>
-        <p>Browse GIFs other people have already converted. No TikTok link needed - just search, download, done. Handy if you're on your phone.</p>
+    <main id="main-content" class="gallery-page-main">
+      <div class="gallery-announce">
+        <span class="gallery-announce-badge">NEW</span>
+        <span class="gallery-announce-text">The Gallery just launched - browse GIFs other people already converted, no TikTok link needed.</span>
+        <button class="gallery-announce-link" onclick="openGalleryInfo()">Learn more</button>
       </div>
 
-      <div class="card">
-        <div class="card-header-row">
-          <span class="input-label">SEARCH</span>
+      <div class="gallery-narrow">
+        <div class="hero">
+          <div class="badge">community gallery · free to browse</div>
+          <h1>Sticker GIF Gallery</h1>
+          <p>Browse GIFs other people have already converted. No TikTok link needed - just search, download, done. Handy if you're on your phone.</p>
         </div>
-        <input id="gallery-search" type="text" class="slot-url" style="width:100%" placeholder="Search by name or tag..." oninput="filterGallery()" />
+
+        <div class="card">
+          <div class="card-header-row">
+            <span class="input-label">SEARCH</span>
+          </div>
+          <input id="gallery-search" type="text" class="slot-url" style="width:100%" placeholder="Search by name or tag..." oninput="filterGallery()" />
+        </div>
       </div>
 
       <div id="gallery-status" style="text-align:center;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin:32px 0">Loading stickers...</div>
       <div id="gallery-grid" class="gallery-grid"></div>
 
-      <div class="note" style="margin-top:32px">
-        Something wrong with a sticker here? Every card has a report link. Illegal content is hidden immediately on a single report; everything else is reviewed after a few reports.
+      <div class="gallery-narrow">
+        <div class="note" style="margin-top:32px">
+          Something wrong with a sticker here? Every card has a report link. Illegal content is hidden immediately on a single report; everything else is reviewed after a few reports.
+        </div>
       </div>
     </main>
 
@@ -67,6 +77,18 @@
         <a href="/#copyright">Copyright / DMCA</a>
       </div>
     </footer>
+  </div>
+</div>
+
+<!-- Gallery info modal -->
+<div id="gallery-info-modal">
+  <div class="contact-box">
+    <button class="contact-close" aria-label="Close" onclick="closeGalleryInfo()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <h3>Why a gallery?</h3>
+    <p style="text-align:left">The converter itself needs a TikTok sticker's file URL, and the only reliable way to get that URL is dragging a sticker out of TikTok DMs in a desktop browser. That works great on a computer - but it leaves a lot of people stuck:</p>
+    <p style="text-align:left">- You're on your phone and don't have a computer handy<br>- TikTok's app doesn't let you drag a sticker out the same way a browser does<br>- You just want a sticker someone else already converted, without doing the URL/paste/convert steps yourself</p>
+    <p style="text-align:left">The gallery is the workaround: if someone's already converted the sticker you're after, it's just a search and a tap. No dragging, no URL, no computer required.</p>
+    <p style="text-align:left">Everything here was uploaded voluntarily and goes through review before it's public. Every card has a report link if something looks wrong.</p>
   </div>
 </div>
 
@@ -116,12 +138,15 @@
   let allStickers = [];
   let reportingId = null;
 
+  function openGalleryInfo() { document.getElementById('gallery-info-modal').classList.add('show'); }
+  function closeGalleryInfo() { document.getElementById('gallery-info-modal').classList.remove('show'); }
+
   async function loadGallery() {
     const statusEl = document.getElementById('gallery-status');
     try {
       const { data, error } = await db
         .from('stickers')
-        .select('id, name, tags, storage_path, created_at')
+        .select('id, name, tags, storage_path, download_count, created_at')
         .eq('status', 'published')
         .order('created_at', { ascending: false })
         .limit(200);
@@ -160,8 +185,12 @@
         <div class="gallery-card-body">
           <div class="gallery-card-name">${item.name}</div>
           <div class="gallery-card-tags">${(item.tags || []).map(t => '#' + t).join(' ')}</div>
+          <div class="gallery-card-meta">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>${(item.download_count || 0).toLocaleString()} downloads</span>
+          </div>
           <div class="gallery-card-actions">
-            <a href="${url}" download="${item.name}.gif" class="dl-btn" style="text-decoration:none">
+            <a href="${url}" download="${item.name}.gif" class="dl-btn" style="text-decoration:none" onclick="trackDownload('${item.id}')">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               <span>.gif</span>
             </a>
@@ -169,6 +198,13 @@
           </div>
         </div>`;
       grid.appendChild(card);
+    });
+  }
+
+  function trackDownload(id) {
+    // Fire-and-forget - the download itself shouldn't wait on this.
+    db.rpc('increment_download_count', { sticker_id: id }).then(({ error }) => {
+      if (error) console.warn('Download count not updated:', error);
     });
   }
 
