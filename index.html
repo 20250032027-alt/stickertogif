@@ -98,6 +98,21 @@
 <body>
 
 <!-- Contact modal -->
+<div id="first-convert-modal">
+  <div class="contact-box">
+    <button class="contact-close" aria-label="Close" onclick="document.getElementById('first-convert-modal').classList.remove('show')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <h3>Before your first conversion</h3>
+    <p style="text-align:left">This converts a TikTok sticker link into a GIF right in your browser - no account, no sign-up, and the sticker file itself isn't stored on our end.</p>
+    <p style="text-align:left">By default, GIFs you successfully convert are <strong>automatically submitted to the public Gallery</strong> for review. Once approved, anyone browsing the Gallery can find and download it. By leaving this on, you're confirming you have the right to share what you convert.</p>
+    <label class="publish-consent" style="text-align:left;margin-bottom:16px">
+      <input type="checkbox" id="onboarding-auto-submit" checked />
+      <span>Auto-submit my converted stickers to the Gallery for review (you can change this anytime in the Gallery panel)</span>
+    </label>
+    <p style="text-align:left;font-size:11px;color:var(--muted)">Only convert stickers you already have access to. Full details in our <a href="#terms" style="color:var(--accent)">Terms of Use</a>, <a href="#privacy" style="color:var(--accent)">Privacy Policy</a>, and <a href="#copyright" style="color:var(--accent)">Copyright / DMCA</a> policy.</p>
+    <button class="contact-submit" onclick="agreeToOnboarding()" style="margin-top:14px">Agree &amp; Continue →</button>
+  </div>
+</div>
+
 <div id="contact-modal">
   <div class="contact-box">
     <button class="contact-close" aria-label="Close" onclick="document.getElementById('contact-modal').classList.remove('show')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -1086,6 +1101,7 @@
 
   async function convertSlot(id) {
     if (convertingSlots[id]) return; // already converting, ignore duplicate triggers
+    if (needsOnboarding()) { showOnboardingModal(() => convertSlot(id)); return; }
     const url = document.getElementById('url-' + id).value.trim();
     if (!url) return;
     convertingSlots[id] = true;
@@ -1306,6 +1322,40 @@
     if (el) el.checked = isAutoPublishOn();
   })();
 
+  // ── First-conversion onboarding gate ──
+  // Shown once, the first time anyone actually tries to convert
+  // something. Whatever action triggered it (a single slot's Convert
+  // button, or Convert All) is held and re-run automatically once
+  // they agree - nothing is lost, it just waits for a response.
+  let pendingConversionAction = null;
+
+  function needsOnboarding() {
+    return !localStorage.getItem('s2g_onboarding_seen');
+  }
+
+  function showOnboardingModal(action) {
+    pendingConversionAction = action;
+    const checkbox = document.getElementById('onboarding-auto-submit');
+    if (checkbox) checkbox.checked = isAutoPublishOn();
+    document.getElementById('first-convert-modal').classList.add('show');
+  }
+
+  function agreeToOnboarding() {
+    const checkbox = document.getElementById('onboarding-auto-submit');
+    const autoSubmitOn = checkbox ? checkbox.checked : true;
+    localStorage.setItem('s2g_auto_publish', autoSubmitOn ? 'true' : 'false');
+    localStorage.setItem('s2g_onboarding_seen', 'true');
+    // Keep the side-panel toggle in sync with whatever they chose here.
+    const panelToggle = document.getElementById('auto-publish-toggle');
+    if (panelToggle) panelToggle.checked = autoSubmitOn;
+    document.getElementById('first-convert-modal').classList.remove('show');
+    if (pendingConversionAction) {
+      const action = pendingConversionAction;
+      pendingConversionAction = null;
+      action();
+    }
+  }
+
   // Called right after a conversion finishes. If auto-submit is on,
   // publish immediately with the auto-generated name and no tags -
   // no per-item UI needed. If it's off, leave the manual "Publish to
@@ -1333,7 +1383,7 @@
     try {
       const { data, error } = await galleryDb
         .from('stickers')
-        .select('id, name, storage_path, download_count, created_at')
+        .select('id, name, tags, storage_path, download_count, created_at')
         .eq('status', 'published')
         .order('created_at', { ascending: false })
         .limit(12);
@@ -1346,16 +1396,21 @@
       for (const item of data) {
         const { data: urlData } = galleryDb.storage.from('stickers').getPublicUrl(item.storage_path);
         const card = document.createElement('div');
-        card.className = 'history-card';
+        card.className = 'gallery-card';
         card.innerHTML = `
-          <img src="${urlData.publicUrl}" class="history-thumb" loading="lazy" alt="${item.name}" />
-          <div class="history-info">
-            <div class="history-name">${item.name}</div>
-            <div class="history-date">${(item.download_count || 0)} downloads</div>
+          <div class="gallery-card-img-wrap">
+            <img src="${urlData.publicUrl}" alt="${item.name}" loading="lazy" class="gallery-card-img" />
+            <span class="gallery-card-dl-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              ${(item.download_count || 0).toLocaleString()}
+            </span>
           </div>
-          <div class="history-actions">
-            <a href="${urlData.publicUrl}" download="${item.name}.gif" class="history-dl-btn" title="Download">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <div class="gallery-card-body">
+            <div class="gallery-card-name">${item.name}</div>
+            <div class="gallery-card-tags">${(item.tags || []).map(t => `<span class="tag-chip">${t}</span>`).join('')}</div>
+            <a href="${urlData.publicUrl}" download="${item.name}.gif" class="gallery-card-dl-btn" onclick="trackPanelDownload('${item.id}')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download GIF
             </a>
           </div>`;
         body.appendChild(card);
@@ -1367,7 +1422,15 @@
   }
   loadGalleryPanel();
 
+  function trackPanelDownload(id) {
+    if (!galleryDb) return;
+    galleryDb.rpc('increment_download_count', { sticker_id: id }).then(({ error }) => {
+      if (error) console.warn('Download count not updated:', error);
+    });
+  }
+
   async function convertAll() {
+    if (needsOnboarding()) { showOnboardingModal(() => convertAll()); return; }
     const slots = document.querySelectorAll('.slot');
     const zipBtn = document.getElementById('dl-zip-btn');
     if (zipBtn) { zipBtn.disabled = true; zipBtn.style.opacity = '0.4'; zipBtn.style.pointerEvents = 'none'; }
