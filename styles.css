@@ -217,7 +217,17 @@
        display font instead of DM Mono, pink/gradient branding to
        match the Gallery nav button, rather than History's flat
        neutral surface + cyan monospace treatment. */
-    .gallery-side-panel { width: 280px; flex-shrink: 0; border-right: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; align-self: flex-start; }
+    .gallery-side-panel { width: 280px; flex-shrink: 0; border-right: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; height: 100vh; display: flex; flex-direction: row; align-self: flex-start; transition: width 0.25s ease; overflow: hidden; }
+    .gallery-side-panel.collapsed { width: 44px; }
+    .gallery-side-panel.collapsed .gallery-panel-content { display: none; }
+    .gallery-panel-content { flex: 1; min-width: 236px; overflow-y: auto; display: flex; flex-direction: column; }
+    .gallery-panel-tab { flex-shrink: 0; width: 44px; height: 100%; background: var(--surface2); border: none; border-left: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 18px; cursor: pointer; color: var(--muted); transition: color 0.15s; }
+    .gallery-panel-tab:hover { color: var(--accent); }
+    .gallery-side-panel.collapsed .gallery-panel-tab { border-left: none; }
+    .gallery-side-panel.collapsed #gallery-tab-chevron { transform: rotate(180deg); }
+    .gallery-panel-tab-label { writing-mode: vertical-rl; text-orientation: mixed; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+    .gallery-panel-dot { width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: none; }
+    .gallery-panel-dot.show { display: block; }
     .gallery-panel-header { padding: 16px 16px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
     .gallery-panel-title { display: flex; align-items: center; gap: 6px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: -0.2px; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .gallery-panel-see-all { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent2); text-decoration: none; transition: opacity 0.15s; }
@@ -402,7 +412,21 @@
         border-right: none;
         border-top: 1px solid var(--border);
         position: static;
+        flex-direction: column;
       }
+      .gallery-side-panel.collapsed { max-height: 48px; }
+      .gallery-panel-tab {
+        order: -1;
+        flex-direction: row;
+        width: 100%;
+        height: 44px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 0;
+        justify-content: center;
+      }
+      .gallery-side-panel.collapsed .gallery-panel-tab { border-top: none; }
+      .gallery-panel-tab-label { writing-mode: horizontal-tb; }
     }
 
     @media (max-width: 520px) {
