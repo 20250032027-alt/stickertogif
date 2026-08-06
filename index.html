@@ -958,12 +958,14 @@
     const img = document.getElementById('preview-' + id);
     const ph = document.getElementById('placeholder-' + id);
     const convertBtn = document.getElementById('convert-btn-' + id);
-    const previewSrc = (typeof sampleSlots !== 'undefined' && sampleSlots[id]) ? (window.location.origin + '/sample.awebp') : rawUrl;
+    const status = document.getElementById('status-' + id);
+    const previewSrc = (rawUrl === SAMPLE_FAKE_URL || (typeof sampleSlots !== 'undefined' && sampleSlots[id])) ? (window.location.origin + '/sample.awebp') : rawUrl;
     if (url && url.includes('awebp')) {
       img.src = previewSrc;
       img.style.display = 'block';
       ph.style.display = 'none';
       img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
+      if (status) { status.textContent = ''; status.style.color = ''; }
       // Conversion is manual only, never automatic. Show the Convert
       // button for this slot unless it's already been converted.
       if (convertBtn && !gifBlobs[id]) convertBtn.style.display = 'inline-flex';
@@ -974,7 +976,26 @@
       img.style.display = 'none';
       ph.style.display = 'flex';
       if (convertBtn) convertBtn.style.display = 'none';
+      // Catch the single most common source of confusion before it
+      // turns into a failed conversion: someone pasting a link to a
+      // TikTok video/post instead of a sticker file URL. This tool
+      // only does stickers - tell them that immediately instead of
+      // letting the fetch fail later with no explanation.
+      if (status) {
+        if (looksLikeTikTokVideoLink(url)) {
+          status.textContent = "that's a TikTok video link - this tool only converts stickers, not videos";
+          status.style.color = 'var(--accent2)';
+        } else {
+          status.textContent = '';
+          status.style.color = '';
+        }
+      }
     }
+  }
+
+  function looksLikeTikTokVideoLink(url) {
+    if (!url) return false;
+    return /tiktok\.com\/(@[\w.\-]+\/(video|photo)\/|t\/[\w]+)|vm\.tiktok\.com\/|vt\.tiktok\.com\//i.test(url);
   }
 
   function maybeAutoAddSlot(id) {
@@ -1080,7 +1101,7 @@
 
     return new Promise(async (resolve) => {
       try {
-        const resolvedUrl = (typeof sampleSlots !== 'undefined' && sampleSlots[id]) ? SAMPLE_REAL_URL : url;
+        const resolvedUrl = (url === SAMPLE_FAKE_URL || (typeof sampleSlots !== 'undefined' && sampleSlots[id])) ? SAMPLE_REAL_URL : url;
         const isSameOrigin = resolvedUrl.startsWith(window.location.origin);
         const fetchUrl = isSameOrigin ? resolvedUrl : `${PROXY}?url=${encodeURIComponent(resolvedUrl)}`;
         const res = await fetch(fetchUrl);
