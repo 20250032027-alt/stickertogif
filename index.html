@@ -150,6 +150,22 @@
 <a href="#main-content" style="position:absolute;top:-100px;left:0;background:var(--accent);color:#000;padding:8px 16px;font-family:'DM Mono',monospace;font-size:12px;z-index:9999;transition:top 0.15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to content</a>
 
 <div class="page-with-history">
+  <div class="gallery-side-panel">
+    <div class="history-panel-header">
+      <span class="history-panel-title">Gallery</span>
+      <a href="/gallery.html" class="clear-history-btn" style="text-decoration:none">See all →</a>
+    </div>
+    <div class="gallery-panel-toggle">
+      <label class="publish-consent" style="cursor:pointer">
+        <input type="checkbox" id="auto-publish-toggle" onchange="toggleAutoPublish()" />
+        <span>Auto-submit my converted stickers to the Gallery for review. I confirm I have the right to share what I convert.</span>
+      </label>
+    </div>
+    <div class="history-panel-body" id="gallery-panel-body">
+      <div class="history-empty">Loading...</div>
+    </div>
+  </div>
+
   <div class="converter-col">
     <header>
       <a class="logo" href="/">
@@ -1183,8 +1199,7 @@
           const gifName = document.getElementById('name-display-' + id).textContent;
           gifBlobs[id] = { blob: finalBlob, name: gifName };
           dlBtn.style.display = 'inline-flex';
-          const publishRow = document.getElementById('publish-row-' + id);
-          if (publishRow) publishRow.style.display = 'block';
+          maybeAutoPublish(id, finalBlob, gifName);
           updateZipBtn();
           saveToHistory(finalBlob, gifName);
           incrementCounter();
@@ -1220,6 +1235,29 @@
     toggle.textContent = opening ? '- Publish to gallery' : '+ Publish to gallery';
   }
 
+  // Shared upload+insert core. Used by both the manual per-slot publish
+  // panel (tags + explicit per-item consent) and the auto-submit toggle
+  // in the gallery side panel (standing consent, no tags, auto name).
+  async function submitStickerToGallery(blob, name, tags) {
+    if (!galleryDb || !window.SUPABASE_URL || window.SUPABASE_URL.includes('YOUR-PROJECT')) {
+      throw new Error("Gallery isn't set up yet (see supabase-config.js).");
+    }
+    const path = `${crypto.randomUUID()}.gif`;
+    const { error: uploadError } = await galleryDb.storage
+      .from('stickers')
+      .upload(path, blob, { contentType: 'image/gif' });
+    if (uploadError) throw uploadError;
+
+    const { error: insertError } = await galleryDb.from('stickers').insert({
+      name,
+      tags: tags || [],
+      storage_path: path,
+      file_size: blob.size,
+      uploader_session: getSessionId()
+    });
+    if (insertError) throw insertError;
+  }
+
   async function publishToGallery(id) {
     const entry = gifBlobs[id];
     if (!entry) return;
@@ -1227,11 +1265,6 @@
     const consent = document.getElementById('publish-consent-' + id).checked;
     if (!consent) {
       statusEl.textContent = 'Check the box to confirm you have the right to share this.';
-      statusEl.style.color = 'var(--accent2)';
-      return;
-    }
-    if (!galleryDb || !window.SUPABASE_URL || window.SUPABASE_URL.includes('YOUR-PROJECT')) {
-      statusEl.textContent = 'Gallery isn\'t set up yet (see supabase-config.js).';
       statusEl.style.color = 'var(--accent2)';
       return;
     }
@@ -1243,21 +1276,7 @@
     statusEl.textContent = 'uploading...';
 
     try {
-      const path = `${crypto.randomUUID()}.gif`;
-      const { error: uploadError } = await galleryDb.storage
-        .from('stickers')
-        .upload(path, entry.blob, { contentType: 'image/gif' });
-      if (uploadError) throw uploadError;
-
-      const { error: insertError } = await galleryDb.from('stickers').insert({
-        name: entry.name,
-        tags,
-        storage_path: path,
-        file_size: entry.blob.size,
-        uploader_session: getSessionId()
-      });
-      if (insertError) throw insertError;
-
+      await submitStickerToGallery(entry.blob, entry.name, tags);
       statusEl.style.color = 'var(--accent)';
       statusEl.textContent = 'submitted! it\'ll appear in the gallery once reviewed.';
       publishBtn.style.display = 'none';
@@ -1268,6 +1287,85 @@
       console.error(err);
     }
   }
+
+  // ── Auto-submit toggle ──
+  // Defaults to ON. The label on the toggle itself carries the same
+  // rights-confirmation language the old per-item checkbox did, just
+  // as a standing preference instead of a fresh click every time.
+  function isAutoPublishOn() {
+    return localStorage.getItem('s2g_auto_publish') !== 'false';
+  }
+
+  function toggleAutoPublish() {
+    const on = document.getElementById('auto-publish-toggle').checked;
+    localStorage.setItem('s2g_auto_publish', on ? 'true' : 'false');
+  }
+
+  (function initAutoPublishToggle() {
+    const el = document.getElementById('auto-publish-toggle');
+    if (el) el.checked = isAutoPublishOn();
+  })();
+
+  // Called right after a conversion finishes. If auto-submit is on,
+  // publish immediately with the auto-generated name and no tags -
+  // no per-item UI needed. If it's off, leave the manual "Publish to
+  // gallery" panel available for that slot instead.
+  async function maybeAutoPublish(id, blob, name) {
+    const publishRow = document.getElementById('publish-row-' + id);
+    if (!isAutoPublishOn()) {
+      if (publishRow) publishRow.style.display = 'block';
+      return;
+    }
+    try {
+      await submitStickerToGallery(blob, name, []);
+      loadGalleryPanel();
+    } catch (err) {
+      console.warn('Auto-publish skipped:', err);
+      // Fall back to the manual panel so it's not just silently lost.
+      if (publishRow) publishRow.style.display = 'block';
+    }
+  }
+
+  // ── Gallery side panel feed ──
+  async function loadGalleryPanel() {
+    const body = document.getElementById('gallery-panel-body');
+    if (!body || !galleryDb || !window.SUPABASE_URL || window.SUPABASE_URL.includes('YOUR-PROJECT')) return;
+    try {
+      const { data, error } = await galleryDb
+        .from('stickers')
+        .select('id, name, storage_path, download_count, created_at')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false })
+        .limit(12);
+      if (error) throw error;
+      if (!data || !data.length) {
+        body.innerHTML = '<div class="history-empty">Nothing published yet - be the first!</div>';
+        return;
+      }
+      body.innerHTML = '';
+      for (const item of data) {
+        const { data: urlData } = galleryDb.storage.from('stickers').getPublicUrl(item.storage_path);
+        const card = document.createElement('div');
+        card.className = 'history-card';
+        card.innerHTML = `
+          <img src="${urlData.publicUrl}" class="history-thumb" loading="lazy" alt="${item.name}" />
+          <div class="history-info">
+            <div class="history-name">${item.name}</div>
+            <div class="history-date">${(item.download_count || 0)} downloads</div>
+          </div>
+          <div class="history-actions">
+            <a href="${urlData.publicUrl}" download="${item.name}.gif" class="history-dl-btn" title="Download">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </a>
+          </div>`;
+        body.appendChild(card);
+      }
+    } catch (err) {
+      body.innerHTML = '<div class="history-empty">Could not load the gallery.</div>';
+      console.error(err);
+    }
+  }
+  loadGalleryPanel();
 
   async function convertAll() {
     const slots = document.querySelectorAll('.slot');
