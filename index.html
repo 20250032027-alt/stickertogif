@@ -1417,6 +1417,10 @@
     dot.classList.toggle('show', isNew);
   }
 
+  let galleryPanelItems = [];
+  let galleryRotationTimer = null;
+  let galleryRotationPaused = false;
+
   async function loadGalleryPanel() {
     const body = document.getElementById('gallery-panel-body');
     if (!body || !galleryDb || !window.SUPABASE_URL || window.SUPABASE_URL.includes('YOUR-PROJECT')) return;
@@ -1426,7 +1430,7 @@
         .select('id, name, tags, storage_path, download_count, created_at')
         .eq('status', 'published')
         .order('created_at', { ascending: false })
-        .limit(12);
+        .limit(20);
       if (error) throw error;
       if (!data || !data.length) {
         body.innerHTML = '<div class="gallery-panel-empty">Nothing published yet - be the first!</div>';
@@ -1439,37 +1443,68 @@
       } else {
         checkGalleryDotIndicator();
       }
-      body.innerHTML = '';
-      for (const item of data) {
-        const { data: urlData } = galleryDb.storage.from('stickers').getPublicUrl(item.storage_path);
-        const card = document.createElement('div');
-        card.className = 'gallery-card';
-        const tagsHtml = (item.tags && item.tags.length)
-          ? `<div class="gallery-card-tags">${item.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</div>`
-          : '';
-        card.innerHTML = `
-          <div class="gallery-card-img-wrap">
-            <img src="${urlData.publicUrl}" alt="Gallery sticker" loading="lazy" class="gallery-card-img" />
-            <span class="gallery-card-dl-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              ${item.download_count ? item.download_count.toLocaleString() : '...'}
-            </span>
-          </div>
-          <div class="gallery-card-body">
-            ${tagsHtml}
-            <a href="${urlData.publicUrl}" download="${item.name}.gif" class="gallery-card-dl-btn" onclick="trackPanelDownload('${item.id}')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download GIF
-            </a>
-          </div>`;
-        body.appendChild(card);
-      }
+      galleryPanelItems = data;
+      renderGalleryPanelItems();
+      startGalleryRotation();
     } catch (err) {
       body.innerHTML = '<div class="gallery-panel-empty">Could not load the gallery.</div>';
       console.error(err);
     }
   }
   loadGalleryPanel();
+
+  function renderGalleryPanelItems() {
+    const body = document.getElementById('gallery-panel-body');
+    if (!body) return;
+    body.innerHTML = '';
+    for (const item of galleryPanelItems) {
+      const { data: urlData } = galleryDb.storage.from('stickers').getPublicUrl(item.storage_path);
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      const tagsHtml = (item.tags && item.tags.length)
+        ? `<div class="gallery-card-tags">${item.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</div>`
+        : '';
+      card.innerHTML = `
+        <div class="gallery-card-img-wrap">
+          <img src="${urlData.publicUrl}" alt="Gallery sticker" loading="lazy" class="gallery-card-img" />
+          <span class="gallery-card-dl-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            ${item.download_count ? item.download_count.toLocaleString() : '...'}
+          </span>
+        </div>
+        <div class="gallery-card-body">
+          ${tagsHtml}
+          <a href="${urlData.publicUrl}" download="${item.name}.gif" class="gallery-card-dl-btn" onclick="trackPanelDownload('${item.id}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download GIF
+          </a>
+        </div>`;
+      body.appendChild(card);
+    }
+  }
+
+  // Every few seconds, rotate the pool so different stickers surface
+  // into view over time - the panel only shows a handful at once, so
+  // without this it'd always just be the same 3-4 stuck at the top.
+  // Pauses while the panel's collapsed, or while someone's actually
+  // hovering it (don't yank content out from under someone reading).
+  function startGalleryRotation() {
+    if (galleryRotationTimer) clearInterval(galleryRotationTimer);
+    if (galleryPanelItems.length <= 4) return; // not enough to bother rotating
+    galleryRotationTimer = setInterval(() => {
+      const panel = document.getElementById('gallery-side-panel');
+      if (!panel || panel.classList.contains('collapsed') || galleryRotationPaused) return;
+      galleryPanelItems.push(galleryPanelItems.shift());
+      renderGalleryPanelItems();
+    }, 5000);
+  }
+
+  (function wireGalleryRotationPause() {
+    const body = document.getElementById('gallery-panel-body');
+    if (!body) return;
+    body.addEventListener('mouseenter', () => { galleryRotationPaused = true; });
+    body.addEventListener('mouseleave', () => { galleryRotationPaused = false; });
+  })();
 
   function trackPanelDownload(id) {
     if (!galleryDb) return;

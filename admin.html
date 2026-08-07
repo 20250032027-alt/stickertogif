@@ -126,7 +126,7 @@
       ? `<button class="dl-btn" onclick="setStatus('${item.id}','published')">Approve</button>`
       : '';
     const checkbox = showCheckbox
-      ? `<input type="checkbox" class="queue-select-checkbox" data-id="${item.id}" onchange="updateBatchBar()" style="margin-right:10px;flex-shrink:0" />`
+      ? `<input type="checkbox" class="queue-select-checkbox" data-id="${item.id}" onclick="handleQueueCheckboxClick(event)" style="margin-right:10px;flex-shrink:0" />`
       : '';
     row.innerHTML = `
       <div class="slot-top">
@@ -207,6 +207,27 @@
         document.getElementById('published-status').textContent = allPublished.length + ' published sticker(s).';
       }
     }, 200);
+  }
+
+  // Shift-click range select: click one checkbox, hold Shift and
+  // click another further down, and everything in between gets set
+  // to match. Plain clicks (no Shift) work exactly as before -
+  // toggling just that one row - and become the new starting point
+  // for the next range.
+  let lastClickedQueueCheckbox = null;
+
+  function handleQueueCheckboxClick(e) {
+    const checkboxes = Array.from(document.querySelectorAll('.queue-select-checkbox'));
+    const clicked = e.target;
+    if (e.shiftKey && lastClickedQueueCheckbox && checkboxes.includes(lastClickedQueueCheckbox)) {
+      const startIdx = checkboxes.indexOf(lastClickedQueueCheckbox);
+      const endIdx = checkboxes.indexOf(clicked);
+      const [from, to] = startIdx < endIdx ? [startIdx, endIdx] : [endIdx, startIdx];
+      const shouldCheck = clicked.checked;
+      for (let i = from; i <= to; i++) checkboxes[i].checked = shouldCheck;
+    }
+    lastClickedQueueCheckbox = clicked;
+    updateBatchBar();
   }
 
   function getSelectedIds() {
