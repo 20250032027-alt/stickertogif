@@ -50,7 +50,16 @@
           <span class="input-label">PENDING REVIEW &amp; REPORTED</span>
           <button class="add-btn" onclick="signOut()">Sign out</button>
         </div>
-        <div id="queue-status" style="color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin-bottom:16px"></div>
+        <div id="queue-status" style="color:var(--muted);font-family:'DM Mono',monospace;font-size:13px;margin-bottom:10px"></div>
+        <div id="batch-bar" style="display:none;align-items:center;gap:12px;margin-bottom:16px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px">
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">
+            <input type="checkbox" id="select-all-checkbox" onchange="toggleSelectAll()" />
+            Select all
+          </label>
+          <span id="batch-count" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);flex:1">0 selected</span>
+          <button class="dl-btn" onclick="approveSelected()">Approve selected</button>
+          <button class="convert-btn" onclick="hideSelected()">Hide selected</button>
+        </div>
         <div id="queue-list"></div>
 
         <div class="card-header-row" style="margin:40px 0 16px">
@@ -103,21 +112,28 @@
 
   // Builds one editable row: image, name input, tags input, report
   // details (if any), and action buttons. Used for both the review
-  // queue and the published-stickers list below it.
-  async function buildStickerRow(item) {
+  // queue and the published-stickers list below it. showCheckbox is
+  // only true in the queue, where batch-approve needs something to
+  // select.
+  async function buildStickerRow(item, showCheckbox) {
     const { data: reports } = await db.from('reports').select('reason, details, created_at').eq('sticker_id', item.id);
     const { data: urlData } = db.storage.from('stickers').getPublicUrl(item.storage_path);
     const row = document.createElement('div');
     row.className = 'slot';
+    row.dataset.id = item.id;
     const reportLines = (reports || []).map(r => `<div style="font-size:11px;color:var(--muted)">- ${r.reason}${r.details ? ': ' + r.details : ''}</div>`).join('');
     const approveBtn = item.status !== 'published'
       ? `<button class="dl-btn" onclick="setStatus('${item.id}','published')">Approve</button>`
       : '';
+    const checkbox = showCheckbox
+      ? `<input type="checkbox" class="queue-select-checkbox" data-id="${item.id}" onchange="updateBatchBar()" style="margin-right:10px;flex-shrink:0" />`
+      : '';
     row.innerHTML = `
       <div class="slot-top">
-        <div class="slot-name-wrap" style="flex:1">
+        <div class="slot-name-wrap" style="flex:1;display:flex;align-items:center">
+          ${checkbox}
           <input id="name-input-${item.id}" class="slot-url" style="font-family:'Syne',sans-serif;font-weight:700;max-width:260px" value="${item.name}" />
-          <span class="gif-ext">status: ${item.status}, ${item.report_count} report(s)</span>
+          <span class="gif-ext" style="margin-left:10px">status: ${item.status}, ${item.report_count} report(s)</span>
         </div>
       </div>
       <div class="slot-body">
@@ -151,16 +167,80 @@
       statusEl.textContent = 'Could not load the queue. Are you in the admins table? See SETUP.md.';
       return;
     }
-    if (!data.length) {
-      statusEl.textContent = 'Nothing waiting on review right now.';
-      listEl.innerHTML = '';
-      return;
-    }
-    statusEl.textContent = data.length + ' item(s) waiting on review.';
+    updateQueueStatusText(data.length);
     listEl.innerHTML = '';
+    document.getElementById('batch-bar').style.display = data.length ? 'flex' : 'none';
+    document.getElementById('select-all-checkbox').checked = false;
     for (const item of data) {
-      listEl.appendChild(await buildStickerRow(item));
+      listEl.appendChild(await buildStickerRow(item, true));
     }
+    updateBatchBar();
+  }
+
+  function updateQueueStatusText(count) {
+    const statusEl = document.getElementById('queue-status');
+    statusEl.textContent = count > 0 ? count + ' item(s) waiting on review.' : 'Nothing waiting on review right now.';
+  }
+
+  // Removes a row from the DOM directly instead of re-fetching and
+  // re-rendering the whole list - this is what actually fixes the
+  // "everything refreshes" feeling after a single action. Works out
+  // which list the row came from so it updates the right counter.
+  function removeRowFromDOM(id) {
+    const row = document.querySelector(`.slot[data-id="${id}"]`);
+    if (!row) return;
+    const inQueue = !!row.closest('#queue-list');
+    const inPublished = !!row.closest('#published-list');
+    row.style.transition = 'opacity 0.2s, transform 0.2s';
+    row.style.opacity = '0';
+    row.style.transform = 'scale(0.98)';
+    setTimeout(() => {
+      row.remove();
+      if (inQueue) {
+        const remaining = document.getElementById('queue-list').children.length;
+        updateQueueStatusText(remaining);
+        document.getElementById('batch-bar').style.display = remaining ? 'flex' : 'none';
+        updateBatchBar();
+      }
+      if (inPublished) {
+        allPublished = allPublished.filter(s => s.id !== id);
+        document.getElementById('published-status').textContent = allPublished.length + ' published sticker(s).';
+      }
+    }, 200);
+  }
+
+  function getSelectedIds() {
+    return Array.from(document.querySelectorAll('.queue-select-checkbox:checked')).map(cb => cb.dataset.id);
+  }
+
+  function updateBatchBar() {
+    const count = getSelectedIds().length;
+    document.getElementById('batch-count').textContent = count + ' selected';
+    const allBoxes = document.querySelectorAll('.queue-select-checkbox');
+    document.getElementById('select-all-checkbox').checked = allBoxes.length > 0 && count === allBoxes.length;
+  }
+
+  function toggleSelectAll() {
+    const checked = document.getElementById('select-all-checkbox').checked;
+    document.querySelectorAll('.queue-select-checkbox').forEach(cb => { cb.checked = checked; });
+    updateBatchBar();
+  }
+
+  async function approveSelected() {
+    const ids = getSelectedIds();
+    if (!ids.length) return;
+    const { error } = await db.from('stickers').update({ status: 'published', report_count: 0 }).in('id', ids);
+    if (error) { alert('Batch approve failed: ' + error.message); return; }
+    ids.forEach(id => removeRowFromDOM(id));
+    loadPublished();
+  }
+
+  async function hideSelected() {
+    const ids = getSelectedIds();
+    if (!ids.length) return;
+    const { error } = await db.from('stickers').update({ status: 'hidden' }).in('id', ids);
+    if (error) { alert('Batch hide failed: ' + error.message); return; }
+    ids.forEach(id => removeRowFromDOM(id));
   }
 
   let allPublished = [];
@@ -191,7 +271,7 @@
       return;
     }
     for (const item of items) {
-      listEl.appendChild(await buildStickerRow(item));
+      listEl.appendChild(await buildStickerRow(item, false));
     }
   }
 
@@ -219,19 +299,23 @@
     setTimeout(() => { saveStatus.textContent = ''; }, 2500);
   }
 
+  // Single-item status change. Removes just that one row locally
+  // instead of reloading and rebuilding the entire queue/published
+  // list - only refreshes the *other* list, and only when it
+  // actually needs to (e.g. approving means it should now show up
+  // in Published).
   async function setStatus(id, status) {
     const { error } = await db.from('stickers').update({ status, report_count: status === 'published' ? 0 : undefined }).eq('id', id);
     if (error) { alert('Update failed: ' + error.message); return; }
-    loadQueue();
-    loadPublished();
+    removeRowFromDOM(id);
+    if (status === 'published') loadPublished();
   }
 
   async function removeSticker(id) {
     if (!confirm('Permanently remove this sticker? This cannot be undone.')) return;
     const { error } = await db.from('stickers').update({ status: 'removed' }).eq('id', id);
     if (error) { alert('Remove failed: ' + error.message); return; }
-    loadQueue();
-    loadPublished();
+    removeRowFromDOM(id);
   }
 
   checkAuth();
