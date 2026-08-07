@@ -90,8 +90,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/supabase-config.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7492388540350253" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -590,6 +588,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase-config.js"></script>
 <script>
   const PROXY = 'https://tiktok-proxy.cabarlesebantonio.workers.dev';
   let slotCount = 0;
@@ -1388,17 +1388,34 @@
   // Roughly 40% chance it's already open on any given visit, 60%
   // chance it starts collapsed - deliberately not shouting about it
   // on every single load. The dot is the quieter version of that.
+  // The gallery query only ever fires once it's actually visible -
+  // no point spending a database round-trip on a panel 60% of
+  // visits never see.
+  let galleryPanelLoaded = false;
+
   (function initGalleryPanelState() {
     const panel = document.getElementById('gallery-side-panel');
     if (!panel) return;
-    if (Math.random() >= 0.4) panel.classList.add('collapsed');
+    if (Math.random() >= 0.4) {
+      panel.classList.add('collapsed');
+    } else {
+      galleryPanelLoaded = true;
+      loadGalleryPanel();
+    }
   })();
 
   function toggleGalleryPanel() {
     const panel = document.getElementById('gallery-side-panel');
     if (!panel) return;
     panel.classList.toggle('collapsed');
-    if (!panel.classList.contains('collapsed')) markGalleryAsSeen();
+    if (!panel.classList.contains('collapsed')) {
+      if (!galleryPanelLoaded) {
+        galleryPanelLoaded = true;
+        loadGalleryPanel(); // marks as seen internally once data arrives
+      } else {
+        markGalleryAsSeen();
+      }
+    }
   }
 
   function markGalleryAsSeen() {
@@ -1425,18 +1442,24 @@
     const body = document.getElementById('gallery-panel-body');
     if (!body || !galleryDb || !window.SUPABASE_URL || window.SUPABASE_URL.includes('YOUR-PROJECT')) return;
     try {
-      const { data, error } = await galleryDb
-        .from('stickers')
-        .select('id, name, tags, storage_path, download_count, created_at')
-        .eq('status', 'published')
-        .order('created_at', { ascending: false })
-        .limit(20);
+      const { data, error } = await galleryDb.rpc('get_random_published_stickers', { item_limit: 20 });
       if (error) throw error;
       if (!data || !data.length) {
         body.innerHTML = '<div class="gallery-panel-empty">Nothing published yet - be the first!</div>';
         return;
       }
-      window.__latestGalleryTimestamp = data[0].created_at;
+
+      // Random order means item[0] here isn't necessarily the newest
+      // one anymore, so the "new since you last looked" check needs
+      // its own tiny separate lookup - one indexed row, cheap either way.
+      const { data: latest } = await galleryDb
+        .from('stickers')
+        .select('created_at')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false })
+        .limit(1);
+      if (latest && latest[0]) window.__latestGalleryTimestamp = latest[0].created_at;
+
       const panel = document.getElementById('gallery-side-panel');
       if (panel && !panel.classList.contains('collapsed')) {
         markGalleryAsSeen();
@@ -1451,7 +1474,6 @@
       console.error(err);
     }
   }
-  loadGalleryPanel();
 
   function renderGalleryPanelItems() {
     const body = document.getElementById('gallery-panel-body');
