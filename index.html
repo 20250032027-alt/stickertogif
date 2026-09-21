@@ -3,35 +3,109 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TikTok Sticker &amp; Video to GIF Converter - Free | StickerToGIF</title>
+  <title>TikTok Sticker &amp; Video to GIF Converter - Free, No Signup | StickerToGIF</title>
   <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <meta name="description" content="Convert TikTok stickers (.awebp) and video links into high-quality GIFs instantly. Free, no watermark, mobile-friendly.">
+  <meta name="description" content="Convert TikTok stickers and videos to GIF for free in seconds. Drag a sticker out of TikTok DMs or paste a link, and download your GIF instantly. No signup, no watermark, no limits.">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="canonical" href="https://www.stickertogif.me/" />
   <meta name="google-adsense-account" content="ca-pub-7492388540350253">
+  <meta name="keywords" content="tiktok sticker to gif, convert tiktok sticker, save tiktok sticker, tiktok sticker download, awebp to gif, tiktok video to gif converter">
   <meta name="author" content="AntonAnon">
   <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.stickertogif.me/">
+  <meta property="og:title" content="TikTok Sticker & Video to GIF Converter - Free, No Signup">
+  <meta property="og:description" content="Convert TikTok stickers and videos to GIF for free in seconds. No signup, no watermark, no limits.">
+  <meta property="og:image" content="https://www.stickertogif.me/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TikTok Sticker & Video to GIF Converter - Free">
+  <meta name="twitter:description" content="Drag a TikTok sticker URL or video link, paste it in, get a GIF. Free, no signup.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "StickerToGIF",
+    "url": "https://www.stickertogif.me",
+    "description": "Free tool to convert TikTok stickers and videos to GIF format.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.stickertogif.me/",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "StickerToGIF",
+    "url": "https://www.stickertogif.me",
+    "logo": "https://www.stickertogif.me/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "contact@stickertogif.me"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "StickerToGIF",
+    "url": "https://www.stickertogif.me",
+    "description": "Free tool to convert TikTok stickers and videos to GIF format.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "AntonAnon" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert a TikTok sticker to GIF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Drag the sticker out of TikTok DMs in a desktop browser to get its .awebp URL. Paste that URL into StickerToGIF and click Convert. Your GIF downloads automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is StickerToGIF free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. No account, no watermark, no conversion limit. Completely free." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the TikTok sticker URL stop working?",
+        "acceptedAnswer": { "@type": "Answer", "text": "TikTok signs their CDN URLs with an expiry timestamp. Once it expires you need to drag the sticker out again from TikTok to get a fresh URL." }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7492388540350253" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/styles.css">
   <style>
-    /* Clean, Mobile-First Structural Overhauls */
+    /* Mobile Layout & Core Responsive Overhauls */
     body { padding: 0; margin: 0; box-sizing: border-box; }
     .page-with-history { flex-direction: column; width: 100%; max-width: 100%; overflow-x: hidden; }
     .converter-col { width: 100%; padding: 0 12px; box-sizing: border-box; }
     header { width: 100%; max-width: 1000px; margin: 0 auto; padding: 14px 16px; box-sizing: border-box; }
-    main { width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 16px 40px; box-sizing: border-box; }
+    main { width: 100%; max-width: 680px; margin: 0 auto; padding: 24px 16px 40px; box-sizing: border-box; }
     
     .card { padding: 18px; border-radius: 14px; width: 100%; box-sizing: border-box; }
     .slot { padding: 14px; border-radius: 10px; width: 100%; box-sizing: border-box; margin-bottom: 12px; }
     .slot-body { flex-direction: column; gap: 12px; }
-    .slot-preview-wrap { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; background: #111; }
+    .slot-preview-wrap { width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; background: var(--bg); }
     .slot-input-row { flex-direction: column; gap: 8px; width: 100%; }
-    .slot-url { width: 100%; font-size: 13px; padding: 12px; box-sizing: border-box; }
+    .slot-url { width: 100%; font-size: 13px; padding: 10px 12px; box-sizing: border-box; }
     
     .batch-actions { flex-direction: column; width: 100%; gap: 10px; }
     .convert-all-btn, .dl-zip-btn { width: 100%; text-align: center; justify-content: center; }
@@ -41,12 +115,12 @@
 
     .history-panel { width: 100%; height: auto; max-height: 280px; border-left: none; border-top: 1px solid var(--border); position: relative; margin-top: 30px; box-sizing: border-box; }
     
-    footer { width: 100%; max-width: 720px; margin: 40px auto 20px; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { width: 100%; max-width: 680px; margin: 40px auto 20px; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 16px; }
     .footer-links { gap: 12px; }
 
     @media(min-width: 768px) {
       .converter-col { padding: 0 24px; }
-      main { padding: 50px 24px 40px; }
+      main { padding: 60px 24px 40px; }
       .card { padding: 28px; }
       .slot { padding: 16px; }
       .slot-body { flex-direction: row; align-items: flex-start; }
@@ -55,7 +129,7 @@
       .batch-actions { flex-direction: row; }
       .convert-all-btn, .dl-zip-btn { width: auto; }
       .steps { grid-template-columns: 1fr 1fr 1fr; }
-      .history-panel { width: 240px; height: 100vh; position: sticky; top: 0; border-left: 1px solid var(--border); border-top: none; margin-top: 0; }
+      .history-panel { width: 220px; height: 100vh; position: sticky; top: 0; border-left: 1px solid var(--border); border-top: none; margin-top: 0; }
       .page-with-history { flex-direction: row; }
       footer { flex-direction: row; justify-content: space-between; align-items: center; }
     }
@@ -64,22 +138,48 @@
 <body>
 
 <!-- Contact modal -->
-<div id="contact-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+<div id="contact-modal">
   <div class="contact-box">
-    <button class="contact-close" aria-label="Close" onclick="document.getElementById('contact-modal').style.display='none'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="contact-close" aria-label="Close" onclick="document.getElementById('contact-modal').classList.remove('show')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <h3>Send a message</h3>
-    <p>Got feedback or bug reports? Drop it here.</p>
-    <form class="contact-form" onsubmit="submitContact(event)">
-      <select name="type" required>
-        <option value="" disabled selected>Select topic</option>
-        <option value="feedback">General feedback</option>
-        <option value="bug">Bug report</option>
-      </select>
-      <textarea name="message" placeholder="Your message..." required></textarea>
-      <button type="submit" class="contact-submit">Send →</button>
-    </form>
+    <p>Got feedback, a bug to report, or just want to say something? Drop it here.</p>
+    <div id="contact-form-wrap">
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <select name="type" required>
+          <option value="" disabled selected>What is this about?</option>
+          <option value="feedback">General feedback</option>
+          <option value="bug">Bug report</option>
+          <option value="feature">Feature request</option>
+          <option value="other">Something else</option>
+        </select>
+        <input type="email" name="email" placeholder="Your email (optional)" />
+        <textarea name="message" placeholder="Your message..." required></textarea>
+        <button type="submit" class="contact-submit">Send →</button>
+      </form>
+    </div>
+    <div class="contact-success" id="contact-success">
+      <div class="tick">✓</div>
+      <p>Message sent. Thanks for reaching out.</p>
+    </div>
   </div>
 </div>
+
+<!-- Cookie consent banner -->
+<div id="cookie-banner">
+  <p>We use cookies from Google AdSense to show ads. These help keep the tool free. <a href="#cookies">Learn more</a></p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
+    <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+  </div>
+</div>
+
+<!-- Ad blocker banner -->
+<div id="adblock-banner">
+  This site is free to use. Ads are the only thing keeping it running. Turning off your ad blocker for this page helps a lot.
+  <button id="banner-close" aria-label="Dismiss" onclick="document.getElementById('adblock-banner').style.display='none'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+
+<a href="#main-content" style="position:absolute;top:-100px;left:0;background:var(--accent);color:#000;padding:8px 16px;font-family:'DM Mono',monospace;font-size:12px;z-index:9999;transition:top 0.15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to content</a>
 
 <div class="page-with-history">
   <div class="converter-col">
@@ -91,6 +191,7 @@
       <nav>
         <a href="#how-it-works">How it works</a>
         <a href="#faq">FAQ</a>
+        <a href="#blog">Blog</a>
         <a href="#about">About</a>
       </nav>
     </header>
@@ -98,53 +199,180 @@
     <main id="main-content">
       <div class="hero">
         <div class="badge">free · no signup · instant</div>
-        <h1>TikTok Sticker &amp; Video to GIF</h1>
-        <p>Paste a TikTok sticker URL (.awebp) or a full TikTok video link to turn them into smooth, top-quality GIFs.</p>
+        <h1>TikTok Sticker &amp; Video to GIF Converter</h1>
+        <p>Drag any TikTok sticker out of your DMs or paste a video link, and get a GIF you can send anywhere.</p>
         <div class="counter-wrap">
-          <span class="counter-num" id="counter-num">1,840</span>
-          <span class="counter-label">converted</span>
+          <span class="counter-num" id="counter-num">...</span>
+          <span class="counter-label">items converted</span>
         </div>
       </div>
 
+      <p style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.8;max-width:680px;margin:0 auto 24px;text-align:center">
+        Convert TikTok animated stickers (.awebp) or full video links into standard GIFs in seconds. No upload, no account, no watermark.
+      </p>
+      
       <div class="card">
         <div class="card-header-row">
-          <span class="input-label">PASTE STICKER URL OR TIKTOK LINK</span>
+          <span class="input-label">STICKER URLS OR TIKTOK LINKS</span>
           <button class="add-btn" onclick="addSlot()">+ Add another</button>
         </div>
         <div id="slots"></div>
-        <div class="batch-actions" style="margin-top: 16px;">
-          <button class="convert-all-btn" onclick="convertAll()">Convert all items →</button>
+        <div class="batch-actions">
+          <button class="convert-all-btn" onclick="convertAll()">Convert all →</button>
           <button class="dl-zip-btn" id="dl-zip-btn" onclick="downloadZip()" style="display:none">Download all as ZIP</button>
         </div>
+        <button class="report-issue-link" onclick="openFeedback()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Something not working? Report it</button>
       </div>
 
-      <div class="steps" id="how-it-works" style="margin-top: 30px;">
+      <div class="steps">
         <div class="step-card">
           <div class="step-num">01.</div>
-          <h3>Get Your Link</h3>
-          <p>Drag a sticker out of desktop DMs to get its <code>.awebp</code> link, or copy a public TikTok post link.</p>
+          <h3>Get the link</h3>
+          <p>Drag a sticker out of TikTok DMs or copy a public TikTok post link.</p>
         </div>
         <div class="step-card">
           <div class="step-num">02.</div>
-          <h3>Paste &amp; Convert</h3>
-          <p>Paste it into the box. Frames are processed instantly in your browser with full transparency preserved.</p>
+          <h3>Paste and convert</h3>
+          <p>Paste the link above and hit Convert. Frames process right in your browser.</p>
         </div>
         <div class="step-card">
           <div class="step-num">03.</div>
           <h3>Download GIF</h3>
-          <p>Get your final looping GIF file right away, fully optimized and ready to text or post anywhere.</p>
+          <p>Your GIF saves automatically. Works in Discord, iMessage, WhatsApp, and more.</p>
         </div>
+      </div>
+
+      <div class="note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-right:6px;vertical-align:-2px"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Sticker URLs expire after a few hours. If it stops working, just drag the sticker out again to get a fresh one.
+      </div>
+
+      <div class="section" id="try-it">
+        <div class="section-label">TRY IT OUT</div>
+        <h2>Test with a sample sticker</h2>
+        <p>No TikTok sticker URL handy? Use this one. Copy the sample URL below, paste it into the converter, and hit Convert all.</p>
+        <div class="sample-card">
+          <div class="sample-left">
+            <img src="sample.awebp" class="sample-img" alt="Sample TikTok sticker" />
+            <div class="sample-hint">sample only, do not drag out</div>
+          </div>
+          <div class="sample-right">
+            <div class="sample-url-row">
+              <code id="sample-url-text">https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/tos-alisg-i-dhq7zx4c1p-sg/3f9a21bc7e4d48fa92c08b1e5d7f3a92~tplv-dhq7zx4c1p-video2sticker-mid.awebp?rk3s=00edd399&x-expires=9999999999&x-signature=sAmPlEsTiCkErToGiF00000</code>
+            </div>
+            <div class="sample-actions">
+              <button class="sample-copy-btn" onclick="loadSample()">Load into converter</button>
+              <button class="sample-copy-btn secondary" onclick="copySampleUrl()">Copy URL</button>
+              <span id="sample-confirm" style="display:none;font-size:11px;font-family:'DM Mono',monospace;color:var(--accent)">done!</span>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-top:10px;margin-bottom:0">"Load into converter" fills the URL field above automatically. Or copy the URL and paste it yourself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="video">
+        <div class="section-label">SEE IT IN ACTION</div>
+        <h2>Watch how it works</h2>
+        <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);">
+          <iframe
+            src="https://www.youtube.com/embed/cmj2eewo0Do"
+            title="TikTok Sticker to GIF tutorial"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          </iframe>
+        </div>
+      </div>
+
+      <section aria-label="How it works" class="section" id="how-it-works">
+        <div class="section-label">HOW IT WORKS</div>
+        <h2>What's actually happening</h2>
+        <p>TikTok stores stickers as animated WebP files or video streams on public CDNs. When you drag one out or copy a link, the tool reads each frame and turns it into a regular GIF. The whole conversion runs in your browser.</p>
+        <p>A secure proxy handles fetching files across different domains because browsers block cross-origin requests directly. That proxy doesn't log or store data.</p>
+      </section>
+
+      <div class="section" id="about-webp">
+        <div class="section-label">FORMATS EXPLAINED</div>
+        <h2>WebP vs GIF</h2>
+        <p>TikTok uses animated WebP for stickers to keep file sizes small. However, most chat applications do not natively play back WebP animations outside of standard web browsers.</p>
+        <p>GIF is universally supported across Discord, iMessage, WhatsApp, email, and Reddit. Converting your sticker or clip guarantees it will animate wherever you post it.</p>
+      </div>
+
+      <section aria-label="Frequently Asked Questions" class="section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="section-label">FAQ</div>
+        <h2>Common questions</h2>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why does the URL stop working after a while?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">TikTok puts an expiry timestamp in sticker URLs. Once it passes, the link stops working. Just drag the sticker out again from TikTok to get a new one.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this work on mobile?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Video link conversion works on mobile browsers, but dragging sticker URLs requires a desktop browser like Chrome or Edge.</span></div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is it really free?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Yes. No account, no watermark, no limit. The site runs on ads to stay free.</span></div>
+        </div>
+      </section>
+
+      <section aria-label="Blog and guides" class="section" id="blog">
+        <div class="section-label">BLOG</div>
+        <h2>Guides and tips</h2>
+        <div id="blog-list">
+          <div class="blog-grid">
+            <a class="blog-card" href="/blog/how-to-save-tiktok-stickers-as-gif.html">
+              <div class="blog-card-body">
+                <span class="blog-tag">Guide</span>
+                <h3>How to save TikTok stickers as GIF in 30 seconds</h3>
+                <p>A step by step walkthrough of dragging a sticker out of TikTok DMs, getting the URL, and converting it.</p>
+                <div class="blog-meta">AntonAnon · May 2026 · 3 min read</div>
+              </div>
+            </a>
+            <a class="blog-card" href="/blog/why-tiktok-stickers-are-webp.html">
+              <div class="blog-card-body">
+                <span class="blog-tag">Explainer</span>
+                <h3>Why TikTok stickers are WebP and why that matters</h3>
+                <p>TikTok uses a format most apps can't play. Here's why they chose it and what it means for sharing stickers outside the app.</p>
+                <div class="blog-meta">AntonAnon · May 2026 · 4 min read</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="legal-section" id="privacy">
+        <h2>Privacy Policy</h2>
+        <p>Last updated August 2026.</p>
+        <p>The converter works with no accounts or logins. Nothing you convert or paste into the URL field is stored on our servers.</p>
+      </div>
+
+      <div class="legal-section" id="terms">
+        <h2>Terms of Use</h2>
+        <p>Last updated August 2026.</p>
+        <p>By using this site you agree to use these tools for personal use and respect original content rights.</p>
+      </div>
+
+      <div class="legal-section" id="about" style="scroll-margin-top:40px">
+        <h2>About this site</h2>
+        <p>Hi, I'm AntonAnon. I built this tool to make turning TikTok animated files into standard GIFs fast and easy.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">Questions or feedback? <button onclick="document.getElementById('contact-modal').classList.add('show')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;padding:0;text-decoration:underline">Send a message</button></p>
       </div>
     </main>
 
     <footer>
       <div style="display:flex;flex-direction:column;gap:6px">
         <p>© 2026 stickertogif. Built by <a href="#about" style="color:var(--accent);text-decoration:none">AntonAnon</a></p>
-        <p style="font-size:11px">A free tool to convert TikTok links to GIF. No signup, no watermark.</p>
+        <p style="font-size:11px">A free tool to convert TikTok elements to GIF. No signup, no watermark.</p>
       </div>
       <div class="footer-links">
+        <a href="#blog">Blog</a>
         <a href="#about">About</a>
-        <a href="#" onclick="document.getElementById('contact-modal').style.display='flex';return false">Contact</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Use</a>
+        <a href="#" onclick="document.getElementById('contact-modal').classList.add('show');return false">Contact</a>
       </div>
     </footer>
   </div>
@@ -165,14 +393,236 @@
   const PROXY = 'https://tiktok-proxy.cabarlesebantonio.workers.dev';
   let slotCount = 0;
   const gifBlobs = {};
+  const lastErrors = {};
 
   window.addEventListener('load', function() {
     addSlot();
+    loadCounter();
   });
+
+  const SAMPLE_FAKE_URL = 'https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/tos-alisg-i-dhq7zx4c1p-sg/3f9a21bc7e4d48fa92c08b1e5d7f3a92~tplv-dhq7zx4c1p-video2sticker-mid.awebp?rk3s=00edd399&x-expires=9999999999&x-signature=sAmPlEsTiCkErToGiF00000';
+  const SAMPLE_REAL_URL = window.location.origin + '/sample.awebp';
+  const sampleSlots = {};
+
+  function loadSample() {
+    const slots = document.querySelectorAll('.slot');
+    let loaded = false;
+    for (const slot of slots) {
+      const id = parseInt(slot.id.replace('slot-', ''));
+      const input = document.getElementById('url-' + id);
+      if (input && !input.value.trim()) {
+        input.value = SAMPLE_FAKE_URL;
+        sampleSlots[id] = true;
+        previewSticker(id);
+        loaded = true;
+        break;
+      }
+    }
+    if (!loaded) {
+      addSlot();
+      const newId = slotCount - 1;
+      setTimeout(() => {
+        document.getElementById('url-' + newId).value = SAMPLE_FAKE_URL;
+        sampleSlots[newId] = true;
+        previewSticker(newId);
+      }, 50);
+    }
+    showSampleConfirm('loaded!');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function copySampleUrl() {
+    navigator.clipboard.writeText(SAMPLE_FAKE_URL).then(() => showSampleConfirm('copied!'));
+  }
+
+  function showSampleConfirm(msg) {
+    const el = document.getElementById('sample-confirm');
+    el.textContent = msg;
+    el.style.display = 'inline';
+    setTimeout(() => el.style.display = 'none', 2000);
+  }
+
+  async function loadCounter() {
+    try {
+      const res = await fetch(`${PROXY}/count`);
+      const data = await res.json();
+      if (typeof data.value === 'number') {
+        document.getElementById('counter-num').textContent = data.value.toLocaleString();
+      }
+    } catch(e) { document.getElementById('counter-num').textContent = '1,840'; }
+  }
+
+  async function incrementCounter() {
+    try {
+      await fetch(`${PROXY}/count`, { method: 'POST' });
+    } catch(e) {}
+  }
+
+  function openFeedback(slotId) {
+    const modal = document.getElementById('contact-modal');
+    modal.classList.add('show');
+  }
+
+  async function submitContact(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://formspree.io/f/xojrrrzb', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('contact-form-wrap').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('contact-modal').classList.remove('show');
+          document.getElementById('contact-form-wrap').style.display = 'block';
+          document.getElementById('contact-success').style.display = 'none';
+          form.reset();
+        }, 3000);
+      }
+    } catch(err) {
+      alert('Something went wrong. Try again.');
+    }
+  }
+
+  (function(){
+    if(!localStorage.getItem('cookie_consent')){
+      document.getElementById('cookie-banner').classList.add('show');
+    }
+  })();
+  function acceptCookies(){
+    localStorage.setItem('cookie_consent','accepted');
+    document.getElementById('cookie-banner').classList.remove('show');
+  }
+  function declineCookies(){
+    localStorage.setItem('cookie_consent','declined');
+    document.getElementById('cookie-banner').classList.remove('show');
+  }
+
+  function toggleFaq(el) {
+    el.closest('.faq-item').classList.toggle('open');
+  }
+
+  let db = null;
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('stickertogif_v2', 1);
+      req.onupgradeneeded = e => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('gifs')) {
+          const store = d.createObjectStore('gifs', { keyPath: 'id', autoIncrement: true });
+          store.createIndex('ts', 'ts', { unique: false });
+        }
+      };
+      req.onsuccess = e => { db = e.target.result; resolve(db); };
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function makeThumbnail(blob) {
+    return new Promise(resolve => {
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement('canvas');
+        c.width = 80; c.height = 80;
+        const ctx = c.getContext('2d');
+        const s = Math.min(80/img.width, 80/img.height);
+        const dw = img.width*s, dh = img.height*s;
+        ctx.drawImage(img, (80-dw)/2, (80-dh)/2, dw, dh);
+        URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/png', 0.6));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(''); };
+      img.src = url;
+    });
+  }
+
+  async function saveToHistory(blob, name) {
+    if (!db) await openDB();
+    const thumb = await makeThumbnail(blob);
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('gifs', 'readwrite');
+      tx.objectStore('gifs').add({
+        blob, thumb, name,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ts: Date.now()
+      });
+      tx.oncomplete = () => { loadHistory(); resolve(); };
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function loadHistory() {
+    if (!db) await openDB();
+    const tx = db.transaction('gifs', 'readonly');
+    const req = tx.objectStore('gifs').getAll();
+    req.onsuccess = () => {
+      const items = req.result.sort((a, b) => b.ts - a.ts);
+      renderHistory(items);
+    };
+  }
+
+  function renderHistory(items) {
+    const grid = document.getElementById('history-grid');
+    grid.innerHTML = '';
+    if (!items.length) {
+      grid.innerHTML = '<div class="history-empty">No conversions yet.<br>Convert an item and it shows up here.</div>';
+      return;
+    }
+    items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'history-card';
+      card.innerHTML = `
+        <img class="history-thumb" src="${item.thumb}" alt="${item.name}" />
+        <div class="history-info">
+          <div class="history-name">${item.name}.gif</div>
+          <div class="history-date">${item.date}</div>
+        </div>
+        <div class="history-actions">
+          <button class="history-dl-btn" aria-label="Download GIF" onclick="downloadFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <button class="history-del-btn" aria-label="Delete" onclick="deleteFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  async function downloadFromHistory(id) {
+    if (!db) return;
+    const tx = db.transaction('gifs', 'readonly');
+    const req = tx.objectStore('gifs').get(id);
+    req.onsuccess = () => {
+      if (!req.result) return;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(req.result.blob);
+      a.download = req.result.name + '.gif';
+      a.click();
+    };
+  }
+
+  async function deleteFromHistory(id) {
+    if (!db) return;
+    const tx = db.transaction('gifs', 'readwrite');
+    tx.objectStore('gifs').delete(id);
+    tx.oncomplete = () => loadHistory();
+  }
+
+  async function clearAllHistory() {
+    if (!confirm('Clear all history?')) return;
+    if (!db) await openDB();
+    const tx = db.transaction('gifs', 'readwrite');
+    tx.objectStore('gifs').clear();
+    tx.oncomplete = () => loadHistory();
+  }
+
+  openDB().then(() => loadHistory());
 
   function addSlot() {
     const id = slotCount++;
-    const randomName = 'item_' + String(Math.floor(100000 + Math.random() * 900000));
+    const randomName = 'sticker_' + String(Math.floor(100000 + Math.random() * 900000));
     const div = document.createElement('div');
     div.className = 'slot';
     div.id = 'slot-' + id;
@@ -184,24 +634,26 @@
             <input id="name-input-${id}" type="text" value="${randomName}" onblur="saveName(${id})" onkeydown="if(event.key==='Enter')saveName(${id})" />
           </span>
           <span class="gif-ext">.gif</span>
+          <span class="pen-icon" role="button" aria-label="Rename" onclick="editName(${id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
         </div>
-        <button class="remove-btn" aria-label="Remove slot" onclick="removeSlot(${id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="remove-btn" aria-label="Remove this slot" onclick="removeSlot(${id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
       <div class="slot-body">
         <div class="slot-preview-wrap">
-          <img id="preview-${id}" class="slot-preview" src="" alt="" style="display:none; width:100%; height:100%; object-fit:contain;" />
-          <div class="slot-preview-placeholder" id="placeholder-${id}">📁</div>
+          <img id="preview-${id}" class="slot-preview" src="" alt="" style="display:none" />
+          <div class="slot-preview-placeholder" id="placeholder-${id}">?</div>
         </div>
         <div class="slot-right">
           <div class="slot-input-row">
             <input id="url-${id}" type="text" class="slot-url" placeholder="Paste .awebp sticker URL or TikTok video link..."
-              oninput="detectLinkType(${id})" />
-            <button class="paste-btn" onclick="pasteClipboard(${id})">📋 Paste</button>
-            <button class="convert-btn" id="convert-btn-${id}" style="display:none" onclick="convertSlot(${id})">
-              <span>Convert →</span>
+              oninput="previewSticker(${id})" />
+            <button class="convert-btn" id="convert-btn-${id}" style="display:none" onclick="convertSlot(${id})" title="Convert item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>Convert</span>
             </button>
-            <button class="dl-btn" id="dl-btn-${id}" style="display:none" onclick="downloadSingle(${id})">
-              <span>Download .gif</span>
+            <button class="dl-btn" id="dl-btn-${id}" style="display:none" onclick="downloadSingle(${id})" title="Download GIF">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>.gif</span>
             </button>
           </div>
           <div class="slot-status-row">
@@ -219,20 +671,9 @@
     document.getElementById('slots').appendChild(div);
   }
 
-  async function pasteClipboard(id) {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (text) {
-        document.getElementById('url-' + id).value = text.trim();
-        detectLinkType(id);
-      }
-    } catch (err) {
-      alert('Clipboard access denied. Use manual paste.');
-    }
-  }
-
   function removeSlot(id) {
-    document.getElementById('slot-' + id)?.remove();
+    const el = document.getElementById('slot-' + id);
+    if (el) el.remove();
     delete gifBlobs[id];
     updateZipBtn();
   }
@@ -245,32 +686,51 @@
   }
 
   function saveName(id) {
-    const val = document.getElementById('name-input-' + id).value.trim() || ('item_' + Math.floor(Math.random()*900000));
+    const val = document.getElementById('name-input-' + id).value.trim() || ('sticker_' + String(Math.floor(100000 + Math.random() * 900000)));
     document.getElementById('name-display-' + id).textContent = val;
     document.getElementById('name-display-' + id).style.display = 'inline';
     document.getElementById('name-input-' + id).parentElement.style.display = 'none';
   }
 
   const autoAddedNext = {};
-  function detectLinkType(id) {
-    const val = document.getElementById('url-' + id).value.trim();
-    const convertBtn = document.getElementById('convert-btn-' + id);
+
+  function previewSticker(id) {
+    const rawUrl = document.getElementById('url-' + id).value.trim();
     const img = document.getElementById('preview-' + id);
     const ph = document.getElementById('placeholder-' + id);
-
-    if (val.length > 5) {
-      if (val.includes('awebp')) {
-        img.src = `${PROXY}?url=${encodeURIComponent(val)}`;
+    const convertBtn = document.getElementById('convert-btn-' + id);
+    const status = document.getElementById('status-' + id);
+    const previewSrc = (rawUrl === SAMPLE_FAKE_URL || (typeof sampleSlots !== 'undefined' && sampleSlots[id])) ? SAMPLE_REAL_URL : rawUrl;
+    
+    if (rawUrl && (rawUrl.includes('awebp') || rawUrl.includes('tiktok.com') || rawUrl.includes('vm.tiktok') || rawUrl.includes('vt.tiktok'))) {
+      if (rawUrl.includes('awebp')) {
+        img.src = previewSrc;
         img.style.display = 'block';
         ph.style.display = 'none';
+        img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
+      } else {
+        img.style.display = 'none';
+        ph.style.display = 'flex';
+        ph.textContent = '🎬';
       }
+      if (status) { status.textContent = ''; status.style.color = ''; }
       if (convertBtn && !gifBlobs[id]) convertBtn.style.display = 'inline-flex';
-      if (!autoAddedNext[id]) {
-        autoAddedNext[id] = true;
-        addSlot();
-      }
+      maybeAutoAddSlot(id);
     } else {
+      img.style.display = 'none';
+      ph.style.display = 'flex';
+      ph.textContent = '?';
       if (convertBtn) convertBtn.style.display = 'none';
+    }
+  }
+
+  function maybeAutoAddSlot(id) {
+    if (autoAddedNext[id]) return;
+    const slots = document.querySelectorAll('.slot');
+    const lastSlot = slots[slots.length - 1];
+    if (lastSlot && lastSlot.id === 'slot-' + id) {
+      autoAddedNext[id] = true;
+      addSlot();
     }
   }
 
@@ -280,6 +740,25 @@
   }
 
   const supportsImageDecoder = typeof window.ImageDecoder !== 'undefined';
+  let xmuxReadyPromise = null;
+
+  function loadWebpxmuxFallback() {
+    if (xmuxReadyPromise) return xmuxReadyPromise;
+    xmuxReadyPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'vendor/webpxmux.min.js';
+      script.onload = () => {
+        try {
+          const xMux = window.WebPXMux('vendor/webpxmux.wasm');
+          xMux.waitRuntime().then(() => resolve(xMux)).catch(reject);
+        } catch (e) { reject(e); }
+      };
+      script.onerror = () => reject(new Error('Could not load decoder.'));
+      document.head.appendChild(script);
+    });
+    return xmuxReadyPromise;
+  }
+
   const convertingSlots = {};
 
   async function convertSlot(id) {
@@ -302,7 +781,7 @@
 
     if (convertBtn) convertBtn.style.display = 'none';
     barWrap.style.display = 'block';
-    status.textContent = 'processing payload...';
+    status.textContent = 'processing...';
     setP(0);
 
     const done = (ok) => {
@@ -311,15 +790,17 @@
     };
 
     try {
-      if (inputVal.includes('awebp')) {
-        // --- ROUTE A: STICKER .AWEBP FILE CONVERSION WITH TRANSPARENCY FIX ---
-        const res = await fetch(`${PROXY}?url=${encodeURIComponent(inputVal)}`);
+      if (inputVal.includes('awebp') || inputVal.includes('sample.awebp')) {
+        // --- ROUTE A: STICKER .AWEBP CONVERSION (WITH TRANSPARENCY FIX) ---
+        const resolvedUrl = (inputVal === SAMPLE_FAKE_URL || sampleSlots[id]) ? SAMPLE_REAL_URL : inputVal;
+        const fetchUrl = resolvedUrl.startsWith(window.location.origin) ? resolvedUrl : `${PROXY}?url=${encodeURIComponent(resolvedUrl)}`;
+        const res = await fetch(fetchUrl);
         const blob = await res.blob();
         const buf = await blob.arrayBuffer();
 
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
-        const gif = new GIF({ workers: 4, quality: 1, workerScript: 'gif.worker.js', dither: 'FloydSteinberg' });
+        const gif = new GIF({ workers: 4, quality: 10, workerScript: 'gif.worker.js' });
 
         if (supportsImageDecoder) {
           const decoder = new ImageDecoder({ data: buf, type: 'image/webp' });
@@ -331,7 +812,7 @@
             canvas.width = image.codedWidth;
             canvas.height = image.codedHeight;
             
-            // CRITICAL FIX: Clear canvas fully before every draw to stop dark background/pixel bleeds
+            // CLEAR CANVAS FULLY TO PREVENT BLACK BACKGROUND BLEEDS ON TRANSPARENT STICKERS
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(image, 0, 0);
 
@@ -341,24 +822,26 @@
             setP((i + 1) / frameCount * 80);
           }
         }
-        
-        gif.on('progress', p => { setP(80 + p * 20); status.textContent = 'rendering max quality...'; });
+
+        gif.on('progress', p => { setP(80 + p * 20); status.textContent = 'rendering...'; });
         gif.on('finished', result => {
-          status.textContent = 'done! (highest fidelity)';
+          status.textContent = 'done!';
           setP(100);
-          const name = document.getElementById('name-display-' + id).textContent;
-          gifBlobs[id] = { blob: result, name };
+          const gifName = document.getElementById('name-display-' + id).textContent;
+          gifBlobs[id] = { blob: result, name: gifName };
           dlBtn.style.display = 'inline-flex';
           updateZipBtn();
+          saveToHistory(result, gifName);
+          incrementCounter();
           done(true);
         });
         gif.render();
 
       } else {
-        // --- ROUTE B: FULL TIKTOK VIDEO LINK STREAM CONVERSION ---
+        // --- ROUTE B: TIKTOK VIDEO LINK STREAM CONVERSION ---
         status.textContent = 'fetching video stream...';
         const res = await fetch(`${PROXY}/video?url=${encodeURIComponent(inputVal)}`);
-        if (!res.ok) throw new Error('Failed to retrieve video stream from link.');
+        if (!res.ok) throw new Error('Failed to load video from link.');
         const blob = await res.blob();
         const videoUrl = URL.createObjectURL(blob);
 
@@ -368,12 +851,12 @@
         video.muted = true;
         video.playsInline = true;
 
-        await new Promise((resLoad, rejLoad) => {
-          video.onloadedmetadata = () => resLoad();
-          video.onerror = () => rejLoad(new Error('Could not parse video metadata.'));
+        await new Promise((resL, rejL) => {
+          video.onloadedmetadata = () => resL();
+          video.onerror = () => rejL(new Error('Video loading failed.'));
         });
 
-        const duration = Math.min(video.duration, 5); // Cap to 5s highlight slice
+        const duration = Math.min(video.duration, 5); // 5 second cap for performance
         const fps = 15;
         const totalFrames = Math.floor(duration * fps);
         
@@ -382,7 +865,7 @@
         canvas.height = video.videoHeight || 854;
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-        const gif = new GIF({ workers: 4, quality: 1, workerScript: 'gif.worker.js', width: canvas.width, height: canvas.height, dither: 'FloydSteinberg' });
+        const gif = new GIF({ workers: 4, quality: 10, workerScript: 'gif.worker.js', width: canvas.width, height: canvas.height });
 
         for (let i = 0; i < totalFrames; i++) {
           video.currentTime = (i / fps);
@@ -396,12 +879,14 @@
         status.textContent = 'rendering video frames...';
         gif.on('progress', p => { setP(70 + p * 30); });
         gif.on('finished', result => {
-          status.textContent = 'done! (highest fidelity)';
+          status.textContent = 'done!';
           setP(100);
-          const name = document.getElementById('name-display-' + id).textContent;
-          gifBlobs[id] = { blob: result, name };
+          const gifName = document.getElementById('name-display-' + id).textContent;
+          gifBlobs[id] = { blob: result, name: gifName };
           dlBtn.style.display = 'inline-flex';
           updateZipBtn();
+          saveToHistory(result, gifName);
+          incrementCounter();
           done(true);
         });
         gif.render();
@@ -423,29 +908,37 @@
 
   async function convertAll() {
     const slots = document.querySelectorAll('.slot');
+    const zipBtn = document.getElementById('dl-zip-btn');
+    if (zipBtn) { zipBtn.disabled = true; zipBtn.style.opacity = '0.4'; }
     for (const slot of slots) {
       const id = parseInt(slot.id.replace('slot-', ''));
       const url = document.getElementById('url-' + id).value.trim();
       if (url && !gifBlobs[id]) await convertSlot(id);
     }
+    if (zipBtn) { zipBtn.disabled = false; zipBtn.style.opacity = ''; }
+    updateZipBtn();
   }
 
   async function downloadZip() {
     const entries = Object.entries(gifBlobs);
     if (!entries.length) return;
     const zip = new JSZip();
+    const nameCounts = {};
     for (const [id, entry] of entries) {
-      zip.file(entry.name + '.gif', entry.blob);
+      let filename = (entry.name || 'sticker').trim();
+      if (nameCounts[filename] === undefined) {
+        nameCounts[filename] = 0;
+      } else {
+        nameCounts[filename]++;
+        filename = filename + '_' + nameCounts[filename];
+      }
+      zip.file(filename + '.gif', entry.blob);
     }
     const zipBlob = await zip.generateAsync({ type: 'blob' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(zipBlob);
-    a.download = 'stickers_and_clips.zip';
+    a.download = 'stickers.zip';
     a.click();
-  }
-
-  function clearAllHistory() {
-    document.getElementById('history-grid').innerHTML = '<div class="history-empty">No conversions yet.</div>';
   }
 </script>
 </body>
