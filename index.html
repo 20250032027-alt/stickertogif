@@ -3,33 +3,33 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TikTok Sticker &amp; Video to GIF Converter - Free, No Signup | StickerToGIF</title>
+  <title>TikTok Sticker to GIF Converter - Free, No Signup | StickerToGIF</title>
   <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <meta name="description" content="Convert TikTok stickers and videos to GIF for free in seconds. Drag a sticker out of TikTok DMs or paste a link, and download your GIF instantly. No signup, no watermark, no limits.">
+  <meta name="description" content="Convert TikTok stickers to GIF for free in seconds. Drag a sticker out of TikTok DMs, paste the URL, and download your GIF instantly. No signup, no watermark, no limits.">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="canonical" href="https://www.stickertogif.me/" />
   <meta name="google-adsense-account" content="ca-pub-7492388540350253">
-  <meta name="keywords" content="tiktok sticker to gif, convert tiktok sticker, save tiktok sticker, tiktok sticker download, awebp to gif, tiktok video to gif converter">
+  <meta name="keywords" content="tiktok sticker to gif, convert tiktok sticker, save tiktok sticker, tiktok sticker download, awebp to gif, tiktok sticker gif converter">
   <meta name="author" content="AntonAnon">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.stickertogif.me/">
-  <meta property="og:title" content="TikTok Sticker & Video to GIF Converter - Free, No Signup">
-  <meta property="og:description" content="Convert TikTok stickers and videos to GIF for free in seconds. No signup, no watermark, no limits.">
+  <meta property="og:title" content="TikTok Sticker to GIF Converter - Free, No Signup">
+  <meta property="og:description" content="Convert TikTok stickers to GIF for free in seconds. No signup, no watermark, no limits.">
   <meta property="og:image" content="https://www.stickertogif.me/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="TikTok Sticker & Video to GIF Converter - Free">
-  <meta name="twitter:description" content="Drag a TikTok sticker URL or video link, paste it in, get a GIF. Free, no signup.">
+  <meta name="twitter:title" content="TikTok Sticker to GIF Converter - Free">
+  <meta name="twitter:description" content="Drag a TikTok sticker URL, paste it in, get a GIF. Free, no signup.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "StickerToGIF",
     "url": "https://www.stickertogif.me",
-    "description": "Free tool to convert TikTok stickers and videos to GIF format.",
+    "description": "Free tool to convert TikTok stickers from animated WebP to GIF format.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://www.stickertogif.me/",
@@ -57,7 +57,7 @@
     "@type": "WebApplication",
     "name": "StickerToGIF",
     "url": "https://www.stickertogif.me",
-    "description": "Free tool to convert TikTok stickers and videos to GIF format.",
+    "description": "Free tool to convert TikTok stickers from animated WebP to GIF format.",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -97,8 +97,8 @@
     body { padding: 0; margin: 0; box-sizing: border-box; }
     .page-with-history { flex-direction: column; width: 100%; max-width: 100%; overflow-x: hidden; }
     .converter-col { width: 100%; padding: 0 12px; box-sizing: border-box; }
-    header { width: 100%; max-width: 1000px; margin: 0 auto; padding: 14px 16px; box-sizing: border-box; }
-    main { width: 100%; max-width: 680px; margin: 0 auto; padding: 24px 16px 40px; box-sizing: border-box; }
+    header { width: 100%; max-width: 1100px; margin: 0 auto; padding: 14px 16px; box-sizing: border-box; }
+    main { width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 16px 40px; box-sizing: border-box; }
     
     .card { padding: 18px; border-radius: 14px; width: 100%; box-sizing: border-box; }
     .slot { padding: 14px; border-radius: 10px; width: 100%; box-sizing: border-box; margin-bottom: 12px; }
@@ -113,25 +113,54 @@
     .steps { grid-template-columns: 1fr; gap: 10px; }
     .step-card { padding: 14px; }
 
-    .history-panel { width: 100%; height: auto; max-height: 280px; border-left: none; border-top: 1px solid var(--border); position: relative; margin-top: 30px; box-sizing: border-box; }
+    /* Scalable History Panel Scrolling Fixes */
+    .history-panel { 
+      width: 100%; 
+      height: auto; 
+      max-height: 320px; 
+      border-left: none; 
+      border-top: 1px solid var(--border); 
+      position: relative; 
+      margin-top: 30px; 
+      box-sizing: border-box; 
+      display: flex; 
+      flex-direction: column;
+    }
+    .history-panel-body {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 250px;
+      padding-right: 4px;
+    }
+    .history-panel-body::-webkit-scrollbar {
+      width: 5px;
+    }
+    .history-panel-body::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
     
-    footer { width: 100%; max-width: 680px; margin: 40px auto 20px; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { width: 100%; max-width: 720px; margin: 40px auto 20px; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 16px; }
     .footer-links { gap: 12px; }
 
-    @media(min-width: 768px) {
-      .converter-col { padding: 0 24px; }
-      main { padding: 60px 24px 40px; }
-      .card { padding: 28px; }
-      .slot { padding: 16px; }
-      .slot-body { flex-direction: row; align-items: flex-start; }
-      .slot-preview-wrap { width: 72px; height: 72px; }
-      .slot-input-row { flex-direction: row; }
-      .batch-actions { flex-direction: row; }
-      .convert-all-btn, .dl-zip-btn { width: auto; }
-      .steps { grid-template-columns: 1fr 1fr 1fr; }
-      .history-panel { width: 220px; height: 100vh; position: sticky; top: 0; border-left: 1px solid var(--border); border-top: none; margin-top: 0; }
-      .page-with-history { flex-direction: row; }
-      footer { flex-direction: row; justify-content: space-between; align-items: center; }
+    /* Balanced Desktop Multi-Column view */
+    @media(min-width: 1024px) {
+      .page-with-history { flex-direction: row; align-items: flex-start; justify-content: center; max-width: 1300px; margin: 0 auto; }
+      .converter-col { flex: 1; max-width: 740px; padding: 0 20px; }
+      main { max-width: 100%; }
+      .history-panel { 
+        width: 280px; 
+        height: 100vh; 
+        max-height: none; 
+        position: sticky; 
+        top: 0; 
+        border-left: 1px solid var(--border); 
+        border-top: none; 
+        margin-top: 0; 
+      }
+      .history-panel-body {
+        max-height: calc(100vh - 60px);
+      }
     }
   </style>
 </head>
@@ -199,21 +228,21 @@
     <main id="main-content">
       <div class="hero">
         <div class="badge">free · no signup · instant</div>
-        <h1>TikTok Sticker &amp; Video to GIF Converter</h1>
-        <p>Drag any TikTok sticker out of your DMs or paste a video link, and get a GIF you can send anywhere.</p>
+        <h1>TikTok Sticker to GIF Converter</h1>
+        <p>Drag any TikTok sticker out of your DMs, paste the URL, and get a GIF you can send anywhere.</p>
         <div class="counter-wrap">
           <span class="counter-num" id="counter-num">...</span>
-          <span class="counter-label">items converted</span>
+          <span class="counter-label">stickers converted</span>
         </div>
       </div>
 
       <p style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.8;max-width:680px;margin:0 auto 24px;text-align:center">
-        Convert TikTok animated stickers (.awebp) or full video links into standard GIFs in seconds. No upload, no account, no watermark.
+        According to StickerToGIF's analysis, TikTok stickers are animated WebP files (.awebp) hosted on TikTok's CDN. Dragging a sticker out of a TikTok DM in Chrome or Edge reveals the direct file URL. Pasting that URL here converts it to a standard GIF in seconds. No upload, no account, no watermark.
       </p>
       
       <div class="card">
         <div class="card-header-row">
-          <span class="input-label">STICKER URLS OR TIKTOK LINKS</span>
+          <span class="input-label">STICKER URLS</span>
           <button class="add-btn" onclick="addSlot()">+ Add another</button>
         </div>
         <div id="slots"></div>
@@ -227,18 +256,18 @@
       <div class="steps">
         <div class="step-card">
           <div class="step-num">01.</div>
-          <h3>Get the link</h3>
-          <p>Drag a sticker out of TikTok DMs or copy a public TikTok post link.</p>
+          <h3>Drag the sticker</h3>
+          <p>In TikTok DMs on desktop, drag a sticker out of the chat. Your browser will show the URL.</p>
         </div>
         <div class="step-card">
           <div class="step-num">02.</div>
           <h3>Paste and convert</h3>
-          <p>Paste the link above and hit Convert. Frames process right in your browser.</p>
+          <p>Paste the URL above and hit Convert. The frames get decoded right in your browser, nothing uploaded.</p>
         </div>
         <div class="step-card">
           <div class="step-num">03.</div>
           <h3>Download GIF</h3>
-          <p>Your GIF saves automatically. Works in Discord, iMessage, WhatsApp, and more.</p>
+          <p>Your GIF saves automatically. Works in Discord, iMessage, WhatsApp, wherever GIFs are supported.</p>
         </div>
       </div>
 
@@ -287,15 +316,17 @@
       <section aria-label="How it works" class="section" id="how-it-works">
         <div class="section-label">HOW IT WORKS</div>
         <h2>What's actually happening</h2>
-        <p>TikTok stores stickers as animated WebP files or video streams on public CDNs. When you drag one out or copy a link, the tool reads each frame and turns it into a regular GIF. The whole conversion runs in your browser.</p>
-        <p>A secure proxy handles fetching files across different domains because browsers block cross-origin requests directly. That proxy doesn't log or store data.</p>
+        <p>TikTok stores their stickers as animated WebP files on a public CDN. When you drag one out of a DM in your browser, the file URL shows up. That URL points to a .awebp file, which is an animated format most apps outside TikTok won't play.</p>
+        <p>This tool grabs that file, reads each frame, and turns it into a regular GIF. The whole thing runs in your browser. Nothing gets sent to a server.</p>
+        <p>There's one small exception: a proxy forwards the request to TikTok's CDN because browsers won't fetch files from other domains directly. That proxy doesn't log or store anything. It just passes the file through.</p>
       </section>
 
       <div class="section" id="about-webp">
         <div class="section-label">FORMATS EXPLAINED</div>
         <h2>WebP vs GIF</h2>
-        <p>TikTok uses animated WebP for stickers to keep file sizes small. However, most chat applications do not natively play back WebP animations outside of standard web browsers.</p>
-        <p>GIF is universally supported across Discord, iMessage, WhatsApp, email, and Reddit. Converting your sticker or clip guarantees it will animate wherever you post it.</p>
+        <p>TikTok uses animated WebP for stickers. It's a format made by Google that handles animation well and keeps file sizes small. The problem is most apps don't support it outside of browsers.</p>
+        <p>GIF is old, from 1987. But it works everywhere. Discord, iMessage, WhatsApp, email, Reddit. That's the whole reason to convert in the first place.</p>
+        <p>The file will get bigger when you convert. That's normal. A 200KB sticker can turn into a 1.5MB GIF. It's still small enough to send in most apps without issues.</p>
       </div>
 
       <section aria-label="Frequently Asked Questions" class="section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
@@ -304,17 +335,17 @@
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Why does the URL stop working after a while?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
-          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">TikTok puts an expiry timestamp in sticker URLs. Once it passes, the link stops working. Just drag the sticker out again from TikTok to get a new one.</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">TikTok puts an expiry timestamp in the URL. Once it passes, the link stops working. Just drag the sticker out again from TikTok to get a new one. Takes about five seconds.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this work on mobile?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
-          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Video link conversion works on mobile browsers, but dragging sticker URLs requires a desktop browser like Chrome or Edge.</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Sticker URL extraction requires a desktop browser (Chrome or Edge) because mobile browsers hide drag-and-drop file target paths.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Is it really free?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
-          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Yes. No account, no watermark, no limit. The site runs on ads to stay free.</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Yes. No account, no watermark, no limit. The site runs on ads so if you find it useful, turning off your ad blocker helps keep it free.</span></div>
         </div>
       </section>
 
@@ -346,18 +377,18 @@
       <div class="legal-section" id="privacy">
         <h2>Privacy Policy</h2>
         <p>Last updated August 2026.</p>
-        <p>The converter works with no accounts or logins. Nothing you convert or paste into the URL field is stored on our servers.</p>
+        <p>The converter works with no accounts, no registration, and no login - nothing you convert or paste into the URL field is stored on our servers.</p>
       </div>
 
       <div class="legal-section" id="terms">
         <h2>Terms of Use</h2>
         <p>Last updated August 2026.</p>
-        <p>By using this site you agree to use these tools for personal use and respect original content rights.</p>
+        <p>By using this site you agree to these terms. This tool is a personal use utility built for saving stickers you have access to.</p>
       </div>
 
       <div class="legal-section" id="about" style="scroll-margin-top:40px">
         <h2>About this site</h2>
-        <p>Hi, I'm AntonAnon. I built this tool to make turning TikTok animated files into standard GIFs fast and easy.</p>
+        <p>Hi, I'm AntonAnon. I built this after noticing that TikTok stickers are just animated WebP files hosted on a public CDN. When you drag a sticker out of a DM in your browser, the file URL shows up right there.</p>
         <p style="margin-top:8px;font-size:12px;color:var(--muted)">Questions or feedback? <button onclick="document.getElementById('contact-modal').classList.add('show')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:'DM Mono',monospace;font-size:12px;padding:0;text-decoration:underline">Send a message</button></p>
       </div>
     </main>
@@ -365,7 +396,7 @@
     <footer>
       <div style="display:flex;flex-direction:column;gap:6px">
         <p>© 2026 stickertogif. Built by <a href="#about" style="color:var(--accent);text-decoration:none">AntonAnon</a></p>
-        <p style="font-size:11px">A free tool to convert TikTok elements to GIF. No signup, no watermark.</p>
+        <p style="font-size:11px">A free tool to convert TikTok stickers to GIF. No signup, no watermark.</p>
       </div>
       <div class="footer-links">
         <a href="#blog">Blog</a>
@@ -449,7 +480,7 @@
       if (typeof data.value === 'number') {
         document.getElementById('counter-num').textContent = data.value.toLocaleString();
       }
-    } catch(e) { document.getElementById('counter-num').textContent = '1,840'; }
+    } catch(e) { document.getElementById('counter-num').textContent = '20,522'; }
   }
 
   async function incrementCounter() {
@@ -570,7 +601,7 @@
     const grid = document.getElementById('history-grid');
     grid.innerHTML = '';
     if (!items.length) {
-      grid.innerHTML = '<div class="history-empty">No conversions yet.<br>Convert an item and it shows up here.</div>';
+      grid.innerHTML = '<div class="history-empty">No conversions yet.<br>Convert a sticker and it shows up here.</div>';
       return;
     }
     items.forEach(item => {
@@ -645,9 +676,9 @@
         </div>
         <div class="slot-right">
           <div class="slot-input-row">
-            <input id="url-${id}" type="text" class="slot-url" placeholder="Paste .awebp sticker URL or TikTok video link..."
+            <input id="url-${id}" type="text" class="slot-url" placeholder="https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/...awebp?..."
               oninput="previewSticker(${id})" />
-            <button class="convert-btn" id="convert-btn-${id}" style="display:none" onclick="convertSlot(${id})" title="Convert item">
+            <button class="convert-btn" id="convert-btn-${id}" style="display:none" onclick="convertSlot(${id})" title="Convert this sticker">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               <span>Convert</span>
             </button>
@@ -702,25 +733,22 @@
     const status = document.getElementById('status-' + id);
     const previewSrc = (rawUrl === SAMPLE_FAKE_URL || (typeof sampleSlots !== 'undefined' && sampleSlots[id])) ? SAMPLE_REAL_URL : rawUrl;
     
-    if (rawUrl && (rawUrl.includes('awebp') || rawUrl.includes('tiktok.com') || rawUrl.includes('vm.tiktok') || rawUrl.includes('vt.tiktok'))) {
-      if (rawUrl.includes('awebp')) {
-        img.src = previewSrc;
-        img.style.display = 'block';
-        ph.style.display = 'none';
-        img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
-      } else {
-        img.style.display = 'none';
-        ph.style.display = 'flex';
-        ph.textContent = '🎬';
-      }
+    if (rawUrl && rawUrl.includes('awebp')) {
+      img.src = previewSrc;
+      img.style.display = 'block';
+      ph.style.display = 'none';
+      img.onerror = () => { img.style.display = 'none'; ph.style.display = 'flex'; };
       if (status) { status.textContent = ''; status.style.color = ''; }
       if (convertBtn && !gifBlobs[id]) convertBtn.style.display = 'inline-flex';
       maybeAutoAddSlot(id);
     } else {
       img.style.display = 'none';
       ph.style.display = 'flex';
-      ph.textContent = '?';
       if (convertBtn) convertBtn.style.display = 'none';
+      if (status) {
+        status.textContent = '';
+        status.style.color = '';
+      }
     }
   }
 
@@ -759,12 +787,35 @@
     return xmuxReadyPromise;
   }
 
+  let gifsicleReadyPromise = null;
+  function loadGifsicle() {
+    if (!gifsicleReadyPromise) {
+      gifsicleReadyPromise = import('/vendor/gifsicle.min.js').then(m => m.default);
+    }
+    return gifsicleReadyPromise;
+  }
+
+  function framesToImageData(frame, width, height) {
+    const imgData = new ImageData(width, height);
+    const out = imgData.data;
+    const px = frame.rgba;
+    for (let i = 0; i < px.length; i++) {
+      const v = px[i];
+      const o = i * 4;
+      out[o] = (v >>> 24) & 0xFF;
+      out[o + 1] = (v >>> 16) & 0xFF;
+      out[o + 2] = (v >>> 8) & 0xFF;
+      out[o + 3] = v & 0xFF;
+    }
+    return imgData;
+  }
+
   const convertingSlots = {};
 
   async function convertSlot(id) {
     if (convertingSlots[id]) return;
-    const inputVal = document.getElementById('url-' + id).value.trim();
-    if (!inputVal) return;
+    const url = document.getElementById('url-' + id).value.trim();
+    if (!url) return;
     convertingSlots[id] = true;
 
     const status = document.getElementById('status-' + id);
@@ -781,7 +832,7 @@
 
     if (convertBtn) convertBtn.style.display = 'none';
     barWrap.style.display = 'block';
-    status.textContent = 'processing...';
+    status.textContent = 'fetching...';
     setP(0);
 
     const done = (ok) => {
@@ -789,11 +840,11 @@
       if (!ok && convertBtn) convertBtn.style.display = 'inline-flex';
     };
 
-    try {
-      if (inputVal.includes('awebp') || inputVal.includes('sample.awebp')) {
-        // --- ROUTE A: STICKER .AWEBP CONVERSION (WITH TRANSPARENCY FIX) ---
-        const resolvedUrl = (inputVal === SAMPLE_FAKE_URL || sampleSlots[id]) ? SAMPLE_REAL_URL : inputVal;
-        const fetchUrl = resolvedUrl.startsWith(window.location.origin) ? resolvedUrl : `${PROXY}?url=${encodeURIComponent(resolvedUrl)}`;
+    return new Promise(async (resolve) => {
+      try {
+        const resolvedUrl = (url === SAMPLE_FAKE_URL || (typeof sampleSlots !== 'undefined' && sampleSlots[id])) ? SAMPLE_REAL_URL : url;
+        const isSameOrigin = resolvedUrl.startsWith(window.location.origin);
+        const fetchUrl = isSameOrigin ? resolvedUrl : `${PROXY}?url=${encodeURIComponent(resolvedUrl)}`;
         const res = await fetch(fetchUrl);
         const blob = await res.blob();
         const buf = await blob.arrayBuffer();
@@ -806,95 +857,86 @@
           const decoder = new ImageDecoder({ data: buf, type: 'image/webp' });
           await decoder.tracks.ready;
           const frameCount = decoder.tracks.selectedTrack.frameCount;
+          status.textContent = `encoding ${frameCount} frames...`;
 
           for (let i = 0; i < frameCount; i++) {
             const { image } = await decoder.decode({ frameIndex: i });
             canvas.width = image.codedWidth;
             canvas.height = image.codedHeight;
             
-            // CLEAR CANVAS FULLY TO PREVENT BLACK BACKGROUND BLEEDS ON TRANSPARENT STICKERS
+            // CRITICAL FIX: CLEAR CANVAS FULLY TO PREVENT BLACK BACKGROUND ON TRANSPARENT STICKERS
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(image, 0, 0);
 
             const delayMs = image.duration ? image.duration / 1000 : 1000 / 15;
             gif.addFrame(canvas, { copy: true, delay: delayMs });
             image.close();
-            setP((i + 1) / frameCount * 80);
+            setP((i + 1) / frameCount * 70);
+          }
+        } else {
+          status.textContent = 'loading compatibility decoder...';
+          const xMux = await loadWebpxmuxFallback();
+          status.textContent = 'decoding...';
+          const decoded = await xMux.decodeFrames(new Uint8Array(buf));
+          const frameCount = decoded.frameCount;
+          canvas.width = decoded.width;
+          canvas.height = decoded.height;
+          status.textContent = `encoding ${frameCount} frames...`;
+
+          for (let i = 0; i < frameCount; i++) {
+            const frame = decoded.frames[i];
+            const imgData = framesToImageData(frame, decoded.width, decoded.height);
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.putImageData(imgData, 0, 0);
+
+            const delayMs = frame.duration || (1000 / 15);
+            gif.addFrame(canvas, { copy: true, delay: delayMs });
+            setP((i + 1) / frameCount * 70);
           }
         }
 
-        gif.on('progress', p => { setP(80 + p * 20); status.textContent = 'rendering...'; });
-        gif.on('finished', result => {
-          status.textContent = 'done!';
+        gif.on('progress', p => { setP(70 + p * 15); status.textContent = 'rendering...'; });
+
+        gif.on('finished', async result => {
+          setP(85);
+          status.textContent = 'compressing...';
+
+          let finalBlob = result;
+          try {
+            const gifsicle = await loadGifsicle();
+            const outFiles = await gifsicle.run({
+              input: [{ file: result, name: 'in.gif' }],
+              command: ['-O2 --lossy=40 in.gif -o /out/out.gif']
+            });
+            if (outFiles && outFiles[0] && outFiles[0].size > 0) {
+              finalBlob = outFiles[0];
+            }
+          } catch (e) {
+            console.warn('GIF compression skipped:', e);
+          }
+
           setP(100);
+          const savedPct = result.size > 0 ? Math.round((1 - finalBlob.size / result.size) * 100) : 0;
+          status.textContent = savedPct > 0 ? `done! (${savedPct}% smaller)` : 'done!';
           const gifName = document.getElementById('name-display-' + id).textContent;
-          gifBlobs[id] = { blob: result, name: gifName };
+          gifBlobs[id] = { blob: finalBlob, name: gifName };
           dlBtn.style.display = 'inline-flex';
           updateZipBtn();
-          saveToHistory(result, gifName);
+          saveToHistory(finalBlob, gifName);
           incrementCounter();
           done(true);
+          resolve();
         });
+
         gif.render();
-
-      } else {
-        // --- ROUTE B: TIKTOK VIDEO LINK STREAM CONVERSION ---
-        status.textContent = 'fetching video stream...';
-        const res = await fetch(`${PROXY}/video?url=${encodeURIComponent(inputVal)}`);
-        if (!res.ok) throw new Error('Failed to load video from link.');
-        const blob = await res.blob();
-        const videoUrl = URL.createObjectURL(blob);
-
-        const video = document.createElement('video');
-        video.src = videoUrl;
-        video.crossOrigin = 'anonymous';
-        video.muted = true;
-        video.playsInline = true;
-
-        await new Promise((resL, rejL) => {
-          video.onloadedmetadata = () => resL();
-          video.onerror = () => rejL(new Error('Video loading failed.'));
-        });
-
-        const duration = Math.min(video.duration, 5); // 5 second cap for performance
-        const fps = 15;
-        const totalFrames = Math.floor(duration * fps);
-        
-        const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth || 480;
-        canvas.height = video.videoHeight || 854;
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
-
-        const gif = new GIF({ workers: 4, quality: 10, workerScript: 'gif.worker.js', width: canvas.width, height: canvas.height });
-
-        for (let i = 0; i < totalFrames; i++) {
-          video.currentTime = (i / fps);
-          await new Promise(r => { video.onseeked = r; });
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          gif.addFrame(canvas, { copy: true, delay: 1000 / fps });
-          setP((i / totalFrames) * 70);
-        }
-
-        status.textContent = 'rendering video frames...';
-        gif.on('progress', p => { setP(70 + p * 30); });
-        gif.on('finished', result => {
-          status.textContent = 'done!';
-          setP(100);
-          const gifName = document.getElementById('name-display-' + id).textContent;
-          gifBlobs[id] = { blob: result, name: gifName };
-          dlBtn.style.display = 'inline-flex';
-          updateZipBtn();
-          saveToHistory(result, gifName);
-          incrementCounter();
-          done(true);
-        });
-        gif.render();
+      } catch (err) {
+        status.textContent = 'error: ' + err.message;
+        lastErrors[id] = { url, message: err.message };
+        done(false);
+        resolve();
       }
-    } catch (err) {
-      status.textContent = 'error: ' + err.message;
-      done(false);
-    }
+    });
   }
 
   function downloadSingle(id) {
@@ -909,13 +951,13 @@
   async function convertAll() {
     const slots = document.querySelectorAll('.slot');
     const zipBtn = document.getElementById('dl-zip-btn');
-    if (zipBtn) { zipBtn.disabled = true; zipBtn.style.opacity = '0.4'; }
+    if (zipBtn) { zipBtn.disabled = true; zipBtn.style.opacity = '0.4'; zipBtn.style.pointerEvents = 'none'; }
     for (const slot of slots) {
       const id = parseInt(slot.id.replace('slot-', ''));
       const url = document.getElementById('url-' + id).value.trim();
       if (url && !gifBlobs[id]) await convertSlot(id);
     }
-    if (zipBtn) { zipBtn.disabled = false; zipBtn.style.opacity = ''; }
+    if (zipBtn) { zipBtn.disabled = false; zipBtn.style.opacity = ''; zipBtn.style.pointerEvents = ''; }
     updateZipBtn();
   }
 
@@ -926,6 +968,7 @@
     const nameCounts = {};
     for (const [id, entry] of entries) {
       let filename = (entry.name || 'sticker').trim();
+      if (!filename) filename = 'sticker';
       if (nameCounts[filename] === undefined) {
         nameCounts[filename] = 0;
       } else {
