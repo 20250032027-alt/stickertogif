@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TikTok Sticker to GIF Converter - Free, No Signup | StickerToGIF</title>
-  <script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
+	<script>
+	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/insights/script.js"></script>
   <meta name="description" content="Convert TikTok stickers to GIF for free in seconds. Drag a sticker out of TikTok DMs, paste the URL, and download your GIF instantly. No signup, no watermark, no limits.">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="canonical" href="https://www.stickertogif.me/" />
@@ -98,14 +98,17 @@
     .page-with-history { flex-direction: column; width: 100%; max-width: 100%; overflow-x: hidden; }
     .converter-col { width: 100%; padding: 0 12px; box-sizing: border-box; }
     header { width: 100%; max-width: 1100px; margin: 0 auto; padding: 14px 16px; box-sizing: border-box; }
-    main { width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 16px 40px; box-sizing: border-box; }
+    main { width: 100%; max-width: 680px; margin: 0 auto; padding: 24px 16px 40px; box-sizing: border-box; }
     
     .card { padding: 18px; border-radius: 14px; width: 100%; box-sizing: border-box; }
     .slot { padding: 14px; border-radius: 10px; width: 100%; box-sizing: border-box; margin-bottom: 12px; }
-    .slot-body { flex-direction: column; gap: 12px; }
-    .slot-preview-wrap { width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; background: var(--bg); }
-    .slot-input-row { flex-direction: column; gap: 8px; width: 100%; }
-    .slot-url { width: 100%; font-size: 13px; padding: 10px 12px; box-sizing: border-box; }
+    
+    /* Fixed Slot Dead Space Layout */
+    .slot-body { display: flex; flex-direction: row; gap: 12px; align-items: center; }
+    .slot-preview-wrap { width: 64px; height: 64px; flex-shrink: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--bg); display: flex; align-items: center; justify-content: center; }
+    .slot-right { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; width: 100%; }
+    .slot-input-row { display: flex; align-items: center; gap: 8px; width: 100%; }
+    .slot-url { flex: 1; width: 100%; font-size: 12px; padding: 10px 12px; box-sizing: border-box; }
     
     .batch-actions { flex-direction: column; width: 100%; gap: 10px; }
     .convert-all-btn, .dl-zip-btn { width: 100%; text-align: center; justify-content: center; }
@@ -113,11 +116,11 @@
     .steps { grid-template-columns: 1fr; gap: 10px; }
     .step-card { padding: 14px; }
 
-    /* Scalable History Panel Scrolling Fixes */
+    /* Polished, Deep Black Revamped History & Folders Panel */
     .history-panel { 
       width: 100%; 
       height: auto; 
-      max-height: 320px; 
+      max-height: 400px; 
       border-left: none; 
       border-top: 1px solid var(--border); 
       position: relative; 
@@ -125,31 +128,53 @@
       box-sizing: border-box; 
       display: flex; 
       flex-direction: column;
+      background: #0a0a0b;
     }
+    .history-panel-header { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; background: #0e0e10; }
+    .history-top-row { display: flex; align-items: center; justify-content: space-width; width: 100%; }
+    .history-panel-title { font-size: 12px; font-family: 'DM Mono', monospace; color: #f0f0f0; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+    
+    .history-search-input { width: 100%; background: #141416; border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 11px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+    .history-search-input:focus { border-color: var(--accent); }
+    .history-search-input::placeholder { color: #555; }
+    
+    .folder-tabs-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; width: 100%; scrollbar-width: none; }
+    .folder-tabs-row::-webkit-scrollbar { display: none; }
+    .folder-tab { background: #161619; border: 1px solid var(--border); color: #888; font-family: 'DM Mono', monospace; font-size: 10px; padding: 5px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+    .folder-tab:hover { color: #fff; border-color: #444; }
+    .folder-tab.active { background: #1f1f24; color: var(--accent); border-color: rgba(0,212,255,0.4); font-weight: 500; }
+    .folder-add-btn { background: none; border: 1px dashed var(--border); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 10px; padding: 5px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; transition: color 0.15s, border-color 0.15s; }
+    .folder-add-btn:hover { color: var(--accent); border-color: var(--accent); }
+
     .history-panel-body {
       flex: 1;
       overflow-y: auto;
-      max-height: 250px;
-      padding-right: 4px;
+      max-height: 320px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .history-panel-body::-webkit-scrollbar {
-      width: 5px;
-    }
-    .history-panel-body::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 4px;
-    }
+    .history-panel-body::-webkit-scrollbar { width: 4px; }
+    .history-panel-body::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
     
-    footer { width: 100%; max-width: 720px; margin: 40px auto 20px; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .history-card { background: #121214; border: 1px solid var(--border); border-radius: 8px; padding: 8px; display: flex; gap: 10px; align-items: center; transition: border-color 0.15s; }
+    .history-card:hover { border-color: #333; }
+    .history-name-editable { font-size: 11px; font-weight: 700; color: #f0f0f0; font-family: 'DM Mono', monospace; border-bottom: 1px dotted transparent; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; display: inline-block; }
+    .history-name-editable:hover { border-bottom-color: var(--accent); color: var(--accent); }
+    .folder-select { background: #1a1a1e; color: #aaa; border: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 6px; border-radius: 4px; cursor: pointer; margin-top: 3px; outline: none; }
+    .folder-select:hover { color: #fff; border-color: #444; }
+
+    footer { width: 100%; max-width: 680px; margin: 40px auto 20px; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 16px; }
     .footer-links { gap: 12px; }
 
     /* Balanced Desktop Multi-Column view */
     @media(min-width: 1024px) {
-      .page-with-history { flex-direction: row; align-items: flex-start; justify-content: center; max-width: 1300px; margin: 0 auto; }
+      .page-with-history { flex-direction: row; align-items: flex-start; justify-content: center; max-width: 1350px; margin: 0 auto; }
       .converter-col { flex: 1; max-width: 740px; padding: 0 20px; }
       main { max-width: 100%; }
       .history-panel { 
-        width: 280px; 
+        width: 310px; 
         height: 100vh; 
         max-height: none; 
         position: sticky; 
@@ -158,9 +183,7 @@
         border-top: none; 
         margin-top: 0; 
       }
-      .history-panel-body {
-        max-height: calc(100vh - 60px);
-      }
+      .history-panel-body { max-height: calc(100vh - 120px); }
     }
   </style>
 </head>
@@ -340,7 +363,7 @@
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <div class="faq-q" itemprop="name" onclick="toggleFaq(this)">Does this work on mobile?<span class="arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
-          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Sticker URL extraction requires a desktop browser (Chrome or Edge) because mobile browsers hide drag-and-drop file target paths.</span></div>
+          <div class="faq-a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Not right now. It needs Chrome or Edge on a desktop. The browser feature it uses isn't available on mobile or Safari yet.</span></div>
         </div>
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -408,10 +431,18 @@
     </footer>
   </div>
 
+  <!-- Revamped Deep-Black Folders & History Panel -->
   <div class="history-panel">
     <div class="history-panel-header">
-      <span class="history-panel-title">History</span>
-      <button class="clear-history-btn" onclick="clearAllHistory()">Clear all</button>
+      <div class="history-top-row">
+        <span class="history-panel-title" id="panel-title">History</span>
+        <button class="clear-history-btn" onclick="clearCurrentFolderOrHistory()">Clear</button>
+      </div>
+      <input type="text" class="history-search-input" id="history-search" placeholder="Search saved GIFs..." oninput="filterHistoryView()" />
+      <div class="folder-tabs-row" id="folder-tabs-container">
+        <button class="folder-tab active" onclick="switchFolder('All')">History</button>
+        <button class="folder-add-btn" onclick="createNewFolder()">+ Folder</button>
+      </div>
     </div>
     <div class="history-panel-body" id="history-grid">
       <div class="history-empty">No conversions yet.</div>
@@ -425,10 +456,12 @@
   let slotCount = 0;
   const gifBlobs = {};
   const lastErrors = {};
+  let currentFolderView = 'All';
 
   window.addEventListener('load', function() {
     addSlot();
     loadCounter();
+    loadFoldersToUI();
   });
 
   const SAMPLE_FAKE_URL = 'https://p16-tiktok-dm-sticker-sign-sg.ibyteimg.com/tos-alisg-i-dhq7zx4c1p-sg/3f9a21bc7e4d48fa92c08b1e5d7f3a92~tplv-dhq7zx4c1p-video2sticker-mid.awebp?rk3s=00edd399&x-expires=9999999999&x-signature=sAmPlEsTiCkErToGiF00000';
@@ -537,19 +570,70 @@
     el.closest('.faq-item').classList.toggle('open');
   }
 
+  // ── IndexedDB Storage (Folders & History) ──
   let db = null;
   function openDB() {
     return new Promise((resolve, reject) => {
-      const req = indexedDB.open('stickertogif_v2', 1);
+      const req = indexedDB.open('stickertogif_v3', 1);
       req.onupgradeneeded = e => {
         const d = e.target.result;
         if (!d.objectStoreNames.contains('gifs')) {
           const store = d.createObjectStore('gifs', { keyPath: 'id', autoIncrement: true });
           store.createIndex('ts', 'ts', { unique: false });
         }
+        if (!d.objectStoreNames.contains('folders')) {
+          d.createObjectStore('folders', { keyPath: 'name' });
+        }
       };
       req.onsuccess = e => { db = e.target.result; resolve(db); };
       req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function getStoredFolders() {
+    if (!db) await openDB();
+    return new Promise(resolve => {
+      const tx = db.transaction('folders', 'readonly');
+      const req = tx.objectStore('folders').getAll();
+      req.onsuccess = () => resolve(req.result.map(f => f.name));
+      req.onerror = () => resolve([]);
+    });
+  }
+
+  async function loadFoldersToUI() {
+    const folders = await getStoredFolders();
+    const container = document.getElementById('folder-tabs-container');
+    container.innerHTML = `
+      <button class="folder-tab ${currentFolderView === 'All' ? 'active' : ''}" onclick="switchFolder('All')">History</button>
+      ${folders.map(f => `<button class="folder-tab ${currentFolderView === f ? 'active' : ''}" onclick="switchFolder('${f}')">${f}</button>`).join('')}
+      <button class="folder-add-btn" onclick="createNewFolder()">+ Folder</button>
+    `;
+    loadHistory();
+  }
+
+  async function createNewFolder() {
+    const name = prompt('Enter new folder name:');
+    if (!name || !name.trim()) return;
+    const cleanName = name.trim();
+    if (!db) await openDB();
+    const tx = db.transaction('folders', 'readwrite');
+    tx.objectStore('folders').put({ name: cleanName });
+    tx.oncomplete = () => loadFoldersToUI();
+  }
+
+  async function saveToHistory(blob, name) {
+    if (!db) await openDB();
+    const thumb = await makeThumbnail(blob);
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('gifs', 'readwrite');
+      tx.objectStore('gifs').add({
+        blob, thumb, name,
+        folder: 'All',
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        ts: Date.now()
+      });
+      tx.oncomplete = () => { loadHistory(); resolve(); };
+      tx.onerror = () => reject(tx.error);
     });
   }
 
@@ -572,53 +656,84 @@
     });
   }
 
-  async function saveToHistory(blob, name) {
-    if (!db) await openDB();
-    const thumb = await makeThumbnail(blob);
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction('gifs', 'readwrite');
-      tx.objectStore('gifs').add({
-        blob, thumb, name,
-        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        ts: Date.now()
-      });
-      tx.oncomplete = () => { loadHistory(); resolve(); };
-      tx.onerror = () => reject(tx.error);
-    });
-  }
-
   async function loadHistory() {
     if (!db) await openDB();
     const tx = db.transaction('gifs', 'readonly');
     const req = tx.objectStore('gifs').getAll();
-    req.onsuccess = () => {
+    req.onsuccess = async () => {
       const items = req.result.sort((a, b) => b.ts - a.ts);
-      renderHistory(items);
+      const folders = await getStoredFolders();
+      renderHistoryItems(items, folders);
     };
   }
 
-  function renderHistory(items) {
+  async function renderHistoryItems(items, folders) {
     const grid = document.getElementById('history-grid');
+    const query = document.getElementById('history-search').value.toLowerCase().trim();
+    
+    let filtered = items.filter(item => {
+      const matchFolder = (currentFolderView === 'All') || (item.folder === currentFolderView);
+      const matchQuery = !query || item.name.toLowerCase().includes(query);
+      return matchFolder && matchQuery;
+    });
+
     grid.innerHTML = '';
-    if (!items.length) {
-      grid.innerHTML = '<div class="history-empty">No conversions yet.<br>Convert a sticker and it shows up here.</div>';
+    if (!filtered.length) {
+      grid.innerHTML = `<div class="history-empty">No items found.</div>`;
       return;
     }
-    items.forEach(item => {
+
+    for (const item of filtered) {
       const card = document.createElement('div');
       card.className = 'history-card';
+      
+      const folderOptions = ['All', ...folders].map(f => `<option value="${f}" ${item.folder === f ? 'selected' : ''}>${f}</option>`).join('');
+
       card.innerHTML = `
         <img class="history-thumb" src="${item.thumb}" alt="${item.name}" />
-        <div class="history-info">
-          <div class="history-name">${item.name}.gif</div>
+        <div class="history-info" style="min-width:0; flex:1;">
+          <div class="history-name-editable" title="Click to rename" onclick="renameHistoryItem(${item.id}, '${item.name}')">${item.name}.gif</div>
           <div class="history-date">${item.date}</div>
+          <select class="folder-select" onchange="moveItemFolder(${item.id}, this.value)">
+            ${folderOptions}
+          </select>
         </div>
         <div class="history-actions">
-          <button class="history-dl-btn" aria-label="Download GIF" onclick="downloadFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <button class="history-dl-btn" aria-label="Download" onclick="downloadFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
           <button class="history-del-btn" aria-label="Delete" onclick="deleteFromHistory(${item.id})"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         </div>`;
       grid.appendChild(card);
-    });
+    }
+  }
+
+  function filterHistoryView() { loadHistory(); }
+  function switchFolder(folderName) {
+    currentFolderView = folderName;
+    document.getElementById('panel-title').textContent = folderName === 'All' ? 'History' : folderName;
+    loadFoldersToUI();
+  }
+
+  async function moveItemFolder(id, newFolder) {
+    if (!db) await openDB();
+    const tx = db.transaction('gifs', 'readwrite');
+    const store = tx.objectStore('gifs');
+    store.get(id).onsuccess = e => {
+      const data = e.target.result;
+      if (data) { data.folder = newFolder; store.put(data); loadHistory(); }
+    };
+  }
+
+  async function renameHistoryItem(id, currentName) {
+    const newName = prompt('Rename this GIF file:', currentName);
+    if (!newName || !newName.trim()) return;
+    const clean = newName.trim().replace(/\.gif$/i, '');
+    if (!db) await openDB();
+    const tx = db.transaction('gifs', 'readwrite');
+    const store = tx.objectStore('gifs');
+    store.get(id).onsuccess = e => {
+      const data = e.target.result;
+      if (data) { data.name = clean; store.put(data); loadHistory(); }
+    };
   }
 
   async function downloadFromHistory(id) {
@@ -641,16 +756,23 @@
     tx.oncomplete = () => loadHistory();
   }
 
-  async function clearAllHistory() {
-    if (!confirm('Clear all history?')) return;
+  async function clearCurrentFolderOrHistory() {
+    if (!confirm(`Clear all items in view (${currentFolderView})?`)) return;
     if (!db) await openDB();
     const tx = db.transaction('gifs', 'readwrite');
-    tx.objectStore('gifs').clear();
-    tx.oncomplete = () => loadHistory();
+    const store = tx.objectStore('gifs');
+    store.getAll().onsuccess = async e => {
+      const items = e.target.result;
+      for (const item of items) {
+        if (currentFolderView === 'All' || item.folder === currentFolderView) {
+          store.delete(item.id);
+        }
+      }
+      loadHistory();
+    };
   }
 
-  openDB().then(() => loadHistory());
-
+  // ── Converter Engine Slots ──
   function addSlot() {
     const id = slotCount++;
     const randomName = 'sticker_' + String(Math.floor(100000 + Math.random() * 900000));
@@ -864,7 +986,7 @@
             canvas.width = image.codedWidth;
             canvas.height = image.codedHeight;
             
-            // CRITICAL FIX: CLEAR CANVAS FULLY TO PREVENT BLACK BACKGROUND ON TRANSPARENT STICKERS
+            // CLEAR CANVAS FULLY TO PREVENT BLACK BACKGROUND ON TRANSPARENT STICKERS
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(image, 0, 0);
 
